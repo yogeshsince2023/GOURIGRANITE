@@ -1,0 +1,78 @@
+.card {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+    background-color: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+}
+
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.08);
+}
+
+.content {
+    padding: 1.5rem;
+}
+
+.name {
+    font-family: var(--font-playfair);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    transition: color 0.2s ease;
+}
+
+.card:hover .name {
+    color: var(--accent);
+}
+
+.details {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.badge {
+    background-color: #f5f5f0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.cta {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.card:hover .cta {
+    gap: 0.75rem;
+}

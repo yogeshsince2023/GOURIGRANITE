@@ -1,0 +1,154 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logoImage {
+    height: 70px;
+    width: auto;
+}
+
+.links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.link:hover {
+    color: var(--accent);
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mobileMenuButton {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-primary);
+}
+
+.desktopOnly {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+.mobileMenu {
+    display: none;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.mobileLink {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    transition: color 0.2s;
+}
+
+.mobileLink:hover {
+    color: var(--accent);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .links {
+        gap: 1.5rem;
+    }
+
+    .logoImage {
+        height: 55px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav {
+        padding: 0.5rem 1rem;
+    }
+
+    .logoImage {
+        height: 50px;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .desktopOnly {
+        display: none;
+    }
+
+    .mobileMenuButton {
+        display: flex;
+    }
+
+    .mobileMenu {
+        display: flex;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .logoImage {
+        height: 45px;
+    }
+}
