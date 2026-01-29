@@ -54,7 +54,7 @@ export const FACTORIES: Factory[] = [
         location: 'Kishangarh, Kali Dungri, Rajasthan - 305801',
         coordinates: { lat: 26.5741, lng: 74.8601 },
         capacity: '50,000 sq.ft / month',
-        image: '/images/factory_photo.jpeg'
+        image: '/images/factory1.jpeg'
     },
     {
         id: 'f2',
@@ -62,7 +62,7 @@ export const FACTORIES: Factory[] = [
         location: 'Kishangarh, Ralawta, Rajasthan - 305801',
         coordinates: { lat: 26.5850, lng: 74.8720 },
         capacity: '80,000 sq.ft / month',
-        image: '/images/factory_photo.jpeg'
+        image: '/images/factory2.jpeg'
     },
     {
         id: 'f3',
@@ -70,7 +70,7 @@ export const FACTORIES: Factory[] = [
         location: 'Baopet, Karimnagar, Telangana - 505401',
         coordinates: { lat: 18.4386, lng: 78.4872 },
         capacity: '60,000 sq.ft / month',
-        image: '/images/factory_photo.jpeg'
+        image: '/images/factory3.jpeg'
     }
 ];
 

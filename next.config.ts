@@ -3,27 +3,32 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Image optimization
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    qualities: [70, 75], // Add 70 to the allowed qualities
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+
+    // Disable image optimization in development for faster builds
+    unoptimized: true, // Ensure images are not optimized in development
+
+    // Configure remote patterns for production
+    remotePatterns: process.env.NODE_ENV === 'production' ? [
+      {
+        protocol: 'https',
+        hostname: 'your-production-domain.com',
+        pathname: '/**',
+      },
+    ] : [],
   },
 
-  // Compression
+  // Rest of your config remains the same
   compress: true,
-
-  // Power optimizations
   poweredByHeader: false,
-
-  // Strict mode for better debugging
   reactStrictMode: true,
-
-  // Experimental optimizations for better performance
   experimental: {
     optimizeCss: true,
   },
-
-  // Headers for caching and security
   async headers() {
     return [
       {

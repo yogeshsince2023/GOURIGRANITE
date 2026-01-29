@@ -1,0 +1,7 @@
+.contactBackground {
+  background-image: url('/images/Contactus');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 50px;
+}
