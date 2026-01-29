@@ -86,8 +86,8 @@ export default function Footer() {
                             </a>
                         </p>
                         <p>
-                            <a href="mailto:docs.gouri57@gmail.com" style={{ color: '#a0a0a0' }} aria-label="Email us at docs.gouri57@gmail.com">
-                                <Mail size={16} style={{ display: 'inline', marginRight: 8 }} aria-hidden="true" /> docs.gouri57@gmail.com
+                            <a href="mailto:gouriexports2022@gmail.com" style={{ color: '#a0a0a0' }} aria-label="Email us at gouriexports2022@gmail.com">
+                                <Mail size={16} style={{ display: 'inline', marginRight: 8 }} aria-hidden="true" /> gouriexports2022@gmail.com
                             </a>
                         </p>
                         <p><Globe size={16} style={{ display: 'inline', marginRight: 8 }} aria-hidden="true" /> Worldwide Shipping</p>
@@ -96,7 +96,7 @@ export default function Footer() {
             </div>
 
             <div className={styles.bottom}>
-                <p>&copy; {new Date().getFullYear()} Gouri Granite. All rights reserved.</p>
+                <p>&copy; 2000 Gouri Granite. All rights reserved.</p>
             </div>
         </footer>
     );

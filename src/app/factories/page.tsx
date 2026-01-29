@@ -1,5 +1,5 @@
-import { FACTORIES, CLIENT_LOCATIONS } from '@/lib/data';
-import MapPlaceholder from '@/components/features/factories/MapPlaceholder';
+import { FACTORIES } from '@/lib/data';
+import WorldMap from '@/components/features/factories/WorldMap';
 import { MapPin } from 'lucide-react';
 
 export default function FactoriesPage() {
@@ -32,16 +32,7 @@ export default function FactoriesPage() {
                 </div>
 
                 <div style={{ marginBottom: '4rem' }}>
-                    <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-playfair)', marginBottom: '1.5rem' }}>Global Reach</h2>
-                    <MapPlaceholder />
-                    <div style={{ marginTop: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                        {CLIENT_LOCATIONS.map(client => (
-                            <div key={client.id} style={{ padding: '1rem', backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                                <strong style={{ display: 'block' }}>{client.country}</strong>
-                                <span style={{ fontSize: '0.85rem', color: '#666' }}>{client.projectName}</span>
-                            </div>
-                        ))}
-                    </div>
+                    <WorldMap />
                 </div>
             </div>
         </main>

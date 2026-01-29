@@ -7,13 +7,13 @@ import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 
 export default function Hero() {
     return (
-        <motion.section 
+        <motion.section
             className={styles.hero}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.25 }}
         >
-            <motion.div 
+            <motion.div
                 className={styles.backgroundWrapper}
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
@@ -31,41 +31,42 @@ export default function Hero() {
                 </video>
             </motion.div>
 
-            <motion.div 
+            <motion.div
                 className={styles.content}
                 variants={staggerContainer()}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.25 }}
             >
-                <motion.h1 
+                <motion.h1
                     className={styles.title}
                     variants={textVariant(0.2)}
                 >
                     Exporting Earth's Finest Stone Globally
                 </motion.h1>
-                <motion.p 
+                <motion.p
                     className={styles.subtitle}
                     variants={textVariant(0.4)}
                 >
                     Premium marble and granite from our quarries in India, delivered to architects and builders worldwide.
                 </motion.p>
 
-                <motion.div 
+                <motion.div
                     className={styles.actions}
                     variants={fadeIn('up', 0.6)}
                 >
-                    <Link 
-                        href="/products" 
-                        className="btn btn-primary" 
+                    <Link
+                        href="/products"
+                        className="btn btn-primary"
                         style={{ backgroundColor: 'var(--accent)', borderColor: 'var(--accent)' }}
                     >
                         View Catalog
                     </Link>
-                    <Link 
-                        href="/contact" 
-                        className="btn btn-outline" 
+                    <Link
+                        href="/contact"
+                        className="btn btn-outline"
                         style={{ color: 'white', borderColor: 'white' }}
+                        target="_blank"
                     >
                         Request Quote
                     </Link>

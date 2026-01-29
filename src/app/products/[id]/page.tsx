@@ -75,7 +75,7 @@ export default function ProductDetail({ params }: Props) {
                         </div>
 
                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                            <Link href="/contact" className="btn btn-primary" style={{ flex: 1 }}>Request Quote</Link>
+                            <Link href="/contact" className="btn btn-primary" style={{ flex: 1 }} target="_blank">Request Quote</Link>
                             <button className="btn btn-outline" style={{ flex: 1 }}>Request Sample</button>
                         </div>
 

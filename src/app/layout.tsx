@@ -3,6 +3,7 @@ import "../app/globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ContactWidget from "@/components/layout/ContactWidget";
+import CookieConsent from "@/components/layout/CookieConsent";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import SkipLink from "@/components/SkipLink";
 import { Inter, Playfair_Display } from "next/font/google";
@@ -111,6 +112,7 @@ export default function RootLayout({
             {children}
           </main>
           <ContactWidget />
+          <CookieConsent />
           <Footer />
         </ThemeProvider>
       </body>

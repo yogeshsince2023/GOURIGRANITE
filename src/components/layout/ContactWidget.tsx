@@ -77,7 +77,7 @@ export default function ContactWidget() {
                 </a>
 
                 <a
-                    href="mailto:docs.gouri57@gmail.com"
+                    href="mailto:gouriexports2022@gmail.com"
                     className={`${styles.button} ${styles.actionButton} ${styles.email}`}
                     role="menuitem"
                     aria-label="Send us an email"
