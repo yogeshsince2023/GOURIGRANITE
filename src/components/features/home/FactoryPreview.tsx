@@ -9,10 +9,6 @@ import { FACTORIES } from '@/lib/data';
 import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 
 export default function FactoryPreview() {
-    useEffect(() => {
-        console.log('Factory Images:', FACTORIES.map(factory => factory.image));
-    }, []);
-
     return (
         <motion.section
             className={styles.section}
@@ -36,12 +32,6 @@ export default function FactoryPreview() {
                             transition={{ duration: 0.35, ease: 'easeOut' }}
                         >
                             <div className={styles.media}>
-                                {/* Debugging with a simple img tag */}
-                                <img
-                                    src={factory.image}
-                                    alt={factory.name}
-                                    style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                                />
                                 <Image
                                     src={factory.image}
                                     alt={factory.name}

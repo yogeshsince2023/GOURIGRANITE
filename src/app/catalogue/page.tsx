@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './catalogue.module.css';
-import { Download, X, FileText, Mail, Phone, MapPin, Check } from 'lucide-react';
+import { Download, X, FileText, Mail, Phone, MapPin, Check, Lock } from 'lucide-react';
 
 export default function CataloguePage() {
     const [showModal, setShowModal] = useState(false);
@@ -101,11 +101,32 @@ export default function CataloguePage() {
                 </button>
             </div>
 
-            <iframe
-                src="/catalogue.pdf"
-                style={{ flex: 1, width: '100%', border: 'none' }}
-                title="Gouri Granite Catalogue"
-            />
+            <div className={styles.controls}>
+                <button
+                    onClick={() => window.open('/catalogue.pdf', '_blank')}
+                    className={styles.fullscreenBtn}
+                    title="Open in new tab for better view"
+                >
+                    <FileText size={16} style={{marginRight: '8px'}}/> Open Fullscreen
+                </button>
+            </div>
+
+            <div className={styles.pdfContainer}>
+                <object
+                    data="/catalogue.pdf"
+                    type="application/pdf"
+                    width="100%"
+                    height="100%"
+                    className={styles.pdfObject}
+                >
+                    <div className={styles.fallback}>
+                        <p>Your browser doesn't support embedding PDFs.</p>
+                        <a href="/catalogue.pdf" target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
+                            Download PDF
+                        </a>
+                    </div>
+                </object>
+            </div>
 
             {/* Lead Capture Modal */}
             {showModal && (
@@ -198,7 +219,7 @@ export default function CataloguePage() {
                             </button>
 
                             <p className={styles.privacy}>
-                                🔒 Your information is secure and will never be shared.
+                                <Lock size={12} style={{ marginRight: '4px' }} /> Your information is secure and will never be shared.
                             </p>
                         </form>
                     </div>

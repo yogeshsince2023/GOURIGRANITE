@@ -37,41 +37,39 @@ export default function ContactPage() {
     return (
         <main>
             <div className={styles.contactBackground}>
-                <div style={{ backgroundColor: '#1a1a1a', color: 'white', padding: '4rem 0', textAlign: 'center' }}>
-                    <h1 style={{ fontFamily: 'var(--font-playfair)', fontSize: '3rem', marginBottom: '1rem' }}>Contact Us</h1>
-                    <p style={{ maxWidth: '600px', margin: '0 auto', color: '#ccc' }}>
-                        Get a quote or request samples. We ship globally.
-                    </p>
+                <div className={styles.heroSection}>
+                    <h1>Contact Us</h1>
+                    <p>Get a quote or request samples. We ship globally.</p>
                 </div>
 
-                <div className="container" style={{ padding: '4rem 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
-                    <div>
-                        <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: '2rem', marginBottom: '2rem' }}>Get in Touch</h2>
+                <div className={`container ${styles.contentGrid}`}>
+                    <div className={styles.infoSection}>
+                        <h2>Get in Touch</h2>
 
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Phone size={20} style={{ color: '#d4af37' }} /> Phone / WhatsApp
+                        <div className={styles.contactBlock}>
+                            <h3>
+                                <Phone size={20} className={styles.accentIcon} /> Phone / WhatsApp
                             </h3>
-                            <p style={{ marginLeft: '1.75rem', color: '#555' }}>
-                                <a href="tel:+918619521711" style={{ color: '#555' }}>+91 86195 21711</a>
+                            <p>
+                                <a href="tel:+918619521711">+91 86195 21711</a>
                             </p>
-                            <p style={{ marginLeft: '1.75rem', color: '#555' }}>
-                                <a href="tel:+917689995457" style={{ color: '#555' }}>+91 76899 95457</a>
+                            <p>
+                                <a href="tel:+917689995457">+91 76899 95457</a>
                             </p>
                         </div>
 
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Mail size={20} style={{ color: '#d4af37' }} /> Email
+                        <div className={styles.contactBlock}>
+                            <h3>
+                                <Mail size={20} className={styles.accentIcon} /> Email
                             </h3>
-                            <p style={{ marginLeft: '1.75rem' }}>
-                                <a href="mailto:gouriexports2022@gmail.com" style={{ color: '#555' }}>gouriexports2022@gmail.com</a>
+                            <p>
+                                <a href="mailto:gouriexports2022@gmail.com">gouriexports2022@gmail.com</a>
                             </p>
                         </div>
 
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h3 style={{ fontSize: '1.1rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <MapPin size={20} style={{ color: '#d4af37' }} /> Our Locations
+                        <div className={styles.contactBlock}>
+                            <h3>
+                                <MapPin size={20} className={styles.accentIcon} /> Our Locations
                             </h3>
 
                             {locations.map((loc, index) => (
@@ -80,60 +78,42 @@ export default function ContactPage() {
                                     href={loc.mapUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={{
-                                        display: 'block',
-                                        marginLeft: '1.75rem',
-                                        marginBottom: '1.5rem',
-                                        padding: '1rem',
-                                        backgroundColor: '#f9f9f9',
-                                        borderRadius: '8px',
-                                        textDecoration: 'none',
-                                        transition: 'background-color 0.2s, transform 0.2s',
-                                        cursor: 'pointer'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#f0f0f0';
-                                        e.currentTarget.style.transform = 'translateX(4px)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#f9f9f9';
-                                        e.currentTarget.style.transform = 'translateX(0)';
-                                    }}
+                                    className={styles.locationCard}
                                 >
-                                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#1a1a1a', marginBottom: '0.25rem' }}>
+                                    <strong>
                                         {loc.name}
-                                        <Navigation size={14} style={{ color: '#d4af37' }} />
+                                        <Navigation size={14} className={styles.accentIcon} />
                                     </strong>
-                                    <p style={{ color: '#555', fontSize: '0.95rem', margin: 0 }}>{loc.address}</p>
+                                    <p>{loc.address}</p>
                                 </a>
                             ))}
                         </div>
                     </div>
 
-                    <div style={{ backgroundColor: '#f9f9f9', padding: '2rem', borderRadius: '8px' }}>
+                    <div className={styles.formContainer}>
                         {status === 'success' ? (
-                            <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-                                <h3 style={{ color: 'green', marginBottom: '1rem' }}>Message Sent!</h3>
+                            <div className={styles.successMessage}>
+                                <h3>Message Sent!</h3>
                                 <p>We will get back to you within 24 hours.</p>
                             </div>
                         ) : (
-                            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600 }}>Name</label>
-                                    <input required type="text" placeholder="Your Name" style={{ width: '100%', padding: '0.8rem', borderRadius: '4px', border: '1px solid #ddd' }} />
+                            <form onSubmit={handleSubmit} className={styles.form}>
+                                <div className={styles.formGroup}>
+                                    <label>Name</label>
+                                    <input required type="text" placeholder="Your Name" />
                                 </div>
 
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600 }}>Email</label>
-                                    <input required type="email" placeholder="email@company.com" style={{ width: '100%', padding: '0.8rem', borderRadius: '4px', border: '1px solid #ddd' }} />
+                                <div className={styles.formGroup}>
+                                    <label>Email</label>
+                                    <input required type="email" placeholder="email@company.com" />
                                 </div>
 
-                                <div>
-                                    <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 600 }}>Message / Requirement</label>
-                                    <textarea required rows={5} placeholder="I am interested in..." style={{ width: '100%', padding: '0.8rem', borderRadius: '4px', border: '1px solid #ddd' }}></textarea>
+                                <div className={styles.formGroup}>
+                                    <label>Message / Requirement</label>
+                                    <textarea required rows={5} placeholder="I am interested in..."></textarea>
                                 </div>
 
-                                <button disabled={status === 'submitting'} type="submit" className="btn btn-primary" style={{ marginTop: '1rem' }}>
+                                <button disabled={status === 'submitting'} type="submit" className="btn btn-primary">
                                     {status === 'submitting' ? 'Sending...' : 'Send Message'}
                                 </button>
                             </form>

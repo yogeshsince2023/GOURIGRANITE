@@ -1,0 +1,119 @@
+/* Factories Page Styles */
+.pageContainer {
+    background-color: var(--background);
+}
+
+.hero {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: var(--font-playfair);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ccc;
+}
+
+.content {
+    padding: 4rem 0;
+}
+
+.factoriesSection {
+    margin-bottom: 4rem;
+}
+
+.factoriesSection h2 {
+    font-size: 2rem;
+    font-family: var(--font-playfair);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.factoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.factoryCard {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    transition: box-shadow 0.2s ease;
+}
+
+.factoryCard:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .factoryCard:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.factoryCard img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.factoryInfo {
+    padding: 1.5rem;
+}
+
+.factoryInfo h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.locationText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.locationIcon {
+    color: var(--accent);
+}
+
+.capacityText {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.capacityText strong {
+    color: var(--accent);
+}
+
+.mapSection {
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .content {
+        padding: 2rem 0;
+    }
+    
+    .factoriesGrid {
+        gap: 1.5rem;
+    }
+}

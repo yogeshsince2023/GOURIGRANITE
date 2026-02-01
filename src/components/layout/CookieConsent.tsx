@@ -38,7 +38,7 @@ export default function CookieConsent() {
                     <Cookie size={28} />
                 </div>
                 <div className={styles.text}>
-                    <h4>🍪 We value your privacy</h4>
+                    <h4>We value your privacy</h4>
                     <p>
                         We use cookies to enhance your browsing experience, serve personalized content,
                         and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.

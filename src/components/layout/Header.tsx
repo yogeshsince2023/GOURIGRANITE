@@ -42,7 +42,7 @@ export default function Header() {
                     <Link href="/catalogue" className={`btn btn-outline ${styles.desktopOnly}`}>
                         Catalogue
                     </Link>
-                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`} target="_blank">
+                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`}>
                         Request Quote
                     </Link>
                 </div>
@@ -62,7 +62,7 @@ export default function Header() {
                         <Link href="/about" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
                         <Link href="/contact" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
                         <Link href="/catalogue" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
-                        <Link href="/contact" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)} target="_blank">
+                        <Link href="/contact" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
                             Request Quote
                         </Link>
                     </motion.div>

@@ -1,7 +1,198 @@
 .contactBackground {
-  background-image: url('/images/Contactus');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 50px;
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.heroSection {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.heroSection h1 {
+    font-family: var(--font-playfair);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.heroSection p {
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 2rem;
+}
+
+.infoSection {
+    padding: 2rem;
+}
+
+.infoSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.contactBlock {
+    margin-bottom: 2rem;
+}
+
+.contactBlock h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.contactBlock p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.contactBlock a {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.contactBlock a:hover {
+    color: var(--accent);
+}
+
+.accentIcon {
+    color: var(--accent);
+}
+
+.locationCard {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.locationCard:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) .locationCard:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.locationCard strong {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.locationCard p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.formContainer {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) .formContainer {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.successMessage {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.successMessage h3 {
+    color: #10b981;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.successMessage p {
+    color: var(--text-secondary);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formGroup label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--surface-1);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .heroSection {
+        padding: 3rem 1rem;
+    }
+    
+    .heroSection h1 {
+        font-size: 2rem;
+    }
+    
+    .contentGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+    
+    .infoSection {
+        padding: 1rem;
+    }
+    
+    .formContainer {
+        padding: 1.5rem;
+    }
 }

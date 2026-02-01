@@ -1,12 +1,13 @@
 import { PRODUCTS } from '@/lib/data';
 import Catalog from '@/components/features/products/Catalog';
+import styles from './products.module.css';
 
 export default function ProductsPage() {
     return (
-        <main>
-            <div style={{ backgroundColor: '#1a1a1a', color: 'white', padding: '4rem 0', textAlign: 'center' }}>
-                <h1 style={{ fontFamily: 'var(--font-playfair)', fontSize: '3rem', marginBottom: '1rem' }}>Our Collection</h1>
-                <p style={{ maxWidth: '600px', margin: '0 auto', color: '#ccc' }}>
+        <main className={styles.pageContainer}>
+            <div className={styles.hero}>
+                <h1>Our Collection</h1>
+                <p>
                     Explore our premium range of ethically sourced natural stones.
                 </p>
             </div>

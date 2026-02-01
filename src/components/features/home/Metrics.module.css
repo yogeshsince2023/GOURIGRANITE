@@ -1,9 +1,14 @@
 .metrics {
-    background-color: var(--white);
+    background-color: var(--surface-1);
     position: relative;
     overflow: hidden;
     padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%);
+}
+
+/* Dark mode override */
+:global(.dark) .metrics {
+    background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%);
 }
 
 .metrics::before {
@@ -26,8 +31,8 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -37,14 +42,19 @@
 
 .item {
     padding: 2rem 1.5rem;
-    background: rgba(255, 255, 255, 0.85);
+    background: var(--card-bg);
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border-color);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
+    text-align: center;
+}
+
+:global(.dark) .item {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .item::before {
@@ -63,6 +73,10 @@
 .item:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+:global(.dark) .item:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .item:hover::before {
@@ -116,7 +130,8 @@
 @media (max-width: 1024px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 0 1.5rem;
     }
     
     .item {
@@ -124,30 +139,31 @@
     }
     
     .value {
-        font-size: 3rem;
+        font-size: 2.75rem;
     }
 }
 
 @media (max-width: 640px) {
     .metrics {
-        padding: 3.5rem 0;
+        padding: 3rem 0;
     }
     
     .grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
     }
     
     .item {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
     }
     
     .value {
-        font-size: 2.75rem;
+        font-size: 2.25rem;
     }
     
     .label {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
     }
 }

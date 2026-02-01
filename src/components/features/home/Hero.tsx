@@ -1,11 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import styles from './Hero.module.css';
 import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 
 export default function Hero() {
+    const { scrollY } = useScroll();
+    const y = useTransform(scrollY, [0, 1000], [0, 400]);
+
     return (
         <motion.section
             className={styles.hero}
@@ -15,6 +18,7 @@ export default function Hero() {
         >
             <motion.div
                 className={styles.backgroundWrapper}
+                style={{ y }}
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 2, ease: 'easeOut' }}
@@ -66,7 +70,6 @@ export default function Hero() {
                         href="/contact"
                         className="btn btn-outline"
                         style={{ color: 'white', borderColor: 'white' }}
-                        target="_blank"
                     >
                         Request Quote
                     </Link>

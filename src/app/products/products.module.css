@@ -1,0 +1,33 @@
+/* Products Page Styles */
+.pageContainer {
+    background-color: var(--background);
+}
+
+.hero {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: var(--font-playfair);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+}

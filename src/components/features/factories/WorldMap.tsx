@@ -2,61 +2,62 @@
 
 import { useState } from 'react';
 import styles from './WorldMap.module.css';
+import { Sun, Globe2, Landmark, Map } from 'lucide-react';
 
 // All client countries with coordinates
 const CLIENT_COUNTRIES = [
     // Gulf Region
-    { name: 'UAE', x: 63, y: 48 },
-    { name: 'Qatar', x: 61, y: 47 },
-    { name: 'Oman', x: 64, y: 50 },
-    { name: 'Saudi Arabia', x: 58, y: 47 },
-    { name: 'Kuwait', x: 59, y: 44 },
-    { name: 'Bahrain', x: 60, y: 46 },
+    { name: 'UAE', x: 65, y: 44 },
+    { name: 'Qatar', x: 64, y: 44 },
+    { name: 'Oman', x: 67, y: 46 },
+    { name: 'Saudi Arabia', x: 62, y: 44 },
+    { name: 'Kuwait', x: 63, y: 42 },
+    { name: 'Bahrain', x: 64, y: 43 },
 
     // Middle East
-    { name: 'Jordan', x: 55, y: 44 },
-    { name: 'Lebanon', x: 55, y: 42 },
-    { name: 'Syria', x: 56, y: 41 },
-    { name: 'Iraq', x: 58, y: 43 },
-    { name: 'Iran', x: 62, y: 43 },
-    { name: 'Turkey', x: 53, y: 38 },
-    { name: 'Yemen', x: 60, y: 53 },
+    { name: 'Jordan', x: 59, y: 41 },
+    { name: 'Lebanon', x: 59, y: 39 },
+    { name: 'Syria', x: 60, y: 39 },
+    { name: 'Iraq', x: 62, y: 40 },
+    { name: 'Iran', x: 65, y: 40 },
+    { name: 'Turkey', x: 58, y: 38 },
+    { name: 'Yemen', x: 64, y: 49 },
 
     // Africa
-    { name: 'Egypt', x: 52, y: 46 },
-    { name: 'Libya', x: 47, y: 45 },
-    { name: 'Sudan', x: 52, y: 52 },
-    { name: 'Algeria', x: 42, y: 44 },
-    { name: 'Tunisia', x: 45, y: 41 },
-    { name: 'Morocco', x: 38, y: 44 },
-    { name: 'Tanzania', x: 55, y: 64 },
-    { name: 'Kenya', x: 56, y: 60 },
-    { name: 'Ethiopia', x: 57, y: 56 },
-    { name: 'Nigeria', x: 44, y: 55 },
-    { name: 'South Africa', x: 50, y: 76 },
+    { name: 'Egypt', x: 57, y: 43 },
+    { name: 'Libya', x: 52, y: 42 },
+    { name: 'Sudan', x: 58, y: 48 },
+    { name: 'Algeria', x: 48, y: 40 },
+    { name: 'Tunisia', x: 50, y: 38 },
+    { name: 'Morocco', x: 45, y: 40 },
+    { name: 'Tanzania', x: 61, y: 60 },
+    { name: 'Kenya', x: 62, y: 56 },
+    { name: 'Ethiopia', x: 62, y: 52 },
+    { name: 'Nigeria', x: 50, y: 52 },
+    { name: 'South Africa', x: 56, y: 75 },
 
     // Asia
-    { name: 'India', x: 70, y: 50, isFactory: true },
-    { name: 'Pakistan', x: 67, y: 45 },
-    { name: 'Bangladesh', x: 74, y: 48 },
-    { name: 'Sri Lanka', x: 71, y: 57 },
-    { name: 'Nepal', x: 72, y: 45 },
-    { name: 'Azerbaijan', x: 60, y: 38 },
+    { name: 'India', x: 72, y: 47, isFactory: true },
+    { name: 'Pakistan', x: 69, y: 42 },
+    { name: 'Bangladesh', x: 75, y: 45 },
+    { name: 'Sri Lanka', x: 73, y: 53 },
+    { name: 'Nepal', x: 73, y: 43 },
+    { name: 'Azerbaijan', x: 64, y: 37 },
 
     // Europe
-    { name: 'United Kingdom', x: 38, y: 30 },
-    { name: 'Germany', x: 44, y: 32 },
-    { name: 'Italy', x: 46, y: 37 },
-    { name: 'Greece', x: 50, y: 38 },
-    { name: 'Spain', x: 38, y: 38 },
+    { name: 'United Kingdom', x: 47, y: 26 },
+    { name: 'Germany', x: 50, y: 28 },
+    { name: 'Italy', x: 51, y: 32 },
+    { name: 'Greece', x: 54, y: 35 },
+    { name: 'Spain', x: 46, y: 34 },
 
     // Americas
-    { name: 'USA', x: 18, y: 40 },
-    { name: 'Brazil', x: 28, y: 65 },
-    { name: 'Mexico', x: 15, y: 48 },
+    { name: 'USA', x: 22, y: 35 },
+    { name: 'Brazil', x: 32, y: 65 },
+    { name: 'Mexico', x: 18, y: 44 },
 
     // Oceania
-    { name: 'Australia', x: 84, y: 72 },
+    { name: 'Australia', x: 86, y: 70 },
 ];
 
 export default function WorldMap() {
@@ -144,22 +145,22 @@ export default function WorldMap() {
             {/* Region Cards */}
             <div className={styles.regions}>
                 <div className={styles.region}>
-                    <div className={styles.regionIcon}>🌅</div>
+                    <div className={styles.regionIcon}><Sun size={32} strokeWidth={1.5} /></div>
                     <h4>Gulf & Middle East</h4>
                     <p>UAE, Qatar, Oman, Saudi Arabia, Kuwait, Bahrain, Jordan, Lebanon, Syria, Iraq, Iran, Turkey, Yemen</p>
                 </div>
                 <div className={styles.region}>
-                    <div className={styles.regionIcon}>🌍</div>
+                    <div className={styles.regionIcon}><Globe2 size={32} strokeWidth={1.5} /></div>
                     <h4>Africa</h4>
                     <p>Egypt, Libya, Sudan, Algeria, Tunisia, Morocco, Tanzania, Kenya, Ethiopia, Nigeria, South Africa</p>
                 </div>
                 <div className={styles.region}>
-                    <div className={styles.regionIcon}>🌏</div>
+                    <div className={styles.regionIcon}><Landmark size={32} strokeWidth={1.5} /></div>
                     <h4>Asia & Europe</h4>
                     <p>India, Pakistan, Bangladesh, Nepal, Sri Lanka, Azerbaijan, UK, Germany, Italy, Greece, Spain</p>
                 </div>
                 <div className={styles.region}>
-                    <div className={styles.regionIcon}>🌎</div>
+                    <div className={styles.regionIcon}><Map size={32} strokeWidth={1.5} /></div>
                     <h4>Americas & Oceania</h4>
                     <p>USA, Brazil, Mexico, Australia</p>
                 </div>

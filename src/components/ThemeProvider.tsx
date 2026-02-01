@@ -20,7 +20,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         // Load saved theme from localStorage
         const savedTheme = localStorage.getItem('theme') as Theme | null;
         if (savedTheme) {
-            setTheme(savedTheme);
+            setTheme(savedTheme.toLowerCase() as Theme);
         }
     }, []);
 

@@ -1,10 +1,10 @@
 .mapSection {
-    background: linear-gradient(160deg, #fdfbf7 0%, #f5f0e8 50%, #ebe4d8 100%);
+    background: linear-gradient(160deg, var(--surface-1) 0%, var(--surface-2) 50%, var(--surface-3) 100%);
     border-radius: 24px;
     padding: 3rem 2rem;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(180, 160, 120, 0.2);
+    border: 1px solid var(--border-color);
 }
 
 /* Header */
@@ -14,7 +14,9 @@
 }
 
 .badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     background: linear-gradient(135deg, #8b6914, #c4a035);
     color: #ffffff;
     padding: 0.5rem 1.25rem;
@@ -29,17 +31,17 @@
 .title {
     font-family: var(--font-playfair);
     font-size: 2.5rem;
-    color: #2c2416;
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
 }
 
 .subtitle {
-    color: #6b5d4d;
+    color: var(--text-secondary);
     font-size: 1.1rem;
 }
 
 .subtitle strong {
-    color: #8b6914;
+    color: var(--accent);
     font-weight: 600;
 }
 
@@ -252,11 +254,15 @@
 .statItem {
     text-align: center;
     padding: 1.25rem;
-    background: linear-gradient(145deg, #fff, #f8f5f0);
+    background: var(--card-bg);
     border-radius: 16px;
-    border: 1px solid rgba(180, 160, 120, 0.2);
+    border: 1px solid var(--border-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+:global(.dark) .statItem {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .statItem:hover {
@@ -264,16 +270,20 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
+:global(.dark) .statItem:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
 .statNumber {
     font-size: 2rem;
     font-weight: 700;
-    color: #8b6914;
+    color: var(--accent);
     font-family: var(--font-playfair);
     line-height: 1.2;
 }
 
 .statLabel {
-    color: #6b5d4d;
+    color: var(--text-secondary);
     font-size: 0.85rem;
     margin-top: 0.25rem;
 }
@@ -281,47 +291,70 @@
 /* Regions */
 .regions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
 
 .region {
-    background: linear-gradient(145deg, #fff, #faf8f5);
+    background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 16px;
-    border: 1px solid rgba(180, 160, 120, 0.15);
+    border: 1px solid var(--border-color);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
+}
+
+:global(.dark) .region {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .region:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    border-color: rgba(139, 105, 20, 0.3);
+    border-color: var(--accent);
+}
+
+:global(.dark) .region:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
 }
 
 .regionIcon {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+}
+
+.regionIcon svg {
+    width: 32px;
+    height: 32px;
 }
 
 .region h4 {
-    color: #2c2416;
+    color: var(--text-primary);
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
 .region p {
-    color: #7a6b5a;
+    color: var(--text-secondary);
     font-size: 0.85rem;
     line-height: 1.6;
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .statsBar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .regions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .mapSection {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
         border-radius: 16px;
     }
 
@@ -340,10 +373,15 @@
 
     .statsBar {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
 
     .statNumber {
         font-size: 1.5rem;
+    }
+    
+    .statItem {
+        padding: 1rem;
     }
 
     .regions {
@@ -356,7 +394,7 @@
         right: auto;
         justify-content: center;
         margin-top: 1rem;
-        background: rgba(44, 36, 22, 0.9);
+        background: rgba(0, 0, 0, 0.8);
     }
 
     .dot {
