@@ -24,7 +24,6 @@ const slides: Slide[] = [
     { id: 'fine-8', src: '/images/fine_8.jpg', alt: 'Fine Stone 8' },
 ];
 
-
 export default function CategoryGrid() {
     const marqueeRef = useRef<HTMLDivElement>(null);
     const animationRef = useRef<number | null>(null);
