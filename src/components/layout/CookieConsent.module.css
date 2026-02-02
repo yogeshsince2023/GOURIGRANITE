@@ -1,0 +1,154 @@
+.banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.content {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 16px;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    border-radius: 12px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.text {
+    flex: 1;
+}
+
+.text h4 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.text p {
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.declineBtn {
+    padding: 0.65rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.declineBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.acceptBtn {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #1a1a1a;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.acceptBtn:hover {
+    background: linear-gradient(135deg, #e5c04a, #c9a73f);
+    transform: translateY(-1px);
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.closeBtn:hover {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+
+    .iconWrapper {
+        width: 45px;
+        height: 45px;
+    }
+
+    .text h4 {
+        font-size: 0.95rem;
+    }
+
+    .text p {
+        font-size: 0.8rem;
+    }
+
+    .actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .declineBtn,
+    .acceptBtn {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}

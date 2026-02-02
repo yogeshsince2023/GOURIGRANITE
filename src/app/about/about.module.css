@@ -1,0 +1,348 @@
+/* About Page Styles */
+
+.pageContainer {
+    background-color: var(--background);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: var(--font-playfair);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #ccc;
+}
+
+/* Welcome Section */
+.welcomeSection {
+    margin-bottom: 4rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.welcomeSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.welcomeSection p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.welcomeSection strong {
+    color: var(--accent);
+}
+
+/* Mission Section */
+.missionSection {
+    margin-bottom: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.missionSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+.missionSection p {
+    line-height: 1.9;
+    font-size: 1.15rem;
+    color: #e0e0e0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Core Values */
+.valuesSection {
+    margin-bottom: 4rem;
+}
+
+.valuesSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.valuesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.valueCard {
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    text-align: center;
+    border-left: 4px solid var(--accent);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.valueCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .valueCard:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.valueCard h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.valueCard p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Why Choose Us */
+.whyChooseSection {
+    margin-bottom: 4rem;
+    padding: 3rem;
+    background: var(--surface-2);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.whyChooseSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.reasonsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.reasonCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-color);
+}
+
+:global(.dark) .reasonCard {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.reasonCard h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.reasonCard p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Collection Section */
+.collectionSection {
+    margin-bottom: 4rem;
+}
+
+.collectionSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.collectionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.graniteCard {
+    padding: 2.5rem;
+    background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+    border-radius: 16px;
+    color: white;
+}
+
+.marbleCard {
+    padding: 2.5rem;
+    background: var(--surface-2);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.categoryBadge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.categoryBadgeGold {
+    background-color: var(--accent);
+    color: #1a1a1a;
+}
+
+.categoryBadgeDark {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+:global(.dark) .categoryBadgeDark {
+    background-color: var(--accent);
+    color: #1a1a1a;
+}
+
+.graniteCard h3 {
+    font-family: var(--font-playfair);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.marbleCard h3 {
+    font-family: var(--font-playfair);
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* Certifications */
+.certificationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.certCard {
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.certCard h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.certCard p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Leadership */
+.leadershipSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.leadersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.leaderCard {
+    text-align: center;
+}
+
+.leaderCard img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+}
+
+.leaderCard h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.leaderCard .role {
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.leaderCard .bio {
+    color: var(--text-secondary);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .welcomeSection {
+        padding: 2rem 1rem;
+    }
+    
+    .missionSection,
+    .whyChooseSection {
+        padding: 2rem 1rem;
+    }
+    
+    .collectionGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .graniteCard,
+    .marbleCard {
+        padding: 1.5rem;
+    }
+}
