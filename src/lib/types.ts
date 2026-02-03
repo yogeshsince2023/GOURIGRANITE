@@ -2,7 +2,7 @@ export interface Product {
     id: string;
     name: string;
     category: 'Marble' | 'Granite' | 'Onyx' | 'Travertine';
-    finish: 'Polished' | 'Honed' | 'Leather' | 'Flamed' | 'Backlit';
+    finish: 'Polished' | 'Honed' | 'Leather' | 'Flamed' | 'Backlit' | 'Lappato';
     dimensions: string;
     description: string;
     image: string; // URL

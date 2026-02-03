@@ -5,7 +5,9 @@
     background-color: color-mix(in srgb, var(--card-bg) 85%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    /* SOFTENED: Replaced sharp border with soft shadow */
+    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    border-bottom: none;
     transition: all 0.3s ease;
 }
 
@@ -136,10 +138,13 @@
     flex-direction: column;
     padding: 1rem 1.25rem 1.5rem;
     background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
+    /* SOFTENED: Replaced border top with shadow */
+    border-top: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+    /* Additional inner shadow at top for separation if needed, but the main header shadow covers it */
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
 }
 
 :global(.dark) .mobileMenu {
@@ -151,12 +156,17 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
-    border-bottom: 1px solid var(--border-color);
+    /* SOFTENED: Replaced border-bottom with lighter border/shadow or gradient */
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(to right, var(--border-color) 40%, rgba(255,255,255,0) 0%) bottom/100% 1px no-repeat;
+    /* Actually a simple very light border is often cleaner than shadow for list items, but let's try a very subtle border */
+    border-bottom: 1px solid var(--overlay-light); 
     transition: color 0.2s;
 }
 
 .mobileLink:hover {
     color: var(--accent);
+    background-color: var(--surface-2); /* Visual feedback instead of just line */
 }
 
 /* Tablet */
