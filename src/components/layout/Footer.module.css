@@ -1,71 +1,78 @@
 .footer {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    padding: 4rem 0 1rem;
-    margin-top: auto;
+    background-color: var(--secondary); /* Often dark or contrasty */
+    color: var(--text-primary);
+    padding: 4rem 1rem 2rem;
+    position: relative;
+    /* SOFTENED: Shadow pointing upwards to separate from content above */
+    box-shadow: 0 -10px 40px -20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
 :global(.dark) .footer {
-    background-color: #0d0d0d;
-    border-top: 1px solid #222;
+    background-color: #050505; /* Deep black for footer in dark mode */
+    box-shadow: 0 -10px 40px -20px rgba(0, 0, 0, 0.5);
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1rem 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 3rem;
+    /* Soft separator line for bottom copyright section */
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(to right, transparent, var(--border-color), transparent) bottom/100% 1px no-repeat;
+    /* This creates a fading line effect instead of a sharp full-width border */
 }
 
 .column h3 {
-    font-size: 1.25rem;
+    font-family: var(--font-playfair);
+    font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: #d4af37;
+    color: var(--text-primary);
 }
 
-.column p,
-.column a {
-    color: #a0a0a0;
-    margin-bottom: 0.75rem;
-    display: block;
-    font-size: 0.95rem;
+.column p {
+    color: var(--text-secondary);
     line-height: 1.6;
-    transition: color 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.column a {
+    transition: color 0.2s;
 }
 
 .column a:hover {
-    color: #ffffff;
+    color: var(--accent) !important;
 }
 
 .bottom {
     text-align: center;
-    padding-top: 1rem;
-    color: #666;
-    font-size: 0.85rem;
+    padding-top: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
     .footer {
-        padding: 3rem 0 1rem;
+        padding: 3rem 1rem 1.5rem;
     }
     
     .grid {
-        grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 0 1.5rem 2rem;
+        text-align: center;
     }
-    
-    .column h3 {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
+
+    .column nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    
-    .column p,
-    .column a {
-        font-size: 0.9rem;
+
+    .column address p {
+        justify-content: center;
+        display: flex;
+        align-items: center;
     }
 }

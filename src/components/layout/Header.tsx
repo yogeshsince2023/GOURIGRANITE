@@ -46,25 +46,36 @@ export default function Header() {
                         Request Quote
                     </Link>
                 </div>
+
+                {/* Hamburger Button */}
+                <button
+                    className={styles.mobileMenuButton}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </nav>
 
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
                         className={styles.mobileMenu}
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
                         <Link href="/products" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Products</Link>
                         <Link href="/factories" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Global Factories</Link>
                         <Link href="/about" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
                         <Link href="/contact" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
                         <Link href="/catalogue" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
-                        <Link href="/contact" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
-                            Request Quote
-                        </Link>
+                        <div style={{ padding: '1rem 0' }}>
+                            <Link href="/contact" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }} onClick={() => setMobileMenuOpen(false)}>
+                                Request Quote
+                            </Link>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
