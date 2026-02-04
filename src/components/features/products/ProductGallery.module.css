@@ -1,0 +1,139 @@
+.galleryContainer {
+    width: 100%;
+    min-height: 100vh;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Carousel Section */
+.carouselSection {
+    width: 100%;
+    height: 80vh; /* Large impactful carousel */
+    min-height: 500px;
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.swiperSlide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: var(--primary);
+}
+
+.slideImage {
+    object-fit: cover;
+    filter: brightness(0.7); /* Darken for text readability */
+}
+
+.slideContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 4rem 5%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.slideTitle {
+    font-family: var(--font-playfair);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.8s 0.2s forwards;
+}
+
+.slideDescription {
+    font-size: 1.2rem;
+    max-width: 600px;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.8s 0.4s forwards;
+}
+
+.slideButton {
+    padding: 1rem 2rem;
+    background-color: var(--accent);
+    color: var(--white);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.8s 0.6s forwards;
+}
+
+.slideButton:hover {
+    background-color: white;
+    color: var(--primary);
+}
+
+/* Grid Section */
+.gridSection {
+    padding: 0 5%;
+    margin-bottom: 6rem;
+}
+
+.gridHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.gridTitle {
+    font-family: var(--font-playfair);
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.gridSubtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .carouselSection {
+        height: 60vh;
+    }
+
+    .slideTitle {
+        font-size: 2rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}

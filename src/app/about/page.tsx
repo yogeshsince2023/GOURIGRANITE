@@ -146,7 +146,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Owners */}
-                <div className={styles.leadershipSection}>
+                {/* <div className={styles.leadershipSection}>
                     <h2>Leadership</h2>
                     <div className={styles.leadersGrid}>
                         {OWNERS.map(owner => (
@@ -158,7 +158,7 @@ export default function AboutPage() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </main>
     );
