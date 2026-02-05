@@ -103,9 +103,9 @@ export default function CategoryGrid() {
                         <p className={styles.desc}>Curated from the best quarries across India.</p>
 
                         <div className={styles.tabs}>
-                            <button className={`${styles.tab} ${styles.tabActive}`}>Popular Stone</button>
-                            <button className={styles.tab}>Stone by Colours</button>
-                            <button className={styles.tab}>Stone by Spaces</button>
+                            <div className={styles.tab}>Popular Collection</div>
+                            <div className={styles.tab}>Stone by Colours</div>
+                            <div className={styles.tab}>Stone by Spaces</div>
                         </div>
 
                         <Link href="/products" className={styles.cta}>

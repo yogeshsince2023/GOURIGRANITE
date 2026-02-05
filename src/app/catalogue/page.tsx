@@ -96,7 +96,7 @@ export default function CataloguePage() {
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.heroContent}>
-                    <span className={styles.label}>Product Catalogue 2025</span>
+                    <span className={styles.label}>Latest Products Catalogue</span>
                     <h1 className={styles.title}>The Definitive Stone Collection</h1>
                     <p className={styles.subtitle}>
                         Discover our comprehensive range of premium granites, marbles, and exotic stones. 
@@ -128,7 +128,7 @@ export default function CataloguePage() {
                     <div className={styles.featureIcon}>
                         <Layers size={24} />
                     </div>
-                    <h3 className={styles.featureTitle}>50+ Premium Varieties</h3>
+                    <h3 className={styles.featureTitle}>100+ Premium Varieties</h3>
                     <p className={styles.featureText}>
                         Explore our extensive collection of North and South Indian granites, curated for exceptional quality and color consistency.
                     </p>
