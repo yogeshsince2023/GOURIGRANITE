@@ -2,27 +2,46 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Product } from '@/lib/types';
-import ProductCard from './ProductCard';
 import styles from './ProductGallery.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import { Navigation, Pagination, Keyboard, Zoom } from 'swiper/modules';
 import { motion, Variants } from 'framer-motion';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
+import 'swiper/css/zoom';
 
 interface ProductGalleryProps {
     products: Product[];
 }
 
 export default function ProductGallery({ products }: ProductGalleryProps) {
-    const featuredProducts = products.filter(p => p.featured);
-    const galleryProducts = products; // Show all products in the gallery grid
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [initialSlide, setInitialSlide] = useState(0);
+
+    // Handle body scroll locking
+    useEffect(() => {
+        if (lightboxOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [lightboxOpen]);
+
+    const openLightbox = (index: number) => {
+        setInitialSlide(index);
+        setLightboxOpen(true);
+    };
+
+    const closeLightbox = () => {
+        setLightboxOpen(false);
+    };
 
     // Animation variants for grid items
     const containerVariants: Variants = {
@@ -49,64 +68,66 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
 
     return (
         <div className={styles.galleryContainer}>
-            {/* Hero Carousel */}
-            <section className={styles.carouselSection}>
-                <Swiper
-                    modules={[Navigation, Pagination, Autoplay, EffectFade]}
-                    effect={'fade'}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    navigation
-                    pagination={{ clickable: true }}
-                    autoplay={{ delay: 5000, disableOnInteraction: false }}
-                    loop={true}
-                    className="h-full w-full"
-                    style={{ height: '100%' }}
-                >
-                    {featuredProducts.map((product) => (
-                        <SwiperSlide key={product.id} className={styles.swiperSlide}>
-                            <Image
-                                src={product.image}
-                                alt={product.name}
-                                fill
-                                priority
-                                className={styles.slideImage}
-                            />
-                            <div className={styles.slideContent}>
-                                <h2 className={styles.slideTitle}>{product.name}</h2>
-                                <p className={styles.slideDescription}>{product.description}</p>
-                                {/* <Link href={`/products/${product.id}`}>
-                                    <button className={styles.slideButton}>View Stone</button>
-                                </Link> */}
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </section>
+            <motion.div 
+                className={styles.galleryGrid}
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.1 }}
+            >
+                {products.map((product, index) => (
+                    <motion.div 
+                        key={product.id} 
+                        variants={itemVariants}
+                        className={styles.imageContainer}
+                        onClick={() => openLightbox(index)}
+                    >
+                        <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className={styles.galleryImage}
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                    </motion.div>
+                ))}
+            </motion.div>
 
-            {/* Gallery Grid */}
-            <section className={styles.gridSection}>
-                <div className={styles.gridHeader}>
-                    <h2 className={styles.gridTitle}>Complete Collection</h2>
-                    <p className={styles.gridSubtitle}>
-                        Discover our comprehensive range of nature's finest masterpieces, ethically sourced and processed to perfection.
-                    </p>
+            {/* Lightbox */}
+            {lightboxOpen && (
+                <div className={styles.lightboxOverlay}>
+                    <button className={styles.lightboxClose} onClick={closeLightbox}>
+                        &times;
+                    </button>
+                    <Swiper
+                        modules={[Navigation, Pagination, Zoom, Keyboard]}
+                        initialSlide={initialSlide}
+                        spaceBetween={0}
+                        slidesPerView={1}
+                        navigation
+                        pagination={{ clickable: true }}
+                        zoom={{ maxRatio: 3 }}
+                        keyboard={{ enabled: true }}
+                        loop={true}
+                        className={styles.lightboxSwiper}
+                    >
+                        {products.map((product) => (
+                            <SwiperSlide key={product.id} className={styles.lightboxSlide}>
+                                <div className="swiper-zoom-container">
+                                    <Image
+                                        src={product.image}
+                                        alt={product.name}
+                                        width={1600}
+                                        height={1200}
+                                        className={styles.lightboxImage}
+                                        priority={false} // Lazy load inside swiper except active? Swiper handles this decently.
+                                    />
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
-
-                <motion.div 
-                    className={styles.grid}
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.1 }}
-                >
-                    {galleryProducts.map((product) => (
-                        <motion.div key={product.id} variants={itemVariants}>
-                            <ProductCard product={product} />
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </section>
+            )}
         </div>
     );
 }
