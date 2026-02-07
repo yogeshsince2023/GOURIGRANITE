@@ -22,23 +22,24 @@ export default function CataloguePage() {
 
     useEffect(() => {
         // Hydration check for access
-        if (typeof window !== 'undefined') {
-            const access = localStorage.getItem('catalogue_access');
-            if (access) {
-                setHasAccess(true);
-            }
-        }
+        // if (typeof window !== 'undefined') {
+        //     const access = localStorage.getItem('catalogue_access');
+        //     if (access) {
+        //         setHasAccess(true);
+        //     }
+        // }
     }, []);
 
     const handleAction = (type: 'view' | 'download') => {
         setActionType(type);
         
-        if (hasAccess) {
-            executeAction(type);
-        } else {
+        // Always show modal for now to ensure form filling
+        // if (hasAccess) {
+        //    executeAction(type);
+        // } else {
             setShowModal(true);
             setIsSuccess(false); // Reset success state if reopening
-        }
+        // }
     };
 
     const executeAction = (type: 'view' | 'download') => {
@@ -60,17 +61,29 @@ export default function CataloguePage() {
         setIsSubmitting(true);
 
         try {
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 800));
-
-            // Store Lead Data
             const leadData = {
                 ...formData,
                 timestamp: new Date().toISOString(),
-                source: 'catalogue_page',
-                initialAction: actionType
+                source: 'catalogue_page_download_form',
             };
 
+            // TODO: INTEGRATE GOOGLE SHEETS API HERE
+            // When you have the Google Apps Script Web App URL, replace the following:
+            // const GOOGLE_SHEET_URL = 'YOUR_WEB_APP_URL';
+            // await fetch(GOOGLE_SHEET_URL, {
+            //     method: 'POST',
+            //     mode: 'no-cors', // Important for Google Sheets
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(leadData)
+            // });
+
+            // Mocking the API call for now
+            console.log('Sending data to Google Sheets:', leadData);
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            // Store in local storage for persistence across sessions (optional)
             const existingLeads = JSON.parse(localStorage.getItem('catalogue_leads') || '[]');
             existingLeads.push(leadData);
             localStorage.setItem('catalogue_leads', JSON.stringify(existingLeads));
@@ -78,9 +91,10 @@ export default function CataloguePage() {
             // Grant Access
             localStorage.setItem('catalogue_access', 'true');
             setHasAccess(true);
-            setIsSuccess(true); // Show success state instead of auto-closing
+            setIsSuccess(true);
         } catch (error) {
             console.error('Submission failed', error);
+            // Handle error (show message to user)
         } finally {
             setIsSubmitting(false);
         }
@@ -215,6 +229,16 @@ export default function CataloguePage() {
 
                                     <div className={styles.formRow}>
                                         <div className={styles.formGroup}>
+                                            <label>Mobile Number</label>
+                                            <input
+                                                type="tel"
+                                                required
+                                                placeholder="+91..."
+                                                value={formData.phone}
+                                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                            />
+                                        </div>
+                                        <div className={styles.formGroup}>
                                             <label>Email Address</label>
                                             <input
                                                 type="email"
@@ -224,22 +248,13 @@ export default function CataloguePage() {
                                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
                                             />
                                         </div>
-                                        <div className={styles.formGroup}>
-                                            <label>Phone Number</label>
-                                            <input
-                                                type="tel"
-                                                required
-                                                placeholder="+91..."
-                                                value={formData.phone}
-                                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                            />
-                                        </div>
                                     </div>
 
                                     <div className={styles.formGroup}>
-                                        <label>Company (Optional)</label>
+                                        <label>Company Name</label>
                                         <input
                                             type="text"
+                                            required
                                             placeholder="Your Company Name"
                                             value={formData.company}
                                             onChange={e => setFormData({ ...formData, company: e.target.value })}

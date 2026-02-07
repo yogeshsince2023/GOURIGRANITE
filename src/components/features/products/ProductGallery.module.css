@@ -2,120 +2,96 @@
     width: 100%;
     min-height: 100vh;
     animation: fadeIn 0.6s ease-out;
+    padding: 2rem 5%;
 }
 
-/* Carousel Section */
-.carouselSection {
-    width: 100%;
-    height: 80vh; /* Large impactful carousel */
-    min-height: 500px;
+.galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.imageContainer {
     position: relative;
-    margin-bottom: 4rem;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.swiperSlide {
+.imageContainer:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.galleryImage {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.imageContainer:hover .galleryImage {
+    transform: scale(1.05);
+}
+
+/* Lightbox Styles */
+.lightboxOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.lightboxClose {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 10000;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    padding: 10px;
+}
+
+.lightboxClose:hover {
+    opacity: 1;
+}
+
+.lightboxSwiper {
     width: 100%;
     height: 100%;
-    position: relative;
-    background-color: var(--primary);
 }
 
-.slideImage {
-    object-fit: cover;
-    filter: brightness(0.7); /* Darken for text readability */
-}
-
-.slideContent {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 4rem 5%;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    color: white;
-    z-index: 10;
+.lightboxSlide {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
-.slideTitle {
-    font-family: var(--font-playfair);
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpFade 0.8s 0.2s forwards;
+.lightboxImageWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.slideDescription {
-    font-size: 1.2rem;
-    max-width: 600px;
-    opacity: 0.9;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpFade 0.8s 0.4s forwards;
-}
-
-.slideButton {
-    padding: 1rem 2rem;
-    background-color: var(--accent);
-    color: var(--white);
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpFade 0.8s 0.6s forwards;
-}
-
-.slideButton:hover {
-    background-color: white;
-    color: var(--primary);
-}
-
-/* Grid Section */
-.gridSection {
-    padding: 0 5%;
-    margin-bottom: 6rem;
-}
-
-.gridHeader {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.gridTitle {
-    font-family: var(--font-playfair);
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.gridSubtitle {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-@keyframes slideUpFade {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.lightboxImage {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
 }
 
 @keyframes fadeIn {
@@ -124,16 +100,8 @@
 }
 
 @media (max-width: 768px) {
-    .carouselSection {
-        height: 60vh;
-    }
-
-    .slideTitle {
-        font-size: 2rem;
-    }
-
-    .grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
+    .galleryGrid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
     }
 }

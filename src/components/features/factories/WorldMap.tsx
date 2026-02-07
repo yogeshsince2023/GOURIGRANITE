@@ -95,8 +95,8 @@ export default function WorldMap() {
                             top: `${country.y}%`,
                             animationDelay: `${index * 0.08}s`
                         }}
-                        // onMouseEnter={() => setHoveredCountry(country.name)}
-                        // onMouseLeave={() => setHoveredCountry(null)}
+                        onMouseEnter={() => setHoveredCountry(country.name)}
+                        onMouseLeave={() => setHoveredCountry(null)}
                     >
                         <span className={styles.ping}></span>
                         <span className={styles.dot}></span>
