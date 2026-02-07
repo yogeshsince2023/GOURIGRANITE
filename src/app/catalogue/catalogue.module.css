@@ -369,6 +369,8 @@
     font-size: 1rem;
     transition: all 0.2s;
     color: var(--text-primary);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .formGroup input:focus {
