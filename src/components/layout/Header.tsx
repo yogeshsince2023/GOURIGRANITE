@@ -15,7 +15,7 @@ export default function Header() {
             <nav className={styles.nav}>
                 <div className={styles.left}> {/* Left side links */}
                     <ul className={styles.links}>
-                        <li><Link href="/products" className={styles.link}>Products</Link></li>
+                        <li><Link href="/products" className={styles.link}>Gallery</Link></li>
                         <li><Link href="/factories" className={styles.link}>Global Factories</Link></li>
                     </ul>
                 </div>

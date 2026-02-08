@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
         finish: 'Polished',
         dimensions: '3200 x 1600 mm',
         description: 'Premium white marble with bold grey veining, perfect for luxury interiors.',
-        image: '/images/2.jpeg',
+        image: '/images/factory3.jpeg',
         factoryId: 'f1',
         featured: true,
     },
