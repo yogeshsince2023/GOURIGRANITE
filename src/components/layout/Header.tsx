@@ -22,11 +22,12 @@ export default function Header() {
 
                 <Link href="/" className={styles.logoCenter} aria-label="Gouri Granite Home"> {/* Centered logo */}
                     <Image
-                        src="/images/Company_logo.png"
+                        src="https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png"
                         alt="Gouri Granite"
                         width={260}
                         height={130}
                         className={styles.logoImage}
+                        quality={100}
                         priority
                     />
                 </Link>

@@ -34,20 +34,9 @@ export default function CataloguePage() {
   });
 
   useEffect(() => {
-    // Hydration check for access
-    // if (typeof window !== 'undefined') {
-    //     const access = localStorage.getItem('catalogue_access');
-    //     if (access) {
-    //         setHasAccess(true);
-    //     }
-    // }
-
-    if (typeof window !== 'undefined') {
-      const hasSubmitted = localStorage.getItem('catalogue_submitted');
-      if (hasSubmitted) {
-        setHasAccess(true);
-      }
-    }
+    // Form will always show to collect details
+    // User can access after submitting their information
+    setHasAccess(false);
   }, []);
 
   const handleAction = (type: "view" | "download") => {
@@ -187,7 +176,7 @@ export default function CataloguePage() {
       {showPdf && (
         <div className={styles.pdfViewer}>
           <div className={styles.viewerHeader}>
-            <div className={styles.headerTitle}>Product Catalogue 2026</div>
+            <div className={styles.headerTitle}>Latest Catalogue</div>
             <button
               onClick={() => setShowPdf(false)}
               className={styles.closeViewerBtn}

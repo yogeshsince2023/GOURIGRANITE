@@ -23,10 +23,6 @@ export default function TrustSection() {
 
                 <motion.div className={styles.logos} variants={staggerContainer(0.12, 0.1)}>
                     <motion.div className={styles.logo} variants={fadeIn('up', 0)} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
-                         <Award className="text-accent mb-2" size={32} />
-                         <span style={{fontWeight: 600, marginTop: '0.5rem'}}>ISO 9001:2015</span>
-                    </motion.div>
-                    <motion.div className={styles.logo} variants={fadeIn('up', 0)} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
                         <Globe2 className="text-accent mb-2" size={32} />
                         <span style={{fontWeight: 600, marginTop: '0.5rem'}}>Global Export House</span>
                     </motion.div>
@@ -37,6 +33,10 @@ export default function TrustSection() {
                     <motion.div className={styles.logo} variants={fadeIn('up', 0)} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
                         <CheckCircle className="text-accent mb-2" size={32} />
                         <span style={{fontWeight: 600, marginTop: '0.5rem'}}>100% Quality Check</span>
+                    </motion.div>
+                    <motion.div className={styles.logo} variants={fadeIn('up', 0)} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
+                        <Award className="text-accent mb-2" size={32} />
+                        <span style={{fontWeight: 600, marginTop: '0.5rem'}}>Ethical Sourcing</span>
                     </motion.div>
                 </motion.div>
             </div>

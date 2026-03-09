@@ -21,6 +21,30 @@ interface ProductGalleryProps {
 export default function ProductGallery({ products }: ProductGalleryProps) {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [initialSlide, setInitialSlide] = useState(0);
+    const [randomizedProducts, setRandomizedProducts] = useState<Product[]>([]);
+    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
+    // Shuffle function for random pattern
+    const shuffleArray = (array: Product[]): Product[] => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    };
+
+    // Filter out factory photos and randomize products on mount and on every page reload
+    useEffect(() => {
+        // Filter products that don't use factory photos
+        const filteredProducts = products.filter(
+            product => !product.image.toLowerCase().includes('factory')
+        );
+        
+        // Randomize the filtered products
+        const randomized = shuffleArray(filteredProducts);
+        setRandomizedProducts(randomized);
+    }, []);
 
     // Handle body scroll locking
     useEffect(() => {
@@ -41,6 +65,11 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
 
     const closeLightbox = () => {
         setLightboxOpen(false);
+    };
+
+    // Handle image load completion
+    const handleImageLoad = (productId: string) => {
+        setLoadedImages(prev => new Set(prev).add(productId));
     };
 
     // Animation variants for grid items
@@ -75,19 +104,30 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
             >
-                {products.map((product, index) => (
+                {randomizedProducts.map((product, index) => (
                     <motion.div 
                         key={product.id} 
                         variants={itemVariants}
                         className={styles.imageContainer}
                         onClick={() => openLightbox(index)}
                     >
+                        {/* Skeleton Loader */}
+                        {!loadedImages.has(product.id) && (
+                            <div className={styles.skeleton}></div>
+                        )}
+                        
+                        {/* Progressive Image Loading */}
                         <Image
                             src={product.image}
                             alt={product.name}
                             fill
-                            className={styles.galleryImage}
-                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className={`${styles.galleryImage} ${loadedImages.has(product.id) ? styles.imageLoaded : styles.imageLoading}`}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            quality={100}
+                            placeholder="blur"
+                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75'%3E%3Crect fill='%23e5e5e5' width='100' height='75'/%3E%3C/svg%3E"
+                            loading="lazy"
+                            onLoad={() => handleImageLoad(product.id)}
                         />
                     </motion.div>
                 ))}
@@ -111,7 +151,7 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                         loop={true}
                         className={styles.lightboxSwiper}
                     >
-                        {products.map((product) => (
+                        {randomizedProducts.map((product) => (
                             <SwiperSlide key={product.id} className={styles.lightboxSlide}>
                                 <div className="swiper-zoom-container">
                                     <Image
@@ -120,7 +160,11 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                                         width={1600}
                                         height={1200}
                                         className={styles.lightboxImage}
-                                        priority={false} // Lazy load inside swiper except active? Swiper handles this decently.
+                                        quality={100}
+                                        priority={false}
+                                        loading="lazy"
+                                        placeholder="blur"
+                                        blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75'%3E%3Crect fill='%23333333' width='100' height='75'/%3E%3C/svg%3E"
                                     />
                                 </div>
                             </SwiperSlide>

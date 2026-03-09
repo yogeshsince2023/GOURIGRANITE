@@ -8,6 +8,9 @@ export interface Product {
     image: string; // URL
     factoryId: string;
     featured?: boolean;
+    color?: string; // e.g., 'White', 'Black', 'Green'
+    applications?: string[]; // e.g., ['Flooring', 'Countertops']
+    altText?: string; // SEO alt text
 }
 
 export interface Factory {
@@ -17,6 +20,11 @@ export interface Factory {
     coordinates: { lat: number; lng: number };
     capacity: string;
     image: string;
+    altText?: string;
+    yearEstablished?: number;
+    specialization?: string; // e.g., 'Marble', 'Granite', 'Mixed'
+    machinery?: string[];
+    certifications?: string[];
 }
 
 export interface Owner {

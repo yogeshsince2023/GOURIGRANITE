@@ -14,14 +14,14 @@ interface Slide {
 }
 
 const slides: Slide[] = [
-    { id: 'fine-1', src: '/images/fine_1.png', alt: 'Fine Stone 1' },
-    { id: 'fine-2', src: '/images/fine_2.jpg', alt: 'Fine Stone 2' },
-    { id: 'fine-3', src: '/images/fine_3.jpg', alt: 'Fine Stone 3' },
-    { id: 'fine-4', src: '/images/fine_4.jpg', alt: 'Fine Stone 4' },
-    { id: 'fine-5', src: '/images/fine_5.jpg', alt: 'Fine Stone 5' },
-    { id: 'fine-6', src: '/images/fine_6.jpg', alt: 'Fine Stone 6' },
-    { id: 'fine-7', src: '/images/fine_7.jpg', alt: 'Fine Stone 7' },
-    { id: 'fine-8', src: '/images/fine_8.jpg', alt: 'Fine Stone 8' },
+    { id: 'fine-1', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790204/fine_1_sbu8mz.png', alt: 'Black Galaxy Granite - Premium polished granite with gold speckles' },
+    { id: 'fine-2', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790198/fine_2_iyetda.avif', alt: 'Statuario Marble - Premium white marble with bold grey veining' },
+    { id: 'fine-3', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790199/fine_3_x4ksci.jpg', alt: 'Honey Onyx - Translucent stone with warm amber tones' },
+    { id: 'fine-4', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/fine_4_fck0fe.jpg', alt: 'Silver Travertine - Contemporary silver-grey travertine' },
+    { id: 'fine-5', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790199/fine_5_jkote4.jpg', alt: 'Rainforest Green - Exotic green marble with brown veins' },
+    { id: 'fine-6', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/fine_6_w4s3if.jpg', alt: 'Imperial Red - Deep red granite with blue-black accents' },
+    { id: 'fine-7', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790201/fine_7_jcq1dn.jpg', alt: 'Alaska White - Frosty pale silver and white granite' },
+    { id: 'fine-8', src: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790201/fine_8_vmbbce.jpg', alt: 'Ocean Blue - Deep blue granite with white wave patterns' },
 ];
 
 export default function CategoryGrid() {
@@ -128,6 +128,9 @@ export default function CategoryGrid() {
                                             className={styles.slideImage}
                                             sizes="360px"
                                             priority={i < 4}
+                                            quality={100}
+                                            placeholder="blur"
+                                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f0f0f0' width='400' height='400'/%3E%3C/svg%3E"
                                             onError={(e) => {
                                                 e.currentTarget.src = '/images/placeholder.png'; // Fallback image
                                             }}

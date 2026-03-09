@@ -135,8 +135,8 @@ export default function AboutPage() {
                     </div>
                     <div className={styles.certCard}>
                         <ShieldCheck size={48} color="var(--accent)" style={{ marginBottom: '1rem' }} />
-                        <h3>ISO Certified</h3>
-                        <p>ISO 9001:2015 standards.</p>
+                        <h3>Export Recognized</h3>
+                        <p>Government export house certification.</p>
                     </div>
                     <div className={styles.certCard}>
                         <Leaf size={48} color="var(--accent)" style={{ marginBottom: '1rem' }} />

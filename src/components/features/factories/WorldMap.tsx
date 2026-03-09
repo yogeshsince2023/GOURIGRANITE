@@ -6,58 +6,57 @@ import { Sun, Globe2, Landmark, Map } from 'lucide-react';
 
 // All client countries with coordinates
 const CLIENT_COUNTRIES = [
-  // Gulf Region
-{ name: 'UAE', x: 61, y: 34 },
-{ name: 'Qatar', x: 60, y: 34 },
-{ name: 'Oman', x: 63, y: 36 },
-{ name: 'Saudi Arabia', x: 58, y: 34 },
-{ name: 'Kuwait', x: 59, y: 32 },
-{ name: 'Bahrain', x: 60, y: 33 },
+    // Gulf Region
+    { name: 'UAE', x: 61, y: 34 },
+    { name: 'Qatar', x: 60, y: 34 },
+    { name: 'Oman', x: 63, y: 36 },
+    { name: 'Saudi Arabia', x: 58, y: 34 },
+    { name: 'Kuwait', x: 59, y: 32 },
+    { name: 'Bahrain', x: 60, y: 33 },
 
-// Middle East
-{ name: 'Jordan', x: 55, y: 31 },
-{ name: 'Lebanon', x: 55, y: 29 },
-{ name: 'Syria', x: 56, y: 29 },
-{ name: 'Iraq', x: 58, y: 30 },
-{ name: 'Iran', x: 61, y: 30 },
-{ name: 'Turkey', x: 54, y: 28 },
-{ name: 'Yemen', x: 60, y: 39 },
+    // Middle East
+    { name: 'Jordan', x: 55, y: 31 },
+    { name: 'Lebanon', x: 55, y: 29 },
+    { name: 'Syria', x: 56, y: 29 },
+    { name: 'Iraq', x: 58, y: 30 },
+    { name: 'Iran', x: 61, y: 30 },
+    { name: 'Turkey', x: 54, y: 28 },
+    { name: 'Yemen', x: 60, y: 39 },
 
-// Africa
-{ name: 'Egypt', x: 53, y: 33 },
-{ name: 'Libya', x: 48, y: 32 },
-{ name: 'Sudan', x: 54, y: 38 },
-{ name: 'Algeria', x: 44, y: 30 },
-{ name: 'Tunisia', x: 46, y: 28 },
-{ name: 'Morocco', x: 41, y: 30 },
-{ name: 'Tanzania', x: 57, y: 50 },
-{ name: 'Kenya', x: 58, y: 46 },
-{ name: 'Ethiopia', x: 58, y: 42 },
-{ name: 'Nigeria', x: 46, y: 42 },
-{ name: 'South Africa', x: 52, y: 65 },
+    // Africa
+    { name: 'Egypt', x: 53, y: 33 },
+    { name: 'Libya', x: 48, y: 32 },
+    { name: 'Sudan', x: 54, y: 38 },
+    { name: 'Algeria', x: 44, y: 30 },
+    { name: 'Tunisia', x: 46, y: 28 },
+    { name: 'Morocco', x: 41, y: 30 },
+    { name: 'Tanzania', x: 57, y: 50 },
+    { name: 'Kenya', x: 58, y: 46 },
+    { name: 'Ethiopia', x: 58, y: 42 },
+    { name: 'Nigeria', x: 46, y: 42 },
+    { name: 'South Africa', x: 52, y: 65 },
 
-// Asia
-{ name: 'India', x: 68, y: 37, isFactory: true },
-{ name: 'Pakistan', x: 66.2, y: 33 },
-{ name: 'Bangladesh', x: 71, y: 35 },
-{ name: 'Sri Lanka', x: 69, y: 44 },
-{ name: 'Nepal', x: 69, y: 33 },
-{ name: 'Azerbaijan', x: 60, y: 27 },
+    // Asia
+    { name: 'India', x: 68, y: 37, isFactory: true },
+    { name: 'Bangladesh', x: 71, y: 35 },
+    { name: 'Sri Lanka', x: 69, y: 44 },
+    { name: 'Nepal', x: 69, y: 33 },
+    { name: 'Azerbaijan', x: 60, y: 27 },
 
-// Europe
-{ name: 'United Kingdom', x: 43, y: 16 },
-{ name: 'Germany', x: 46, y: 18 },
-{ name: 'Italy', x: 47, y: 22 },
-{ name: 'Greece', x: 50, y: 25 },
-{ name: 'Spain', x: 42, y: 24 },
+    // Europe
+    { name: 'United Kingdom', x: 43, y: 16 },
+    { name: 'Germany', x: 46, y: 18 },
+    { name: 'Italy', x: 47, y: 22 },
+    { name: 'Greece', x: 50, y: 25 },
+    { name: 'Spain', x: 42, y: 24 },
 
-// Americas
-{ name: 'USA', x: 18, y: 25 },
-{ name: 'Brazil', x: 28, y: 55 },
-{ name: 'Mexico', x: 14, y: 34 },
+    // Americas
+    { name: 'USA', x: 18, y: 25 },
+    { name: 'Brazil', x: 28, y: 55 },
+    { name: 'Mexico', x: 14, y: 34 },
 
-// Oceania
-{ name: 'Australia', x: 82, y: 60 },
+    // Oceania
+    { name: 'Australia', x: 82, y: 60 },
 
 ];
 
@@ -158,7 +157,7 @@ export default function WorldMap() {
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Landmark size={32} strokeWidth={1.5} /></div>
                     <h4>Asia & Europe</h4>
-                    <p>India, Pakistan, Bangladesh, Nepal, Sri Lanka, Azerbaijan, UK, Germany, Italy, Greece, Spain</p>
+                    <p>India, Bangladesh, Nepal, Sri Lanka, Azerbaijan, UK, Germany, Italy, Greece, Spain</p>
                 </div>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Map size={32} strokeWidth={1.5} /></div>
