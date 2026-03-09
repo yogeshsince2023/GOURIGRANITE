@@ -9,7 +9,7 @@ export default function MapPlaceholder() {
             <div style={{ zIndex: 1, textAlign: 'center' }}>
                 <h3 style={{ color: '#004488', fontSize: '1.5rem', marginBottom: '1rem' }}>Global Presence Interactive Map</h3>
                 <p style={{ color: '#555', maxWidth: '400px', margin: '0 auto' }}>
-                    Pins represent our manufacturing units (Red) and client project locations (Blue) across 40+ countries.
+                    Pins represent our manufacturing units (Red) and client project locations (Blue) across 50+ countries.
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '2rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
