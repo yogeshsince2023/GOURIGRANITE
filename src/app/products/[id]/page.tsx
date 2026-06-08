@@ -35,7 +35,7 @@ export default function ProductDetail({ params }: Props) {
                     <div className={styles.imageSection}>
                         <div className={styles.mainImage}>
                             <img src={product.image} alt={product.name} />
-                        </div>
+                        </div>izes="(min-width: 350px) 350px, 100vw" s
                         <div className={styles.thumbnails}>
                             <div className={styles.thumbnail}></div>
                             <div className={styles.thumbnail}></div>

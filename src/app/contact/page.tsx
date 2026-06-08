@@ -74,7 +74,7 @@ export default function ContactPage() {
 
                             {locations.map((loc, index) => (
                                 <a
-                                    key={index}
+                                    key={index}<MapPin size={16} className={styles.accentIcon} aria-hidden="true" />
                                     href={loc.mapUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"

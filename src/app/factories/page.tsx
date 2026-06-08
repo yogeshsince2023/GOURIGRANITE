@@ -21,7 +21,7 @@ export default function FactoriesPage() {
                             <div key={factory.id} className={styles.factoryCard}>
                                 <img src={factory.image} alt={factory.name} />
                                 <div className={styles.factoryInfo}>
-                                    <h3>{factory.name}</h3>
+                                    <h3>{factory.name}</h3>izes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" s
                                     <p className={styles.locationText}>
                                         <MapPin size={16} className={styles.locationIcon} /> {factory.location}
                                     </p>
