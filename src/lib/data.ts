@@ -417,7 +417,7 @@ export const PRODUCTS: Product[] = [
     }
 ];
 
-export const FACTORIES: F (Polished)actory[] = [
+export const FACTORIES: Factory[] = [
     {
         id: 'f1',
         name: 'Gouri Marble Udhyog',

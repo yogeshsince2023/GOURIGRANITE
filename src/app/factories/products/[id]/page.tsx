@@ -35,7 +35,7 @@ export default function ProductDetail({ params }: Props) {
                     <div>
                         <div style={{ borderRadius: '8px', overflow: 'hidden', aspectRatio: '4/3' }}>
                             <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        </div>izes="(min-width: 350px) 350px, 100vw" s
+                        </div>
                         <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                             {/* Thumbnails placeholders */}
                             <div style={{ width: '80px', height: '80px', background: '#eee', borderRadius: '4px' }}></div>

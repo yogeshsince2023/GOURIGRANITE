@@ -74,13 +74,14 @@ export default function ContactPage() {
 
                             {locations.map((loc, index) => (
                                 <a
-                                    key={index}<MapPin size={16} className={styles.accentIcon} aria-hidden="true" />
+                                    key={index}
                                     href={loc.mapUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={styles.locationCard}
                                 >
                                     <strong>
+                                        <MapPin size={16} className={styles.accentIcon} aria-hidden="true" />
                                         {loc.name}
                                         <Navigation size={14} className={styles.accentIcon} />
                                     </strong>
