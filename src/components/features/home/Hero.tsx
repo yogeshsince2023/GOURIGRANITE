@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { Award, Globe, CheckCircle } from 'lucide-react';
+import { Globe, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
-import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
+import { fadeIn } from '@/lib/animations';
+import { getOptimizedCloudinaryVideoUrl } from '@/lib/cloudinary';
 
 export default function Hero() {
     const { scrollY } = useScroll();
@@ -16,12 +17,7 @@ export default function Hero() {
     ];
 
     return (
-        <motion.section
-            className={styles.hero}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-        >
+        <section className={styles.hero}>
             <motion.div
                 className={styles.backgroundWrapper}
                 style={{ y }}
@@ -37,48 +33,36 @@ export default function Hero() {
                     playsInline
                     preload="auto"
                 >
-                    <source src="https://res.cloudinary.com/dvlapdn5x/video/upload/v1770790212/Background_ozszff.mp4" type="video/mp4" />
+                    <source src={getOptimizedCloudinaryVideoUrl("https://res.cloudinary.com/dvlapdn5x/video/upload/v1770790212/Background_ozszff.mp4")} type="video/mp4" />
                 </video>
             </motion.div>
 
             <motion.div
                 className={styles.content}
-                variants={staggerContainer()}
+                variants={fadeIn('up', 0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.25 }}
             >
-                <motion.h1
-                    className={styles.title}
-                    variants={textVariant(0.2)}
-                >
+                <h1 className={styles.title}>
                     Exporting Earth's Finest Stone Globally
-                </motion.h1>
+                </h1>
 
                 {/* Trust Bullets */}
-                <motion.div
-                    className={styles.trustBullets}
-                    variants={fadeIn('up', 0.3)}
-                >
+                <div className={styles.trustBullets}>
                     {trustItems.map((item, index) => (
                         <div key={index} className={styles.trustItem}>
                             <item.icon size={20} />
                             <span>{item.text}</span>
                         </div>
                     ))}
-                </motion.div>
+                </div>
 
-                <motion.p
-                    className={styles.subtitle}
-                    variants={textVariant(0.4)}
-                >
+                <p className={styles.subtitle}>
                     Premium marble, granite, and natural stone from our manufacturing facilities in Rajasthan and Telangana. Trusted by architects and builders worldwide.
-                </motion.p>
+                </p>
 
-                <motion.div
-                    className={styles.actions}
-                    variants={fadeIn('up', 0.6)}
-                >
+                <div className={styles.actions}>
                     <Link
                         href="/products"
                         className={`btn ${styles.primaryCta}`}
@@ -91,19 +75,16 @@ export default function Hero() {
                     >
                         Request Quote
                     </Link>
-                </motion.div>
+                </div>
 
                 {/* Certification Badges */}
-                <motion.div
-                    className={styles.certifications}
-                    variants={fadeIn('up', 0.8)}
-                >
+                <div className={styles.certifications}>
                     <div className={styles.badge}>
                         <Globe size={24} />
                         <span>Export House</span>
                     </div>
-                </motion.div>
+                </div>
             </motion.div>
-        </motion.section>
+        </section>
     );
 }

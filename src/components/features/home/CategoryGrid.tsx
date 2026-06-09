@@ -5,7 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useEffect } from 'react';
 import styles from './CategoryGrid.module.css';
-import { fadeIn, staggerContainer } from '@/lib/animations';
+import { fadeIn } from '@/lib/animations';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 interface Slide {
     id: string;
@@ -89,15 +90,16 @@ export default function CategoryGrid() {
     }, [visibleSlides.length]);
 
     return (
-        <motion.section
-            className={styles.section}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-        >
+        <section className={styles.section}>
             <div className="container">
-                <motion.div className={styles.layout} variants={staggerContainer(0.15, 0.05)}>
-                    <motion.div className={styles.left} variants={fadeIn('up', 0)}>
+                <div className={styles.layout}>
+                    <motion.div
+                        className={styles.left}
+                        variants={fadeIn('up', 0.1)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.25 }}
+                    >
                         <div className={styles.kicker}>Collections</div>
                         <h2 className={styles.title}>Fine Stone Collection</h2>
                         <p className={styles.desc}>Curated from the best quarries across India.</p>
@@ -115,20 +117,22 @@ export default function CategoryGrid() {
 
                     <motion.div
                         className={styles.right}
-                        variants={fadeIn('up', 0.05)}
+                        variants={fadeIn('up', 0.2)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.25 }}
                     >
                         <div className={styles.viewport}>
                             <div ref={marqueeRef} className={styles.marquee}>
                                 {duplicatedSlides.map((s, i) => (
                                     <div key={`${s.id}-${i}`} className={styles.slide}>
                                         <Image
-                                            src={s.src}
+                                            src={getOptimizedCloudinaryUrl(s.src, 400)}
                                             alt={s.alt}
                                             fill
                                             className={styles.slideImage}
                                             sizes="360px"
                                             priority={i < 4}
-                                            quality={100}
                                             placeholder="blur"
                                             blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f0f0f0' width='400' height='400'/%3E%3C/svg%3E"
                                             onError={(e) => {
@@ -140,8 +144,8 @@ export default function CategoryGrid() {
                             </div>
                         </div>
                     </motion.div>
-                </motion.div>
+                </div>
             </div>
-        </motion.section>
+        </section>
     );
 }

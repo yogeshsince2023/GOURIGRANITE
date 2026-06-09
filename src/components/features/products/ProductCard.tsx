@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Product } from '@/lib/types';
 import { Download } from 'lucide-react';
 import styles from './ProductCard.module.css';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 interface ProductCardProps {
     product: Product;
@@ -17,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className={styles.imageWrapper}>
                 {!isImageLoaded && <div className={styles.skeleton}></div>}
                 <Image
-                    src={product.image}
+                    src={getOptimizedCloudinaryUrl(product.image, 600)}
                     alt={product.altText || product.name}
                     className={`${styles.image} ${isImageLoaded ? styles.imageLoaded : styles.imageLoading}`}
                     fill

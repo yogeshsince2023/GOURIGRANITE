@@ -7,6 +7,8 @@ import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Header.module.css';
 
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export default function Header() {
 
                 <Link href="/" className={styles.logoCenter} aria-label="Gouri Granite Home"> {/* Centered logo */}
                     <Image
-                        src="https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png"
+                        src={getOptimizedCloudinaryUrl("https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png", 300)}
                         alt="Gouri Granite"
                         width={260}
                         height={130}

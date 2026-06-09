@@ -41,3 +41,4 @@ jobs:
           security: loose
           local-dir: ./out/
           server-dir: /
+          state-name: .ftp-deploy-sync-state.json

@@ -3,6 +3,11 @@ import { Phone, Mail, Globe, Facebook, Instagram, Navigation } from 'lucide-reac
 
 const locations = [
     {
+        name: 'Gouri Exports (Registered Head Office)',
+        address: 'Teli Mohalla, Borawar, Nagaur, Rajasthan - 341502',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan'
+    },
+    {
         name: 'Gouri Marble Udhyog',
         address: 'Kishangarh, Kali Dungri - 305801',
         mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5741,74.8601'
@@ -29,6 +34,10 @@ export default function Footer() {
                         Premium manufacturing and export of natural stone.
                         Serving architects and builders worldwide from our facilities in India.
                     </p>
+                    <div style={{ fontSize: '0.85rem', color: '#888', marginTop: '0.75rem', lineHeight: '1.6' }}>
+                        <div><strong>GSTIN:</strong> 08BYQPG1619E1ZG</div>
+                        <div><strong>IEC Code:</strong> BYQPG1619E</div>
+                    </div>
                     <nav aria-label="Social media links" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                         <a
                             href="https://www.facebook.com/share/1E1oey2LtC/"

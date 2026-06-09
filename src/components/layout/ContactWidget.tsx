@@ -35,14 +35,13 @@ export default function ContactWidget() {
                 {isOpen ? <X size={28} aria-hidden="true" /> : <MessageSquare size={28} aria-hidden="true" />}
             </button>
 
-            {/* Action Buttons */}
-            <div id="contact-menu" role="menu" aria-hidden={!isOpen}>
+            {/* Action Links */}
+            <div id="contact-menu" className={styles.actionMenu} aria-hidden={!isOpen}>
                 <a
                     href="https://wa.me/918619521711"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.button} ${styles.actionButton} ${styles.whatsapp}`}
-                    role="menuitem"
                     aria-label="Contact us on WhatsApp"
                     tabIndex={isOpen ? 0 : -1}
                 >
@@ -55,7 +54,6 @@ export default function ContactWidget() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.button} ${styles.actionButton} ${styles.facebook}`}
-                    role="menuitem"
                     aria-label="Visit our Facebook page"
                     tabIndex={isOpen ? 0 : -1}
                 >
@@ -68,7 +66,6 @@ export default function ContactWidget() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${styles.button} ${styles.actionButton} ${styles.instagram}`}
-                    role="menuitem"
                     aria-label="Visit our Instagram page"
                     tabIndex={isOpen ? 0 : -1}
                 >
@@ -79,7 +76,6 @@ export default function ContactWidget() {
                 <a
                     href="mailto:gouriexports2022@gmail.com"
                     className={`${styles.button} ${styles.actionButton} ${styles.email}`}
-                    role="menuitem"
                     aria-label="Send us an email"
                     tabIndex={isOpen ? 0 : -1}
                 >
@@ -90,7 +86,6 @@ export default function ContactWidget() {
                 <a
                     href="tel:+918619521711"
                     className={`${styles.button} ${styles.actionButton} ${styles.call}`}
-                    role="menuitem"
                     aria-label="Call us now"
                     tabIndex={isOpen ? 0 : -1}
                 >

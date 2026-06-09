@@ -7,6 +7,11 @@ import styles from './contact.module.css';
 // Google Maps URLs that work on all devices and open native apps when available
 const locations = [
     {
+        name: 'Gouri Exports (Registered Head Office)',
+        address: 'Teli Mohalla, Borawar, Nagaur, Rajasthan - 341502',
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan'
+    },
+    {
         name: 'Gouri Marble Udhyog',
         address: 'Kishangarh, Kali Dungri - 305801',
         mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5741,74.8601'
@@ -65,6 +70,14 @@ export default function ContactPage() {
                             <p>
                                 <a href="mailto:gouriexports2022@gmail.com">gouriexports2022@gmail.com</a>
                             </p>
+                        </div>
+
+                        <div className={styles.contactBlock}>
+                            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text)' }}>
+                                Business Identifiers
+                            </h3>
+                            <p style={{ margin: '0.25rem 0', color: '#bbb' }}><strong>GSTIN:</strong> 08BYQPG1619E1ZG</p>
+                            <p style={{ margin: '0.25rem 0', color: '#bbb' }}><strong>IEC Code:</strong> BYQPG1619E</p>
                         </div>
 
                         <div className={styles.contactBlock}>

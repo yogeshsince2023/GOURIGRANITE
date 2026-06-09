@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Award, Cpu, AlertCircle } from 'lucide-react';
+import { Award } from 'lucide-react';
 import styles from './FactoryPreview.module.css';
 import { FACTORIES } from '@/lib/data';
-import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
+import { fadeIn } from '@/lib/animations';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 export default function FactoryPreview() {
     const [loadedFactories, setLoadedFactories] = useState<Set<string>>(new Set());
@@ -17,36 +18,33 @@ export default function FactoryPreview() {
     };
 
     return (
-        <motion.section
-            className={styles.section}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-        >
+        <section className={styles.section}>
             <div className="container">
-                <motion.div className={styles.heading} variants={staggerContainer(0.12, 0.05)}>
-                    <motion.h2 variants={textVariant(0.05)}>Manufacturing Excellence</motion.h2>
-                    <motion.p variants={textVariant(0.12)}>State-of-the-art facilities processing over 2M sq. ft. annually across India.</motion.p>
-                </motion.div>
+                <div className={styles.heading}>
+                    <h2>Manufacturing Excellence</h2>
+                    <p>State-of-the-art facilities processing over 2M sq. ft. annually across India.</p>
+                </div>
 
-                <motion.div className={styles.grid} variants={staggerContainer(0.1, 0.15)}>
+                <div className={styles.grid}>
                     {FACTORIES.map((factory, index) => (
                         <motion.div
                             key={factory.id}
                             className={styles.card}
-                            variants={fadeIn('up', index * 0.05)}
+                            variants={fadeIn('up', index * 0.1)}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ once: true, amount: 0.15 }}
                             whileHover={{ y: -6 }}
-                            transition={{ duration: 0.35, ease: 'easeOut' }}
+                            transition={{ duration: 0.25 }}
                         >
                             <div className={styles.media}>
                                 {!loadedFactories.has(factory.id) && <div className={styles.skeleton}></div>}
                                 <Image
-                                    src={factory.image}
+                                    src={getOptimizedCloudinaryUrl(factory.image, 800)}
                                     alt={factory.altText || factory.name}
                                     fill
                                     sizes="(max-width: 768px) 100vw, 33vw"
                                     className={`${styles.image} ${loadedFactories.has(factory.id) ? styles.imageLoaded : styles.imageLoading}`}
-                                    quality={100}
                                     placeholder="blur"
                                     blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23b0b0b0' width='400' height='300'/%3E%3C/svg%3E"
                                     loading="lazy"
@@ -83,7 +81,7 @@ export default function FactoryPreview() {
                             </div>
                         </motion.div>
                     ))}
-                </motion.div>
+                </div>
 
                 <div className={styles.cta}>
                     <Link href="/factories" className="btn btn-outline" style={{ padding: '0.75rem 2rem' }}>
@@ -91,6 +89,6 @@ export default function FactoryPreview() {
                     </Link>
                 </div>
             </div>
-        </motion.section>
+        </section>
     );
 }

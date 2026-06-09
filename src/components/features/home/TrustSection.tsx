@@ -7,21 +7,19 @@ import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
 
 export default function TrustSection() {
     return (
-        <motion.section
-            className={styles.trust}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-        >
+        <section className={styles.trust}>
             <div className="container">
-                <motion.p
-                    className={styles.kicker}
-                    variants={textVariant(0.05)}
-                >
+                <p className={styles.kicker}>
                     Trusted by Industry Leaders Worldwide
-                </motion.p>
+                </p>
 
-                <motion.div className={styles.logos} variants={staggerContainer(0.12, 0.1)}>
+                <motion.div
+                    className={styles.logos}
+                    variants={staggerContainer(0.12, 0.1)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     <motion.div className={styles.logo} variants={fadeIn('up', 0)} whileHover={{ y: -4 }} transition={{ duration: 0.25 }}>
                         <Globe2 className="text-accent mb-2" size={32} />
                         <span style={{fontWeight: 600, marginTop: '0.5rem'}}>Global Export House</span>
@@ -40,6 +38,6 @@ export default function TrustSection() {
                     </motion.div>
                 </motion.div>
             </div>
-        </motion.section>
+        </section>
     );
 }

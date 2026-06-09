@@ -46,19 +46,9 @@ export default function Metrics() {
                             transition: { duration: 0.3 }
                         }}
                     >
-                        <motion.h4 
-                            className={styles.value}
-                            initial={{ scale: 0.9 }}
-                            animate={inView ? { scale: 1 } : { scale: 0.9 }}
-                            transition={{
-                                type: 'spring',
-                                damping: 20,
-                                stiffness: 100,
-                                delay: item.delay + 0.2
-                            }}
-                        >
+                        <h4 className={styles.value}>
                             {item.value}
-                        </motion.h4>
+                        </h4>
                         <p className={styles.label}>{item.label}</p>
                     </motion.div>
                 ))}

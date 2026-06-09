@@ -7,6 +7,7 @@ import styles from './ProductGallery.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Keyboard, Zoom } from 'swiper/modules';
 import { motion, Variants } from 'framer-motion';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -118,7 +119,7 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                         
                         {/* Progressive Image Loading */}
                         <Image
-                            src={product.image}
+                            src={getOptimizedCloudinaryUrl(product.image, 800)}
                             alt={product.name}
                             fill
                             className={`${styles.galleryImage} ${loadedImages.has(product.id) ? styles.imageLoaded : styles.imageLoading}`}
@@ -155,7 +156,7 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                             <SwiperSlide key={product.id} className={styles.lightboxSlide}>
                                 <div className="swiper-zoom-container">
                                     <Image
-                                        src={product.image}
+                                        src={getOptimizedCloudinaryUrl(product.image, 1600)}
                                         alt={product.name}
                                         width={1600}
                                         height={1200}
