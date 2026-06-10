@@ -17,7 +17,7 @@ steps:
   - name: Setup Node.js
     uses: actions/setup-node@v4
     with:
-      node-version: 20
+      node-version: "20"
 
   - name: Install Dependencies
     run: npm ci
@@ -41,5 +41,4 @@ steps:
       local-dir: ./out/
       server-dir: /public_html/
       state-name: .ftp-deploy-sync-state.json
-      dangerous-clean-slate: false
 ```
