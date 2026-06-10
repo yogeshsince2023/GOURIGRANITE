@@ -1,6 +1,6 @@
 # Image Optimization Guide - High Quality Loading
 
-This document outlines all the image optimization improvements made to ensure high-quality image loading across the Gouri Granite website.
+This document outlines all the image optimization improvements made to ensure high-quality image loading across the Gouri Exports website.
 
 ## ✅ Optimizations Implemented
 

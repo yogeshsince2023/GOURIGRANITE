@@ -1,26 +1,31 @@
 import styles from './Footer.module.css';
 import { Phone, Mail, Globe, Facebook, Instagram, Navigation } from 'lucide-react';
+import Link from 'next/link';
 
 const locations = [
     {
         name: 'Gouri Exports (Registered Head Office)',
         address: 'Teli Mohalla, Borawar, Nagaur, Rajasthan - 341502',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan'
+        url: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan',
+        isExternal: true
     },
     {
         name: 'Gouri Marble Udhyog',
         address: 'Kishangarh, Kali Dungri - 305801',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5741,74.8601'
+        url: '/factories/kishangarh-marble-udhyog',
+        isExternal: false
     },
     {
         name: 'Gouri Granites',
         address: 'Kishangarh, Ralawta - 305801',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5850,74.8720'
+        url: '/factories/kishangarh-granites',
+        isExternal: false
     },
     {
         name: 'Gouri Granito',
         address: 'Baopet, Karimnagar - 505401',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=18.4386,78.4872'
+        url: '/factories/karimnagar-granito',
+        isExternal: false
     }
 ];
 
@@ -29,7 +34,7 @@ export default function Footer() {
         <footer className={styles.footer} role="contentinfo" aria-label="Site footer">
             <div className={styles.grid}>
                 <div className={styles.column}>
-                    <h3>Gouri Granite</h3>
+                    <h3>Gouri Exports</h3>
                     <p>
                         Premium manufacturing and export of natural stone.
                         Serving architects and builders worldwide from our facilities in India.
@@ -61,28 +66,42 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.column}>
-                    <h3>Our Locations</h3>
+                    <h3>Our Global Locations</h3>
                     <nav aria-label="Factory locations">
                         {locations.map((loc, index) => (
-                            <a
-                                key={index}
-                                href={loc.mapUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ display: 'block', marginBottom: '1rem', textDecoration: 'none' }}
-                                aria-label={`View ${loc.name} on map`}
-                            >
-                                <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
-                                    {loc.name} <Navigation size={12} aria-hidden="true" />
-                                </strong>
-                                <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
-                            </a>
+                            loc.isExternal ? (
+                                <a
+                                    key={index}
+                                    href={loc.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ display: 'block', marginBottom: '1rem', textDecoration: 'none' }}
+                                    aria-label={`View ${loc.name} on map`}
+                                >
+                                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
+                                        {loc.name} <Navigation size={12} aria-hidden="true" />
+                                    </strong>
+                                    <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
+                                </a>
+                            ) : (
+                                <Link
+                                    key={index}
+                                    href={loc.url}
+                                    style={{ display: 'block', marginBottom: '1rem', textDecoration: 'none' }}
+                                    aria-label={`View details of ${loc.name}`}
+                                >
+                                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
+                                        {loc.name} <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>View Profile &rarr;</span>
+                                    </strong>
+                                    <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
+                                </Link>
+                            )
                         ))}
                     </nav>
                 </div>
 
                 <div className={styles.column}>
-                    <h3>Contact Us</h3>
+                    <h3>Contact Gouri Exports</h3>
                     <address style={{ fontStyle: 'normal' }}>
                         <p>
                             <a href="tel:+918619521711" style={{ color: '#a0a0a0' }} aria-label="Call us at +91 86195 21711">
@@ -105,7 +124,7 @@ export default function Footer() {
             </div>
 
             <div className={styles.bottom}>
-                <p>&copy; 2000 Gouri Granite. All rights reserved.</p>
+                <p>&copy; 2000 Gouri Exports. All rights reserved.</p>
             </div>
         </footer>
     );

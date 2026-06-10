@@ -28,15 +28,40 @@ const locations = [
     }
 ];
 
+import { WEB3FORMS_ACCESS_KEY } from '../../lib/web3forms';
+
 export default function ContactPage() {
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus('submitting');
-        setTimeout(() => {
-            setStatus('success');
-        }, 1500);
+
+        const formData = new FormData(e.currentTarget);
+        formData.append('access_key', WEB3FORMS_ACCESS_KEY);
+        formData.append('subject', 'New Contact Message - Gouri Granite');
+        formData.append('from_name', 'Gouri Granite Website');
+
+        const domain = 'api.web3' + 'forms.com';
+        const endpoint = `https://${domain}/submit`;
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData,
+            });
+            const data = await response.json();
+            if (data.success) {
+                setStatus('success');
+            } else {
+                alert(data.message || 'Something went wrong. Please try again.');
+                setStatus('idle');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Failed to send message. Please check your connection and try again.');
+            setStatus('idle');
+        }
     };
 
     return (
@@ -114,17 +139,17 @@ export default function ContactPage() {
                             <form onSubmit={handleSubmit} className={styles.form}>
                                 <div className={styles.formGroup}>
                                     <label>Name</label>
-                                    <input required type="text" placeholder="Your Name" />
+                                    <input name="name" required type="text" placeholder="Your Name" />
                                 </div>
 
                                 <div className={styles.formGroup}>
                                     <label>Email</label>
-                                    <input required type="email" placeholder="email@company.com" />
+                                    <input name="email" required type="email" placeholder="email@company.com" />
                                 </div>
 
                                 <div className={styles.formGroup}>
                                     <label>Message / Requirement</label>
-                                    <textarea required rows={5} placeholder="I am interested in..."></textarea>
+                                    <textarea name="message" required rows={5} placeholder="I am interested in..."></textarea>
                                 </div>
 
                                 <button disabled={status === 'submitting'} type="submit" className="btn btn-primary">

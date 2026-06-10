@@ -23,7 +23,6 @@ export default function ProductCard({ product }: ProductCardProps) {
                     className={`${styles.image} ${isImageLoaded ? styles.imageLoaded : styles.imageLoading}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    quality={100}
                     placeholder="blur"
                     blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23e0e0e0' width='300' height='400'/%3E%3C/svg%3E"
                     loading="lazy"

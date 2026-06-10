@@ -4,7 +4,7 @@ import { PRODUCTS, FACTORIES } from '@/lib/data';
 import { Share2, Download, Truck } from 'lucide-react';
 
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 // Ensure correct type for params in Next.js 13+ App Router
@@ -14,8 +14,9 @@ export function generateStaticParams() {
     }));
 }
 
-export default function ProductDetail({ params }: Props) {
-    const product = PRODUCTS.find((p) => p.id === params.id);
+export default async function ProductDetail({ params }: Props) {
+    const { id } = await params;
+    const product = PRODUCTS.find((p) => p.id === id);
 
     if (!product) {
         notFound();

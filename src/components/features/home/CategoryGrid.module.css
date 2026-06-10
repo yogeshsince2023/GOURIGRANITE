@@ -1,11 +1,8 @@
 .section {
     background: var(--background);
-    padding: 6rem 0;
+    padding: 5rem 0;
     position: relative;
     overflow: hidden;
-    min-height: auto;
-    display: flex;
-    align-items: center;
 }
 
 .layout {
@@ -16,360 +13,711 @@
 }
 
 .left {
-    padding: 1rem 0;
     position: sticky;
-    top: 120px;
+    top: 100px;
+    padding-right: 1rem;
 }
 
 .kicker {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.22em;
-    color: var(--text-secondary);
+    color: var(--accent);
     margin-bottom: 0.75rem;
+    font-weight: 700;
 }
 
 .title {
     font-family: var(--font-playfair);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
     color: var(--text-primary);
 }
 
 .desc {
     color: var(--text-secondary);
-    max-width: 34ch;
-    margin-bottom: 1.5rem;
     line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
 }
 
-.tabs {
+/* Direct Collection Links */
+.collectionLinks {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.collectionLink {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    text-decoration: underline;
+}
+
+.collectionLink:hover {
+    color: var(--accent);
+}
+
+/* Filters Layout */
+.filtersBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+:global(.dark) .filtersBlock {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filterLabel {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.filterRow {
+    display: flex;
+    gap: 0.5rem;
     flex-wrap: wrap;
 }
 
-.tab {
+.filterBtn {
     appearance: none;
-    border: none;
-    background: transparent;
-    padding: 1rem 2rem;
-    border: 2px solid var(--border-color);
-    background: var(--card-bg);
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 500;
+    border: 1px solid var(--border-color);
+    background: var(--surface-2);
     color: var(--text-secondary);
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: none;
-    letter-spacing: 0;
+    transition: all 0.2s ease;
 }
 
-.tab:hover {
+.filterBtn:hover {
     border-color: var(--accent);
     color: var(--accent);
 }
 
-.tabActive {
-    color: var(--text-primary);
+.activeFilterBtn {
+    background: var(--accent);
+    color: #000;
     border-color: var(--accent);
-    background: var(--surface-2);
+    font-weight: 700;
 }
 
 .cta {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.8rem;
     border: 2px solid var(--accent);
-    border-radius: 12px;
-    background: var(--card-bg);
+    border-radius: 30px;
+    background: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .cta:hover {
-    background: var(--accent);
-    color: #fff;
+    background: transparent;
+    color: var(--text-primary);
 }
 
 .right {
     min-width: 0;
 }
 
-.viewport {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 2rem 0;
-    margin: 0 -1rem;
-    min-height: 500px;
-    box-sizing: border-box;
+/* Explorer Grid */
+.explorerGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
 
-.viewportInner {
-    width: 100%;
-    overflow: hidden;
-}
-
-.slide {
-    position: relative;
-    flex: 0 0 auto;
-    width: 380px;
-    height: 480px;
+.stoneCard {
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-    margin: 0 1rem;
-    transform: translateZ(0);
-    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+:global(.dark) .stoneCard {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stoneCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
     background: var(--surface-2);
-    will-change: transform;
-    box-sizing: border-box;
-    flex-shrink: 0;
 }
 
-:global(.dark) .slide {
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-}
-
-.marquee {
-    display: flex;
-    gap: 32px;
-    width: max-content;
-    will-change: transform;
-    transition-timing-function: linear;
-    padding: 0;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transform: translate3d(0,0,0);
-    perspective: 1000;
-    margin: 0;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-}
-
-.slideImage {
-    width: 100%;
-    height: 100%;
+.stoneImage {
     object-fit: cover;
-    object-position: center center;
-    transform: scale(1.01);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-    backface-visibility: hidden;
+    transition: transform 0.5s ease;
 }
 
-.slide:hover .slideImage {
-    transform: scale(1.08);
+.stoneCard:hover .stoneImage {
+    transform: scale(1.05);
 }
 
-.slideOverlay {
+/* Hover Overlays */
+.cardHoverOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.05) 55%, transparent 100%);
-    pointer-events: none;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+    backdrop-filter: blur(4px);
 }
 
-.heading {
+.imageWrapper:hover .cardHoverOverlay,
+.imageWrapper:focus-within .cardHoverOverlay {
+    opacity: 1;
+}
+
+.quickFacts {
+    color: #ddd;
+    font-size: 0.9rem;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
 }
 
-.heading h2 {
-    font-family: var(--font-playfair);
-    font-size: 3rem;
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
+.quickFacts p {
+    margin-bottom: 0.4rem;
 }
 
-.subtitle {
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    line-height: 1.6;
+.overlayActions {
+    display: flex;
+    gap: 0.75rem;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    display: block;
-    text-decoration: none;
-}
-
-.cardInner {
-    position: relative;
-    height: 400px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.4s ease;
-    will-change: transform;
-}
-
-:global(.dark) .cardInner {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-.card:hover .cardInner {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-:global(.dark) .card:hover .cardInner {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-.image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.card:hover .image {
-    transform: scale(1.1);
-}
-
-.overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+.overlayBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    background: transparent;
     color: #fff;
-    transition: padding 0.3s ease;
-}
-
-.card:hover .overlay {
-    padding-bottom: 2.5rem;
-}
-
-.name {
-    font-size: 1.5rem;
-    font-family: var(--font-playfair);
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-
-.linkText {
     font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.overlayBtn:hover {
+    background: #fff;
+    color: #000;
+}
+
+.inCompareBtn {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #000 !important;
+}
+
+.inCompareBtn:hover {
+    background: #c9a22e !important;
+}
+
+/* Stone Info block */
+.stoneInfo {
+    padding: 1.5rem;
+}
+
+.breadcrumbLinks {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 4px;
-    display: inline-block;
-    transition: border-color 0.3s ease;
-    color: #fff;
+    letter-spacing: 0.5px;
 }
 
-.card:hover .linkText {
-    border-color: #fff;
+.breadcrumbLinks a {
+    text-decoration: none;
+    color: var(--text-secondary);
 }
 
-/* Tablet */
+.breadcrumbLinks a:hover {
+    color: var(--accent);
+}
+
+.breadcrumbLinkActive {
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.breadcrumbLinkActive:hover {
+    color: var(--accent);
+}
+
+.breadcrumbCurrent {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.stoneName {
+    font-family: var(--font-playfair);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.stoneName a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.stoneName a:hover {
+    color: var(--accent);
+}
+
+.stoneBadges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.stoneBadge {
+    font-size: 0.75rem;
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+}
+
+.noResults {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+}
+
+.noResultsIcon {
+    color: var(--text-secondary);
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+}
+
+.noResults h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.noResults p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Modals & Dialog backdrops */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
+
+.modalCard {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 900px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+.modalClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    z-index: 10;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.modalClose:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: rotate(90deg);
+}
+
+.modalContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.modalImageWrapper {
+    position: relative;
+    height: 500px;
+    background: var(--surface-2);
+}
+
+.modalImage {
+    object-fit: cover;
+}
+
+.modalInfo {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modalKicker {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.modalTitle {
+    font-family: var(--font-playfair);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.modalDesc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.specsTable {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.specRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--overlay-light);
+    padding-bottom: 0.5rem;
+}
+
+.specRow span {
+    color: var(--text-secondary);
+}
+
+.specRow strong {
+    color: var(--text-primary);
+}
+
+.modalActions {
+    display: flex;
+    gap: 1rem;
+}
+
+.modalActions Link,
+.modalActions a {
+    flex: 1;
+}
+
+/* Compare Sticky Bottom Tray */
+.compareTray {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 900px;
+    background: color-mix(in srgb, var(--card-bg) 95%, transparent);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    padding: 1rem 2rem;
+    z-index: 10000;
+}
+
+.compareTrayContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.compareTrayItems {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.compareTrayItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--surface-2);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.trayThumb {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.trayItemName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.trayItemRemove {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.trayItemRemove:hover {
+    color: #ff4d4d;
+}
+
+.comparePlaceholder {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border: 1.5px dashed var(--border-color);
+    padding: 0.4rem 1rem;
+    border-radius: 12px;
+}
+
+.compareTrayActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.clearCompareBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.clearCompareBtn:hover {
+    color: var(--accent);
+}
+
+/* Compare Details Dialog Modal */
+.compareModalCard {
+    max-width: 950px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.compareModalTitle {
+    font-family: var(--font-playfair);
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.compareTableWrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.compareTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.compareTable th,
+.compareTable td {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.compareTable td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.compareTableHead {
+    width: 250px;
+}
+
+.compareTableImg {
+    position: relative;
+    width: 150px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto 0.75rem auto;
+    border: 1px solid var(--border-color);
+}
+
+.compareTableHead h3 {
+    font-family: var(--font-playfair);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.removeCompareLink {
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: block;
+    margin: 0.5rem auto 0 auto;
+    text-decoration: underline;
+}
+
+.removeCompareLink:hover {
+    color: #ff3333;
+}
+
+/* responsive styling */
 @media (max-width: 1200px) {
     .layout {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
     }
     
     .left {
         position: relative;
         top: 0;
-        text-align: center;
+        padding-right: 0;
     }
-    
-    .desc {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .tabs {
-        justify-content: center;
-    }
-    
-    .slide {
-        width: 320px;
-        height: 420px;
+
+    .cta {
+        display: inline-flex;
     }
 }
 
-/* Mobile */
+@media (max-width: 992px) {
+    .modalContent {
+        grid-template-columns: 1fr;
+    }
+
+    .modalImageWrapper {
+        height: 300px;
+    }
+
+    .modalInfo {
+        padding: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .section {
-        padding: 3rem 0;
-    }
-    
-    .layout {
-        gap: 1.5rem;
-    }
-    
-    .title {
-        font-size: 2rem;
-    }
-    
-    .desc {
-        font-size: 0.95rem;
-    }
-    
-    .tabs {
-        gap: 0.75rem;
-    }
-    
-    .tab {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.95rem;
-    }
-    
-    .cta {
-        padding: 0.85rem 1.5rem;
-        font-size: 1rem;
+    .explorerGrid {
+        grid-template-columns: 1fr;
     }
 
-    .viewport {
-        padding: 1rem 0;
-        margin: 0;
-        min-height: 380px;
+    .stoneCard {
+        max-width: 450px;
+        margin: 0 auto;
+        width: 100%;
     }
 
-    .slide {
-        width: 280px;
-        height: 360px;
-        margin: 0 8px;
+    .compareTray {
+        width: 95%;
+        padding: 1rem;
     }
-    
-    .marquee {
-        gap: 16px;
+
+    .compareTrayContent {
+        flex-direction: column;
+        gap: 1rem;
     }
-    
-    .heading h2 {
-        font-size: 2rem;
+
+    .compareTrayItems {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
     }
-    
-    .cardInner {
-        height: 320px;
+
+    .compareTrayActions {
+        width: 100%;
+        justify-content: space-between;
     }
-    
-    .overlay {
+
+    .compareModalCard {
         padding: 1.5rem;
-    }
-    
-    .name {
-        font-size: 1.25rem;
     }
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './B2BInquiryForm.module.css';
 import { motion } from 'framer-motion';
+import { WEB3FORMS_ACCESS_KEY } from '../../../lib/web3forms';
 
 const productOptions = [
     { value: 'marble', label: 'Marble' },
@@ -90,30 +91,57 @@ export default function B2BInquiryForm() {
         e.preventDefault();
         setLoading(true);
 
+        const apiHost = 'api.web3' + 'forms.com';
+        const submitUrl = `https://${apiHost}/submit`;
+
+        const submitData = new FormData();
+        submitData.append("access_key", WEB3FORMS_ACCESS_KEY);
+        submitData.append("subject", `New B2B Inquiry from ${formData.company}`);
+        submitData.append("from_name", "Gouri Granite Website (B2B Form)");
+        submitData.append("name", formData.name);
+        submitData.append("company", formData.company);
+        submitData.append("email", formData.email);
+        submitData.append("country", formData.country);
+        submitData.append("product_interest", formData.productInterest.join(", "));
+        submitData.append("quantity", formData.quantity);
+        submitData.append("project_type", formData.projectType);
+        submitData.append("special_requests", formData.specialRequests);
+        
+        if (formData.boqFile) {
+            submitData.append("attachment", formData.boqFile);
+        }
+
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const response = await fetch(submitUrl, {
+                method: "POST",
+                body: submitData
+            });
+            const data = await response.json();
             
-            console.log('B2B Inquiry Submitted:', formData);
-            setSubmitted(true);
-            
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                setSubmitted(false);
-                setFormData({
-                    name: '',
-                    company: '',
-                    email: '',
-                    country: '',
-                    productInterest: [],
-                    quantity: '',
-                    projectType: '',
-                    boqFile: null,
-                    specialRequests: '',
-                });
-            }, 3000);
+            if (data.success) {
+                setSubmitted(true);
+                
+                // Reset form after 3 seconds
+                setTimeout(() => {
+                    setSubmitted(false);
+                    setFormData({
+                        name: '',
+                        company: '',
+                        email: '',
+                        country: '',
+                        productInterest: [],
+                        quantity: '',
+                        projectType: '',
+                        boqFile: null,
+                        specialRequests: '',
+                    });
+                }, 3000);
+            } else {
+                alert(data.message || "Failed to submit B2B inquiry. Please try again.");
+            }
         } catch (error) {
             console.error('Error submitting form:', error);
+            alert("Error sending inquiry. Please check your connection and try again.");
         } finally {
             setLoading(false);
         }

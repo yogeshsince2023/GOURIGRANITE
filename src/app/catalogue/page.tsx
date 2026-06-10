@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import styles from "./catalogue.module.css";
+import { WEB3FORMS_ACCESS_KEY } from "../../lib/web3forms";
 import {
   Download,
   X,
@@ -58,7 +59,7 @@ export default function CataloguePage() {
       // Trigger direct download
       const link = document.createElement("a");
       link.href = "/catalogue.pdf";
-      link.download = "Gouri_Granite_Catalogue_2026.pdf";
+      link.download = "Gouri_Exports_Catalogue_2026.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -69,31 +70,34 @@ export default function CataloguePage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formUrl =
-      "https://docs.google.com/forms/d/e/1FAIpQLSeY0QTsVZdEJOfhgzFuMvpGr51h015SmigrtlKDcyUO2T-c4w/formResponse";
+    const apiHost = 'api.web3' + 'forms.com';
+    const submitUrl = `https://${apiHost}/submit`;
 
-    const formBody = new URLSearchParams({
-      "entry.153059410": formData.name,
-      "entry.915520084": formData.phone,
-      "entry.935132252": formData.email,
-      "entry.17443217": formData.company,
-    }).toString();
+    const submitData = new FormData();
+    submitData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    submitData.append("subject", `New Catalogue Access Request - ${formData.name}`);
+    submitData.append("from_name", "Gouri Granite Website (Catalogue Form)");
+    submitData.append("name", formData.name);
+    submitData.append("phone", formData.phone);
+    submitData.append("email", formData.email);
+    submitData.append("company", formData.company);
 
     try {
-      await fetch(formUrl, {
+      const response = await fetch(submitUrl, {
         method: "POST",
-        mode: "no-cors", // expected
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formBody,
+        body: submitData,
       });
-      localStorage.setItem('catalogue_submitted', 'true');
-      setHasAccess(true);
-      setIsSuccess(true);
+      const data = await response.json();
+      if (data.success) {
+        localStorage.setItem('catalogue_submitted', 'true');
+        setHasAccess(true);
+        setIsSuccess(true);
+      } else {
+        alert(data.message || "Submission failed. Please try again.");
+      }
     } catch (err) {
       console.error(err);
-      alert("Submission failed. Please try again.");
+      alert("Submission failed. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -323,7 +327,7 @@ export default function CataloguePage() {
                   style={{ marginBottom: "1rem" }}
                 >
                   <h2>Youre all set!</h2>
-                  <p>Thank you for your interest in Gouri Granite.</p>
+                  <p>Thank you for your interest in Gouri Exports.</p>
                 </div>
 
                 <div

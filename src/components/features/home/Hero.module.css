@@ -282,3 +282,89 @@
     gap: 1rem;
   }
 }
+
+/* Value Prop and Trust Subtitle below CTA buttons */
+.ctaSubtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #e0d5c1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.divider {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Quick Navigation Block */
+.quickNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: 30px;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+}
+
+.quickNavLink {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.quickNavLink:hover,
+.quickNavLink:focus-visible {
+  color: var(--accent);
+  outline: none;
+  text-decoration: underline;
+}
+
+.quickNavDot {
+  color: var(--accent);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .ctaSubtitle {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .quickNav {
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+    border-radius: 16px;
+    width: auto;
+    margin: 1.5rem 1rem 0 1rem;
+  }
+
+  .quickNavLink {
+    font-size: 0.8rem;
+  }
+
+  .quickNavDot {
+    display: none;
+  }
+}
+

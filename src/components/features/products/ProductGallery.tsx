@@ -124,7 +124,6 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                             fill
                             className={`${styles.galleryImage} ${loadedImages.has(product.id) ? styles.imageLoaded : styles.imageLoading}`}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            quality={100}
                             placeholder="blur"
                             blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75'%3E%3Crect fill='%23e5e5e5' width='100' height='75'/%3E%3C/svg%3E"
                             loading="lazy"
@@ -161,7 +160,6 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                                         width={1600}
                                         height={1200}
                                         className={styles.lightboxImage}
-                                        quality={100}
                                         priority={false}
                                         loading="lazy"
                                         placeholder="blur"

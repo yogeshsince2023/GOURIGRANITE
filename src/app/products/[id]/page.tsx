@@ -5,7 +5,7 @@ import { Share2, Download, Truck } from 'lucide-react';
 import styles from './productDetail.module.css';
 
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export function generateStaticParams() {
@@ -14,8 +14,9 @@ export function generateStaticParams() {
     }));
 }
 
-export default function ProductDetail({ params }: Props) {
-    const product = PRODUCTS.find((p) => p.id === params.id);
+export default async function ProductDetail({ params }: Props) {
+    const { id } = await params;
+    const product = PRODUCTS.find((p) => p.id === id);
 
     if (!product) {
         notFound();
@@ -74,8 +75,21 @@ export default function ProductDetail({ params }: Props) {
                         </div>
 
                         <div className={styles.actions}>
-                            <Link href="/contact" className="btn btn-primary">Request Quote</Link>
-                            <button className="btn btn-outline">Request Sample</button>
+                            <Link href={`/lead-generation?product=${encodeURIComponent(product.name)}`} className="btn btn-primary" aria-label={`Get custom estimate for ${product.name}`}>
+                                Get Custom Estimate
+                            </Link>
+                            <Link href={`/contact?sample=${encodeURIComponent(product.name)}`} className="btn btn-outline" aria-label={`Request sample of ${product.name}`}>
+                                Request Sample
+                            </Link>
+                        </div>
+
+                        {/* Direct Lead Gen Banner */}
+                        <div className={styles.leadGenBanner}>
+                            <h4>Wholesale Project Supply?</h4>
+                            <p>We process container-load orders directly from quarries with inspection reports.</p>
+                            <Link href={`/lead-generation?product=${encodeURIComponent(product.name)}`} className={styles.leadGenLink}>
+                                Request Factory Volume Rates &rarr;
+                            </Link>
                         </div>
 
                         <div className={styles.features}>

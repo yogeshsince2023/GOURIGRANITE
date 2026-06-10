@@ -13,8 +13,8 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <header className={styles.header}>
-            <nav className={styles.nav}>
+        <header className={styles.header} role="banner">
+            <nav className={styles.nav} aria-label="Main Navigation">
                 <div className={styles.left}> {/* Left side links */}
                     <ul className={styles.links}>
                         <li><Link href="/products" className={styles.link}>Gallery</Link></li>
@@ -22,14 +22,13 @@ export default function Header() {
                     </ul>
                 </div>
 
-                <Link href="/" className={styles.logoCenter} aria-label="Gouri Granite Home"> {/* Centered logo */}
+                <Link href="/" className={styles.logoCenter} aria-label="Gouri Exports Home"> {/* Centered logo */}
                     <Image
                         src={getOptimizedCloudinaryUrl("https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png", 300)}
-                        alt="Gouri Granite"
+                        alt="Gouri Exports"
                         width={260}
                         height={130}
                         className={styles.logoImage}
-                        quality={100}
                         priority
                     />
                 </Link>
@@ -42,10 +41,10 @@ export default function Header() {
                 </div>
 
                 <div className={styles.extremeRight}> {/* Extreme right actions */}
-                    <Link href="/catalogue" className={`btn btn-outline ${styles.desktopOnly}`}>
+                    <Link href="/catalogue" className={`btn btn-outline ${styles.desktopOnly}`} aria-label="View Our Premium Marble and Granite Catalog">
                         Catalogue
                     </Link>
-                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`}>
+                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`} aria-label="Request a Quote for Premium Marble and Granite">
                         Request Quote
                     </Link>
                 </div>
@@ -54,7 +53,9 @@ export default function Header() {
                 <button
                     className={styles.mobileMenuButton}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="Toggle menu"
+                    aria-label="Menu"
+                    aria-expanded={mobileMenuOpen}
+                    aria-controls="mobile-navigation"
                 >
                     {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -63,22 +64,41 @@ export default function Header() {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
+                        id="mobile-navigation"
                         className={styles.mobileMenu}
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                        <Link href="/products" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Products</Link>
-                        <Link href="/factories" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Global Factories</Link>
-                        <Link href="/about" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
-                        <Link href="/contact" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-                        <Link href="/catalogue" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
-                        <div style={{ padding: '1rem 0' }}>
-                            <Link href="/contact" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }} onClick={() => setMobileMenuOpen(false)}>
-                                Request Quote
-                            </Link>
-                        </div>
+                        <ul className={styles.mobileLinksList}>
+                            <li>
+                                <Link href="/products" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Products</Link>
+                            </li>
+                            <li>
+                                <Link href="/factories" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Global Factories</Link>
+                            </li>
+                            <li>
+                                <Link href="/about" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+                            </li>
+                            <li>
+                                <Link href="/contact" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                            </li>
+                            <li>
+                                <Link href="/catalogue" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
+                            </li>
+                            <li style={{ padding: '1rem 0' }}>
+                                <Link 
+                                    href="/contact" 
+                                    className="btn btn-primary" 
+                                    style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    aria-label="Request a Quote for Premium Marble and Granite"
+                                >
+                                    Request Quote
+                                </Link>
+                            </li>
+                        </ul>
                     </motion.div>
                 )}
             </AnimatePresence>

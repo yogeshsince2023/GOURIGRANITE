@@ -1,0 +1,428 @@
+.pageContainer {
+    background: var(--background);
+    padding: 3rem 0 5rem 0;
+    min-height: 100vh;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: var(--accent);
+}
+
+/* Profile Grid */
+.profileGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+}
+
+.mediaSection {
+    width: 100%;
+}
+
+.imageWrapper {
+    position: relative;
+    height: 480px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+:global(.dark) .imageWrapper {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.image {
+    object-fit: cover;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kicker {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.infoSection h1 {
+    font-family: var(--font-playfair);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.metaInfo {
+    margin-bottom: 2rem;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.icon {
+    color: var(--accent);
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.metaCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+:global(.dark) .metaCard {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.cardIcon {
+    color: var(--accent);
+}
+
+.cardLabel {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.15rem;
+}
+
+.cardValue {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.detailBlock {
+    margin-bottom: 2rem;
+}
+
+.detailBlock h3 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.desc {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.certList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.certItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.checkIcon {
+    color: var(--accent);
+}
+
+/* Sections */
+.sectionDivider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 4rem 0;
+}
+
+.machinerySection h2,
+.productsSection h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.sectionDesc {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+/* Machinery Grid */
+.machineryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.machineCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+:global(.dark) .machineCard {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.machineDot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+.machineCard span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Products Grid */
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.productCard {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    padding-bottom: 1.25rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+:global(.dark) .productCard {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.productCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.productImgWrapper {
+    position: relative;
+    height: 180px;
+    background-color: var(--surface-2);
+}
+
+.productImg {
+    object-fit: cover;
+}
+
+.productCard h4 {
+    font-family: var(--font-playfair);
+    font-size: 1.15rem;
+    margin: 1rem 1rem 0.5rem 1rem;
+    color: var(--text-primary);
+}
+
+.productDetails {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 1rem;
+}
+
+.productDetails span {
+    font-size: 0.75rem;
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Contact Section layout */
+.contactGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.contactLeft h2 {
+    font-family: var(--font-playfair);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.contactLeft p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.trustPoints {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.trustPoints p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.directContact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.directContact p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.profileForm {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .profileForm {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+}
+
+.formGroup input,
+.formGroup textarea {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-2);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border-color: var(--accent);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .profileGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .imageWrapper {
+        height: 380px;
+    }
+
+    .machineryGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contactGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .metaGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .machineryGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .productsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .profileForm {
+        padding: 1.5rem;
+    }
+}

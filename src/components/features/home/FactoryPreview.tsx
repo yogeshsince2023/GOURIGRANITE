@@ -10,6 +10,15 @@ import { FACTORIES } from '@/lib/data';
 import { fadeIn } from '@/lib/animations';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
+const getFactorySlug = (id: string) => {
+    switch (id) {
+        case 'f1': return 'kishangarh-marble-udhyog';
+        case 'f2': return 'kishangarh-granites';
+        case 'f3': return 'karimnagar-granito';
+        default: return '';
+    }
+};
+
 export default function FactoryPreview() {
     const [loadedFactories, setLoadedFactories] = useState<Set<string>>(new Set());
 
@@ -21,8 +30,8 @@ export default function FactoryPreview() {
         <section className={styles.section}>
             <div className="container">
                 <div className={styles.heading}>
-                    <h2>Manufacturing Excellence</h2>
-                    <p>State-of-the-art facilities processing over 2M sq. ft. annually across India.</p>
+                    <h2>Manufacturing Excellence – State-of-the-Art Stone Processing Facilities</h2>
+                    <p>Manufacturing Excellence. State-of-the-art facilities processing over 2 million sq ft annually across India.</p>
                 </div>
 
                 <div className={styles.grid}>
@@ -54,14 +63,12 @@ export default function FactoryPreview() {
                             </div>
                             <div className={styles.content}>
                                 <h3 className={styles.title}>
-                                    <a
-                                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${factory.name}, ${factory.location}`)}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                    <Link
+                                        href={`/factories/${getFactorySlug(factory.id)}`}
                                         className={styles.link}
                                     >
                                         {factory.name}
-                                    </a>
+                                    </Link>
                                 </h3>
                                 <p className={styles.subtitle}>{factory.location}</p>
 

@@ -45,7 +45,7 @@ export default function Hero() {
                 viewport={{ once: true, amount: 0.25 }}
             >
                 <h1 className={styles.title}>
-                    Exporting Earth's Finest Stone Globally
+                    Premium Marble & Granite Exporters from India – Gouri Exports
                 </h1>
 
                 {/* Trust Bullets */}
@@ -59,22 +59,30 @@ export default function Hero() {
                 </div>
 
                 <p className={styles.subtitle}>
-                    Premium marble, granite, and natural stone from our manufacturing facilities in Rajasthan and Telangana. Trusted by architects and builders worldwide.
+                    We offer premium marble, granite, and natural stone from our Rajasthan and Telangana facilities. As a leading granite exporter Rajasthan and marble exporter India, we are trusted by architects and builders worldwide.
                 </p>
 
                 <div className={styles.actions}>
                     <Link
-                        href="/products"
+                        href="/contact"
                         className={`btn ${styles.primaryCta}`}
+                        aria-label="Request a free quote for premium marble and granite"
                     >
-                        View Catalog
+                        Get Your Free Stone Quote Today
                     </Link>
                     <Link
-                        href="/contact"
+                        href="/products"
                         className={`btn ${styles.secondaryCta}`}
+                        aria-label="Explore our premium marble and granite collections catalog"
                     >
-                        Request Quote
+                        Explore Our Fine Stone Collection
                     </Link>
+                </div>
+
+                <div className={styles.ctaSubtitle}>
+                    <span>Premium marble & granite for architects and builders</span>
+                    <span className={styles.divider}>|</span>
+                    <span>Trusted by 50+ countries</span>
                 </div>
 
                 {/* Certification Badges */}
@@ -84,6 +92,25 @@ export default function Hero() {
                         <span>Export House</span>
                     </div>
                 </div>
+
+                {/* Hero Quick Navigation Block */}
+                <nav className={styles.quickNav} aria-label="Hero Quick Links">
+                    <Link href="/products" className={styles.quickNavLink} aria-label="View premium marble and granite catalog">
+                        Premium Marble Catalog
+                    </Link>
+                    <span className={styles.quickNavDot}>&bull;</span>
+                    <Link href="/factories" className={styles.quickNavLink} aria-label="Explore our global granite export factories">
+                        Granite Export Factories
+                    </Link>
+                    <span className={styles.quickNavDot}>&bull;</span>
+                    <Link href="/about" className={styles.quickNavLink} aria-label="Learn about Gouri Exports natural stone manufacturer info">
+                        Why Gouri Exports
+                    </Link>
+                    <span className={styles.quickNavDot}>&bull;</span>
+                    <Link href="/contact" className={styles.quickNavLink} aria-label="Request a marble and granite export quote">
+                        Request a Quote
+                    </Link>
+                </nav>
             </motion.div>
         </section>
     );

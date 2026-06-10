@@ -167,3 +167,87 @@
         letter-spacing: 1px;
     }
 }
+
+/* Override overflow to let tooltip show outside card */
+.item {
+    overflow: visible;
+}
+
+/* Tooltip styling floating above the card */
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid var(--accent);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-bottom: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(26, 26, 26, 0.95) transparent transparent transparent;
+}
+
+.item:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Case study link */
+.linkWrapper {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.caseStudyLink {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+    text-decoration: none;
+}
+
+.caseStudyLink:hover,
+.caseStudyLink:focus-visible {
+    color: var(--primary);
+    border-color: var(--primary);
+    transform: translateX(4px);
+    outline: none;
+}
+
+:global(.dark) .caseStudyLink:hover,
+:global(.dark) .caseStudyLink:focus-visible {
+    color: #fff;
+    border-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .tooltip {
+        display: none; /* Hide tooltips on mobile to avoid layout breaking on tap */
+    }
+}

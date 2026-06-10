@@ -420,7 +420,7 @@ export const PRODUCTS: Product[] = [
 export const FACTORIES: Factory[] = [
     {
         id: 'f1',
-        name: 'Gouri Marble Udhyog',
+        name: 'Kishangarh Facilities – Gouri Marble Udhyog',
         location: 'Kishangarh, Kali Dungri, Rajasthan - 305801',
         coordinates: { lat: 26.5741, lng: 74.8601 },
         capacity: '80,000 sq.ft / month',
@@ -433,7 +433,7 @@ export const FACTORIES: Factory[] = [
     },
     {
         id: 'f2',
-        name: 'Gouri Granites',
+        name: 'Kishangarh – Gouri Granites (Ralawta)',
         location: 'Kishangarh, Ralawta, Rajasthan - 305801',
         coordinates: { lat: 26.5850, lng: 74.8720 },
         capacity: '95,000 sq.ft / month',
@@ -446,7 +446,7 @@ export const FACTORIES: Factory[] = [
     },
     {
         id: 'f3',
-        name: 'Gouri Granito',
+        name: 'Karimnagar – Gouri Granito',
         location: 'Baopet, Karimnagar, Telangana - 505401',
         coordinates: { lat: 18.4386, lng: 78.4872 },
         capacity: '1,50,000 sq.ft / month',

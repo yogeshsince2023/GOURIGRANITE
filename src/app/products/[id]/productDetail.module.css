@@ -157,3 +157,52 @@
         gap: 1rem;
     }
 }
+
+.leadGenBanner {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+:global(.dark) .leadGenBanner {
+    background: var(--surface-1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.leadGenBanner h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.leadGenBanner p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.leadGenLink {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.leadGenLink:hover {
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+:global(.dark) .leadGenLink:hover {
+    color: #fff;
+}
+

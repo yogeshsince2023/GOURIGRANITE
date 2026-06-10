@@ -1,0 +1,1 @@
+export const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "4ec89e8d-c890-41aa-ba55-644fe19ad2c3";
