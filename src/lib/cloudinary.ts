@@ -8,8 +8,8 @@ export function getOptimizedCloudinaryUrl(url: string, width?: number): string {
     const preUpload = url.substring(0, index + uploadMarker.length);
     const postUpload = url.substring(index + uploadMarker.length);
     
-    // Default transformations to optimize format and quality
-    const transformations = ['f_auto', 'q_auto'];
+    // High quality with auto format for best compression
+    const transformations = ['f_auto', 'q_90'];
     if (width) {
         transformations.push(`w_${width}`);
     }

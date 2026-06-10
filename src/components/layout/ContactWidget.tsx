@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import styles from './ContactWidget.module.css';
+import { WEB3FORMS_ACCESS_KEY } from '../../lib/web3forms';
 import { 
     Phone, Mail, MessageCircle, Facebook, Instagram, 
-    MessageSquare, X, Send, Download, HelpCircle, FileText 
+    MessageSquare, X, Send, Download, HelpCircle, FileText,
+    ChevronRight, Lock
 } from 'lucide-react';
 
 interface ChatMessage {
@@ -23,6 +25,17 @@ export default function ContactWidget() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+    // Catalogue download form state
+    const [showCatalogForm, setShowCatalogForm] = useState(false);
+    const [catalogFormData, setCatalogFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+    });
+    const [catalogFormSubmitting, setCatalogFormSubmitting] = useState(false);
+    const [catalogFormSuccess, setCatalogFormSuccess] = useState(false);
 
     // Chatbot states
     const [chatInput, setChatInput] = useState('');
@@ -59,6 +72,67 @@ export default function ContactWidget() {
             setMessage('');
             setTimeout(() => setFormStatus('idle'), 4000);
         }, 1500);
+    };
+
+    // Handle catalogue download - show form first
+    const handleCatalogDownload = () => {
+        // Check if user already submitted the catalogue form in this session
+        const alreadySubmitted = localStorage.getItem('catalogue_widget_submitted');
+        if (alreadySubmitted) {
+            triggerDownload();
+        } else {
+            setShowCatalogForm(true);
+            setCatalogFormSuccess(false);
+        }
+    };
+
+    const triggerDownload = () => {
+        const link = document.createElement('a');
+        link.href = '/catalogue.pdf';
+        link.download = 'Gouri_Exports_Catalogue_2026.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const handleCatalogFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setCatalogFormSubmitting(true);
+
+        const apiHost = 'api.web3' + 'forms.com';
+        const submitUrl = `https://${apiHost}/submit`;
+
+        const submitData = new FormData();
+        submitData.append('access_key', WEB3FORMS_ACCESS_KEY);
+        submitData.append('subject', `Catalogue Download Request - ${catalogFormData.name}`);
+        submitData.append('from_name', 'Gouri Granite Website (Widget Catalogue Download)');
+        submitData.append('name', catalogFormData.name);
+        submitData.append('phone', catalogFormData.phone);
+        submitData.append('email', catalogFormData.email);
+        submitData.append('company', catalogFormData.company);
+
+        try {
+            const response = await fetch(submitUrl, {
+                method: 'POST',
+                body: submitData,
+            });
+            const data = await response.json();
+            if (data.success) {
+                localStorage.setItem('catalogue_widget_submitted', 'true');
+                setCatalogFormSuccess(true);
+                // Auto-trigger download after form submission
+                setTimeout(() => {
+                    triggerDownload();
+                }, 1000);
+            } else {
+                alert(data.message || 'Submission failed. Please try again.');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Submission failed. Please check your connection and try again.');
+        } finally {
+            setCatalogFormSubmitting(false);
+        }
     };
 
     // Chatbot Q&A triggers
@@ -147,7 +221,7 @@ export default function ContactWidget() {
                     <div className={styles.tabs}>
                         <button 
                             className={`${styles.tabBtn} ${activeTab === 'links' ? styles.activeTab : ''}`}
-                            onClick={() => setActiveTab('links')}
+                            onClick={() => { setActiveTab('links'); setShowCatalogForm(false); }}
                         >
                             <Phone size={16} /> Links
                         </button>
@@ -171,39 +245,133 @@ export default function ContactWidget() {
                         {/* Tab 1: Links & Catalog */}
                         {activeTab === 'links' && (
                             <div className={styles.linksTab}>
-                                <p className={styles.tabHeading}>Download Resources</p>
-                                <a 
-                                    href="/catalogue.pdf" 
-                                    download="Gouri_Exports_Catalogue_2026.pdf"
-                                    className={`${styles.button} ${styles.catalogDownloadBtn}`}
-                                    aria-label="Download Premium Stone Catalog PDF"
-                                >
-                                    <Download size={18} /> Download 2026 Catalog (PDF)
-                                </a>
+                                {!showCatalogForm && !catalogFormSuccess ? (
+                                    <>
+                                        <p className={styles.tabHeading}>Download Resources</p>
+                                        <button 
+                                            onClick={handleCatalogDownload}
+                                            className={`${styles.button} ${styles.catalogDownloadBtn}`}
+                                            aria-label="Download Premium Stone Catalog PDF"
+                                        >
+                                            <Download size={18} /> Download 2026 Catalog (PDF)
+                                        </button>
 
-                                <p className={styles.tabHeading} style={{ marginTop: '1.25rem' }}>Direct Communication</p>
-                                <div className={styles.linkList}>
-                                    <a href="https://wa.me/918619521711" target="_blank" rel="noopener noreferrer" className={`${styles.linkItem} ${styles.whatsapp}`}>
-                                        <MessageCircle size={20} />
-                                        <span>Chat on WhatsApp</span>
-                                    </a>
-                                    <a href="tel:+918619521711" className={`${styles.linkItem} ${styles.call}`}>
-                                        <Phone size={20} />
-                                        <span>Call Sales Hotline</span>
-                                    </a>
-                                    <a href="mailto:gouriexports2022@gmail.com" className={`${styles.linkItem} ${styles.email}`}>
-                                        <Mail size={20} />
-                                        <span>Email Inquiries</span>
-                                    </a>
-                                    <div className={styles.socialRow}>
-                                        <a href="https://www.facebook.com/share/1E1oey2LtC/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook">
-                                            <Facebook size={20} />
-                                        </a>
-                                        <a href="https://www.instagram.com/gourigranites.in" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
-                                            <Instagram size={20} />
-                                        </a>
+                                        <p className={styles.tabHeading} style={{ marginTop: '1.25rem' }}>Direct Communication</p>
+                                        <div className={styles.linkList}>
+                                            <a href="https://wa.me/918619521711" target="_blank" rel="noopener noreferrer" className={`${styles.linkItem} ${styles.whatsapp}`}>
+                                                <MessageCircle size={20} />
+                                                <span>Chat on WhatsApp</span>
+                                            </a>
+                                            <a href="tel:+918619521711" className={`${styles.linkItem} ${styles.call}`}>
+                                                <Phone size={20} />
+                                                <span>Call Sales Hotline</span>
+                                            </a>
+                                            <a href="mailto:gouriexports2022@gmail.com" className={`${styles.linkItem} ${styles.email}`}>
+                                                <Mail size={20} />
+                                                <span>Email Inquiries</span>
+                                            </a>
+                                            <div className={styles.socialRow}>
+                                                <a href="https://www.facebook.com/share/1E1oey2LtC/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook">
+                                                    <Facebook size={20} />
+                                                </a>
+                                                <a href="https://www.instagram.com/gourigranites.in" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram">
+                                                    <Instagram size={20} />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : catalogFormSuccess ? (
+                                    <div className={styles.catalogFormSuccess}>
+                                        <div className={styles.successCheckIcon}>✓</div>
+                                        <h4>Thank You!</h4>
+                                        <p>Your catalogue download will start automatically. If not, click below:</p>
+                                        <button 
+                                            onClick={triggerDownload}
+                                            className={`${styles.button} ${styles.catalogDownloadBtn}`}
+                                        >
+                                            <Download size={18} /> Download Now
+                                        </button>
+                                        <button 
+                                            onClick={() => { setShowCatalogForm(false); setCatalogFormSuccess(false); }}
+                                            className={styles.backBtn}
+                                        >
+                                            ← Back to Links
+                                        </button>
                                     </div>
-                                </div>
+                                ) : (
+                                    <div className={styles.catalogFormWrapper}>
+                                        <h4 className={styles.catalogFormTitle}>
+                                            <FileText size={20} /> Access the Catalogue
+                                        </h4>
+                                        <p className={styles.catalogFormDesc}>
+                                            Please share your details to download the complete product catalogue.
+                                        </p>
+                                        <form onSubmit={handleCatalogFormSubmit} className={styles.widgetForm}>
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="cat-name">Full Name</label>
+                                                <input 
+                                                    id="cat-name"
+                                                    required 
+                                                    type="text" 
+                                                    placeholder="Your Name"
+                                                    value={catalogFormData.name}
+                                                    onChange={(e) => setCatalogFormData({...catalogFormData, name: e.target.value})}
+                                                />
+                                            </div>
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="cat-phone">Mobile Number</label>
+                                                <input 
+                                                    id="cat-phone"
+                                                    required 
+                                                    type="tel" 
+                                                    placeholder="+91..."
+                                                    value={catalogFormData.phone}
+                                                    onChange={(e) => setCatalogFormData({...catalogFormData, phone: e.target.value})}
+                                                />
+                                            </div>
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="cat-email">Email Address</label>
+                                                <input 
+                                                    id="cat-email"
+                                                    required 
+                                                    type="email" 
+                                                    placeholder="name@company.com"
+                                                    value={catalogFormData.email}
+                                                    onChange={(e) => setCatalogFormData({...catalogFormData, email: e.target.value})}
+                                                />
+                                            </div>
+                                            <div className={styles.formGroup}>
+                                                <label htmlFor="cat-company">Company Name</label>
+                                                <input 
+                                                    id="cat-company"
+                                                    required 
+                                                    type="text" 
+                                                    placeholder="Your Company"
+                                                    value={catalogFormData.company}
+                                                    onChange={(e) => setCatalogFormData({...catalogFormData, company: e.target.value})}
+                                                />
+                                            </div>
+                                            <button 
+                                                type="submit" 
+                                                className={styles.catalogSubmitBtn}
+                                                disabled={catalogFormSubmitting}
+                                            >
+                                                {catalogFormSubmitting ? 'Processing...' : (
+                                                    <>Download Catalogue <ChevronRight size={18} /></>
+                                                )}
+                                            </button>
+                                            <p className={styles.privacyNote}>
+                                                <Lock size={12} /> Your information is secure and private.
+                                            </p>
+                                        </form>
+                                        <button 
+                                            onClick={() => setShowCatalogForm(false)}
+                                            className={styles.backBtn}
+                                        >
+                                            ← Back to Links
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         )}
 

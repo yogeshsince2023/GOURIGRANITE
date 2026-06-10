@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import { Product } from '@/lib/types';
+import Link from 'next/link';
 import styles from './ProductGallery.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Keyboard, Zoom } from 'swiper/modules';
-import { motion, Variants } from 'framer-motion';
-import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import { GALLERY_IMAGES } from '@/lib/data';
+import { ArrowRight, BookOpen } from 'lucide-react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,39 +15,67 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/zoom';
 
-interface ProductGalleryProps {
-    products: Product[];
+// Fisher-Yates shuffle
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
-export default function ProductGallery({ products }: ProductGalleryProps) {
+// Deduplicate URLs by their filename (last path segment)
+function deduplicateByFilename(urls: string[]): string[] {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const url of urls) {
+        const filename = url.split('/').pop() || url;
+        if (!seen.has(filename)) {
+            seen.add(filename);
+            result.push(url);
+        }
+    }
+    return result;
+}
+
+// Build high-quality Cloudinary URL
+function getHighQualityUrl(url: string, width?: number): string {
+    if (!url || !url.includes('res.cloudinary.com')) return url;
+
+    const uploadMarker = '/upload/';
+    const index = url.indexOf(uploadMarker);
+    if (index === -1) return url;
+
+    const preUpload = url.substring(0, index + uploadMarker.length);
+    const postUpload = url.substring(index + uploadMarker.length);
+
+    const transforms = ['f_auto', 'q_90'];
+    if (width) {
+        transforms.push(`w_${width}`);
+    }
+
+    return `${preUpload}${transforms.join(',')}/${postUpload}`;
+}
+
+const INITIAL_LOAD_COUNT = 24;
+const LOAD_MORE_COUNT = 12;
+
+export default function ProductGallery() {
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [initialSlide, setInitialSlide] = useState(0);
-    const [randomizedProducts, setRandomizedProducts] = useState<Product[]>([]);
-    const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+    const [shuffledImages, setShuffledImages] = useState<string[]>([]);
+    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+    const [visibleCount, setVisibleCount] = useState(INITIAL_LOAD_COUNT);
 
-    // Shuffle function for random pattern
-    const shuffleArray = (array: Product[]): Product[] => {
-        const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
-    };
-
-    // Filter out factory photos and randomize products on mount and on every page reload
+    // Deduplicate and shuffle on mount
     useEffect(() => {
-        // Filter products that don't use factory photos
-        const filteredProducts = products.filter(
-            product => !product.image.toLowerCase().includes('factory')
-        );
-        
-        // Randomize the filtered products
-        const randomized = shuffleArray(filteredProducts);
-        setRandomizedProducts(randomized);
+        const unique = deduplicateByFilename(GALLERY_IMAGES);
+        const randomized = shuffleArray(unique);
+        setShuffledImages(randomized);
     }, []);
 
-    // Handle body scroll locking
+    // Handle body scroll locking for lightbox
     useEffect(() => {
         if (lightboxOpen) {
             document.body.style.overflow = 'hidden';
@@ -68,70 +96,77 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
         setLightboxOpen(false);
     };
 
-    // Handle image load completion
-    const handleImageLoad = (productId: string) => {
-        setLoadedImages(prev => new Set(prev).add(productId));
+    const handleImageLoad = useCallback((index: number) => {
+        setLoadedImages(prev => new Set(prev).add(index));
+    }, []);
+
+    const handleLoadMore = () => {
+        setVisibleCount(prev => Math.min(prev + LOAD_MORE_COUNT, shuffledImages.length));
     };
 
-    // Animation variants for grid items
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants: Variants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        }
-    };
+    const visibleImages = shuffledImages.slice(0, visibleCount);
+    const hasMore = visibleCount < shuffledImages.length;
 
     return (
         <div className={styles.galleryContainer}>
-            <motion.div 
-                className={styles.galleryGrid}
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-            >
-                {randomizedProducts.map((product, index) => (
-                    <motion.div 
-                        key={product.id} 
-                        variants={itemVariants}
+            {/* Gallery Header */}
+            <div className={styles.galleryHeader}>
+                <h1 className={styles.galleryTitle}>Our Stone Collection</h1>
+                <p className={styles.gallerySubtitle}>
+                    Explore our premium range of natural stones — each image in full, uncompromised quality.
+                </p>
+                <span className={styles.imageCount}>
+                    Showing {visibleImages.length} of {shuffledImages.length} stones
+                </span>
+            </div>
+
+            {/* Image Grid */}
+            <div className={styles.galleryGrid}>
+                {visibleImages.map((imageUrl, index) => (
+                    <div
+                        key={`gallery-${index}`}
                         className={styles.imageContainer}
                         onClick={() => openLightbox(index)}
+                        style={{ animationDelay: `${Math.min(index * 0.05, 1)}s` }}
                     >
                         {/* Skeleton Loader */}
-                        {!loadedImages.has(product.id) && (
+                        {!loadedImages.has(index) && (
                             <div className={styles.skeleton}></div>
                         )}
-                        
-                        {/* Progressive Image Loading */}
+
+                        {/* High Quality Image */}
                         <Image
-                            src={getOptimizedCloudinaryUrl(product.image, 800)}
-                            alt={product.name}
+                            src={getHighQualityUrl(imageUrl, 800)}
+                            alt={`Premium natural stone - ${index + 1}`}
                             fill
-                            className={`${styles.galleryImage} ${loadedImages.has(product.id) ? styles.imageLoaded : styles.imageLoading}`}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className={`${styles.galleryImage} ${loadedImages.has(index) ? styles.imageLoaded : styles.imageLoading}`}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             placeholder="blur"
-                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75'%3E%3Crect fill='%23e5e5e5' width='100' height='75'/%3E%3C/svg%3E"
+                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 75'%3E%3Crect fill='%23d4c5a9' width='100' height='75'/%3E%3C/svg%3E"
                             loading="lazy"
-                            onLoad={() => handleImageLoad(product.id)}
+                            onLoad={() => handleImageLoad(index)}
                         />
-                    </motion.div>
+                    </div>
                 ))}
-            </motion.div>
+            </div>
+
+            {/* Load More / Catalogue CTA */}
+            <div className={styles.galleryFooter}>
+                {hasMore && (
+                    <button className={styles.loadMoreBtn} onClick={handleLoadMore}>
+                        Load More Stones
+                        <span className={styles.loadMoreCount}>
+                            +{Math.min(LOAD_MORE_COUNT, shuffledImages.length - visibleCount)} more
+                        </span>
+                    </button>
+                )}
+
+                <Link href="/catalogue" className={styles.catalogueCta}>
+                    <BookOpen size={20} />
+                    <span>View Complete Catalogue with Specifications</span>
+                    <ArrowRight size={18} />
+                </Link>
+            </div>
 
             {/* Lightbox */}
             {lightboxOpen && (
@@ -151,12 +186,12 @@ export default function ProductGallery({ products }: ProductGalleryProps) {
                         loop={true}
                         className={styles.lightboxSwiper}
                     >
-                        {randomizedProducts.map((product) => (
-                            <SwiperSlide key={product.id} className={styles.lightboxSlide}>
+                        {shuffledImages.map((imageUrl, index) => (
+                            <SwiperSlide key={`lightbox-${index}`} className={styles.lightboxSlide}>
                                 <div className="swiper-zoom-container">
                                     <Image
-                                        src={getOptimizedCloudinaryUrl(product.image, 1600)}
-                                        alt={product.name}
+                                        src={getHighQualityUrl(imageUrl, 1600)}
+                                        alt={`Premium natural stone full view - ${index + 1}`}
                                         width={1600}
                                         height={1200}
                                         className={styles.lightboxImage}

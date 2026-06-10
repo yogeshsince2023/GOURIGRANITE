@@ -153,8 +153,8 @@
 /* Explorer Grid */
 .explorerGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
 .stoneCard {
@@ -164,6 +164,41 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeSlideInCard 0.5s ease-out both;
+}
+
+@keyframes fadeSlideInCard {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, #d4c5a9 8%, #e8dcc6 18%, #d4c5a9 33%);
+    background-size: 200% 100%;
+    animation: skeletonLoading 1.5s infinite;
+    z-index: 1;
+}
+
+@keyframes skeletonLoading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.imageLoading {
+    opacity: 0;
+}
+
+.imageLoaded {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
 :global(.dark) .stoneCard {
@@ -687,37 +722,68 @@
 
 @media (max-width: 768px) {
     .explorerGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
     }
 
     .stoneCard {
-        max-width: 450px;
-        margin: 0 auto;
         width: 100%;
     }
 
-    .compareTray {
-        width: 95%;
-        padding: 1rem;
+    .imageWrapper {
+        height: 200px;
     }
 
-    .compareTrayContent {
-        flex-direction: column;
-        gap: 1rem;
+    .viewMoreBtn {
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
     }
+}
 
-    .compareTrayItems {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+@media (max-width: 480px) {
+    .explorerGrid {
+        grid-template-columns: 1fr;
     }
+}
 
-    .compareTrayActions {
-        width: 100%;
-        justify-content: space-between;
-    }
+/* Grid Footer & View More */
+.gridFooter {
+    text-align: center;
+    margin-top: 2rem;
+}
 
-    .compareModalCard {
-        padding: 1.5rem;
-    }
+.viewMoreBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #8B6914, #C49B2A, #D4A843);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(139, 105, 20, 0.3);
+    letter-spacing: 0.02em;
+}
+
+.viewMoreBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(139, 105, 20, 0.45);
+    background: linear-gradient(135deg, #9a7518, #d4a843, #e0b94f);
+}
+
+/* Lightbox */
+.lightboxContent {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.lightboxImage {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
 }
