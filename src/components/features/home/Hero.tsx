@@ -32,17 +32,15 @@ export default function Hero() {
                     muted
                     playsInline
                     preload="auto"
+                    poster={getOptimizedCloudinaryUrl("https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790198/factory1_uzv7wd.jpg", 1920)}
+                    style={{ backgroundColor: '#2b261b' }}
                 >
                     <source src={getOptimizedCloudinaryVideoUrl("https://res.cloudinary.com/dvlapdn5x/video/upload/v1770790212/Background_ozszff.mp4")} type="video/mp4" />
                 </video>
             </motion.div>
 
-            <motion.div
+            <div
                 className={styles.content}
-                variants={fadeIn('up', 0.2)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.25 }}
             >
                 <h1 className={styles.title}>
                     Premium Marble & Granite Exporters from India – Gouri Exports
@@ -111,7 +109,7 @@ export default function Hero() {
                         Request a Quote
                     </Link>
                 </nav>
-            </motion.div>
+            </div>
         </section>
     );
 }

@@ -148,6 +148,11 @@ export default function ContactPage() {
                                 </div>
 
                                 <div className={styles.formGroup}>
+                                    <label>Phone / WhatsApp</label>
+                                    <input name="phone" required type="tel" placeholder="+1 555 123 4567" />
+                                </div>
+
+                                <div className={styles.formGroup}>
                                     <label>Message / Requirement</label>
                                     <textarea name="message" required rows={5} placeholder="I am interested in..."></textarea>
                                 </div>

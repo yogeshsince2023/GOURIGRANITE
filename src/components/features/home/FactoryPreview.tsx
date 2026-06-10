@@ -39,10 +39,6 @@ export default function FactoryPreview() {
                         <motion.div
                             key={factory.id}
                             className={styles.card}
-                            variants={fadeIn('up', index * 0.1)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true, amount: 0.15 }}
                             whileHover={{ y: -6 }}
                             transition={{ duration: 0.25 }}
                         >
@@ -85,6 +81,16 @@ export default function FactoryPreview() {
                                         ))}
                                     </div>
                                 )}
+                                
+                                <div style={{ marginTop: '1.5rem' }}>
+                                    <Link
+                                        href={`/factories/${getFactorySlug(factory.id)}`}
+                                        className="btn btn-outline"
+                                        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+                                    >
+                                        View Factory Profile
+                                    </Link>
+                                </div>
                             </div>
                         </motion.div>
                     ))}

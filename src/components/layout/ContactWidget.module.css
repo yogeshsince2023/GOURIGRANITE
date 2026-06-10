@@ -255,8 +255,8 @@
 .whatsapp { background-color: #25D366; }
 .whatsapp:hover { background-color: #1da851; }
 
-.call { background-color: var(--primary); }
-.call:hover { background-color: #333; }
+.call { background-color: #222; }
+.call:hover { background-color: #000; }
 
 .email { background-color: #EA4335; }
 .email:hover { background-color: #d33426; }

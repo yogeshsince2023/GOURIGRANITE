@@ -95,10 +95,6 @@ export default function Testimonials() {
                             <motion.div
                                 key={activeIndex}
                                 custom={direction}
-                                variants={slideVariants}
-                                initial="enter"
-                                animate="center"
-                                exit="exit"
                                 className={styles.slide}
                             >
                                 <Quote className={styles.quoteIcon} size={48} />

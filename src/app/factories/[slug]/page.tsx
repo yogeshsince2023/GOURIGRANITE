@@ -199,6 +199,10 @@ export default async function FactoryProfilePage({ params }: Props) {
                                     <input required id="pemail" type="email" placeholder="email@company.com" />
                                 </div>
                                 <div className={styles.formGroup}>
+                                    <label htmlFor="pphone">Phone / WhatsApp</label>
+                                    <input required id="pphone" type="tel" placeholder="+1 555 123 4567" />
+                                </div>
+                                <div className={styles.formGroup}>
                                     <label htmlFor="pmessage">Quantity & Requirement Details</label>
                                     <textarea 
                                         required 

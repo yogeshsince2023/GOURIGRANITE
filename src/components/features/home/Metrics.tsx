@@ -66,9 +66,6 @@ export default function Metrics() {
                     <motion.div 
                         key={index} 
                         className={styles.item}
-                        variants={counterVariants}
-                        initial="hidden"
-                        animate={inView ? 'visible' : 'hidden'}
                         custom={item.delay}
                         whileHover={{
                             y: -5,

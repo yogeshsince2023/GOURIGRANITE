@@ -1,7 +1,17 @@
 import { FACTORIES } from '@/lib/data';
 import WorldMap from '@/components/features/factories/WorldMap';
 import { MapPin } from 'lucide-react';
+import Link from 'next/link';
 import styles from './factories.module.css';
+
+const getFactorySlug = (id: string) => {
+    switch (id) {
+        case 'f1': return 'kishangarh-marble-udhyog';
+        case 'f2': return 'kishangarh-granites';
+        case 'f3': return 'karimnagar-granito';
+        default: return '';
+    }
+};
 
 export default function FactoriesPage() {
     return (
@@ -26,6 +36,13 @@ export default function FactoriesPage() {
                                         <MapPin size={16} className={styles.locationIcon} /> {factory.location}
                                     </p>
                                     <p className={styles.capacityText}><strong>Capacity:</strong> {factory.capacity}</p>
+                                    <Link 
+                                        href={`/factories/${getFactorySlug(factory.id)}`}
+                                        className="btn btn-primary"
+                                        style={{ marginTop: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}
+                                    >
+                                        View Factory Profile
+                                    </Link>
                                 </div>
                             </div>
                         ))}

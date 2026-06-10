@@ -29,7 +29,7 @@ export default function LeadGenerationPage() {
                 
                 {/* Left side: Form Info & trust signals */}
                 <div className={styles.infoSection}>
-                    <Link href="/products" className={styles.backLink}>
+                    <Link href="/catalogue" className={styles.backLink}>
                         <ArrowLeft size={16} /> Back to Catalog
                     </Link>
                     
