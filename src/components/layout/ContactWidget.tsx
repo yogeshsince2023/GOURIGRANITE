@@ -138,7 +138,7 @@ export default function ContactWidget() {
     // Chatbot Q&A triggers
     const presetQuestions = [
         { q: 'Which stone is best for kitchen countertops?', a: 'For kitchen countertops, Granite is highly recommended (such as Black Galaxy, Colonial White, or Tan Brown) due to its superior hardness, heat resistance, and scratch resistance. It is highly durable and holds its mirror polish for decades.' },
-        { q: 'Do you ship internationally?', a: 'Yes, we export globally! We regularly ship premium marble and granite to 50+ countries including the US, UK, UAE, Europe, and Australia. All shipments are packed securely in fumigated, seaworthy wooden crates.' },
+        { q: 'Do you ship internationally?', a: 'Yes, we export globally! We regularly ship premium marble and granite to 40+ countries including the US, UK, UAE, Europe, and Australia. All shipments are packed securely in fumigated, seaworthy wooden crates.' },
         { q: 'Where are your factories located?', a: 'We operate 3 factories in India: two processing units in Kishangarh, Rajasthan (specialized in Marble and Granite) and one in Karimnagar, Telangana (specialized in premium black and grey granites).' },
         { q: 'How can I request samples?', a: 'We offer free 10x10 cm or 15x15 cm samples of our stones! You only pay the courier charge, which is fully refunded once you place an order. Please submit a request on our "Quick Quote" tab!' }
     ];

@@ -4,27 +4,37 @@ import { Phone, Mail, MapPin, Navigation } from 'lucide-react';
 import { useState } from 'react';
 import styles from './contact.module.css';
 
+import MapLink from '@/components/ui/MapLink';
+
 // Google Maps URLs that work on all devices and open native apps when available
 const locations = [
     {
         name: 'Gouri Exports (Registered Head Office)',
         address: 'Teli Mohalla, Borawar, Nagaur, Rajasthan - 341502',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan'
+        mapUrl: 'https://www.google.com/maps/search/?api=1&query=Teli+Mohalla,+Borawar,+Nagaur,+Rajasthan',
+        lat: 27.0250, // rough approx since we don't have exact
+        lng: 74.6750
     },
     {
         name: 'Gouri Marble Udhyog',
         address: 'Kishangarh, Kali Dungri - 305801',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5741,74.8601'
+        mapUrl: 'https://maps.app.goo.gl/ggibYwvYEDWYS5Yk8?g_st=aw',
+        lat: 26.5741,
+        lng: 74.8601
     },
     {
         name: 'Gouri Granites',
         address: 'Kishangarh, Ralawta - 305801',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=26.5850,74.8720'
+        mapUrl: 'https://maps.app.goo.gl/HWKuyNAYBQkWXsd8A?g_st=aw',
+        lat: 26.5850,
+        lng: 74.8720
     },
     {
         name: 'Gouri Granito',
         address: 'Baopet, Karimnagar, Telangana - 505401',
-        mapUrl: 'https://www.google.com/maps/search/?api=1&query=18.4386,78.4872'
+        mapUrl: 'https://maps.app.goo.gl/UpymoQSWa3gJERVs6?g_st=aw',
+        lat: 18.4386,
+        lng: 78.4872
     }
 ];
 
@@ -111,11 +121,12 @@ export default function ContactPage() {
                             </h3>
 
                             {locations.map((loc, index) => (
-                                <a
+                                <MapLink
                                     key={index}
-                                    href={loc.mapUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    googleMapsUrl={loc.mapUrl}
+                                    lat={loc.lat}
+                                    lng={loc.lng}
+                                    label={loc.name}
                                     className={styles.locationCard}
                                 >
                                     <strong>
@@ -124,7 +135,7 @@ export default function ContactPage() {
                                         <Navigation size={14} className={styles.accentIcon} />
                                     </strong>
                                     <p>{loc.address}</p>
-                                </a>
+                                </MapLink>
                             ))}
                         </div>
                     </div>

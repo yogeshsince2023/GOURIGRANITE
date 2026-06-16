@@ -42,6 +42,7 @@ const CLIENT_COUNTRIES = [
     { name: 'Sri Lanka', x: 69, y: 44 },
     { name: 'Nepal', x: 69, y: 33 },
     { name: 'Azerbaijan', x: 60, y: 27 },
+    { name: 'Malaysia', x: 76, y: 44 },
 
     // Europe
     { name: 'United Kingdom', x: 43, y: 16 },
@@ -54,6 +55,7 @@ const CLIENT_COUNTRIES = [
     { name: 'USA', x: 18, y: 25 },
     { name: 'Brazil', x: 28, y: 55 },
     { name: 'Mexico', x: 14, y: 34 },
+    { name: 'Canada', x: 18, y: 16 },
 
     // Oceania
     { name: 'Australia', x: 82, y: 60 },
@@ -69,7 +71,7 @@ export default function WorldMap() {
                 <span className={styles.badge}>🌍 GLOBAL PRESENCE</span>
                 <h2 className={styles.title}>Delivering Excellence Worldwide</h2>
                 <p className={styles.subtitle}>
-                    Premium granite & marble trusted by clients in <strong>{(CLIENT_COUNTRIES.length) + 1}+ countries</strong>
+                    Premium granite & marble trusted by clients in <strong>40+ countries</strong>
                 </p>
             </div>
 
@@ -157,12 +159,12 @@ export default function WorldMap() {
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Landmark size={32} strokeWidth={1.5} /></div>
                     <h4>Asia & Europe</h4>
-                    <p>India, Bangladesh, Nepal, Sri Lanka, Azerbaijan, UK, Germany, Italy, Greece, Spain</p>
+                    <p>India, Bangladesh, Nepal, Sri Lanka, Azerbaijan, Malaysia, UK, Germany, Italy, Greece, Spain</p>
                 </div>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Map size={32} strokeWidth={1.5} /></div>
                     <h4>Americas & Oceania</h4>
-                    <p>USA, Brazil, Mexico, Australia</p>
+                    <p>USA, Canada, Brazil, Mexico, Australia</p>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Globe, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
 import { fadeIn } from '@/lib/animations';
-import { getOptimizedCloudinaryVideoUrl } from '@/lib/cloudinary';
+import { getOptimizedCloudinaryUrl, getOptimizedCloudinaryVideoUrl } from '@/lib/cloudinary';
 
 export default function Hero() {
     const { scrollY } = useScroll();
@@ -13,7 +13,7 @@ export default function Hero() {
 
     const trustItems = [
         { icon: CheckCircle, text: 'Direct from 3 Indian quarries' },
-        { icon: Globe, text: 'Shipped to 50+ countries' },
+        { icon: Globe, text: 'Shipped to 40+ countries' },
     ];
 
     return (
@@ -80,7 +80,7 @@ export default function Hero() {
                 <div className={styles.ctaSubtitle}>
                     <span>Premium marble & granite for architects and builders</span>
                     <span className={styles.divider}>|</span>
-                    <span>Trusted by 50+ countries</span>
+                    <span>Trusted by 40+ countries</span>
                 </div>
 
                 {/* Certification Badges */}

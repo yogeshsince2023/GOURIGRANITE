@@ -9,6 +9,7 @@ import styles from './FactoryPreview.module.css';
 import { FACTORIES } from '@/lib/data';
 import { fadeIn } from '@/lib/animations';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import MapLink from '@/components/ui/MapLink';
 
 const getFactorySlug = (id: string) => {
     switch (id) {
@@ -66,7 +67,20 @@ export default function FactoryPreview() {
                                         {factory.name}
                                     </Link>
                                 </h3>
-                                <p className={styles.subtitle}>{factory.location}</p>
+                                {factory.mapUrl ? (
+                                    <MapLink
+                                        googleMapsUrl={factory.mapUrl}
+                                        lat={factory.coordinates?.lat}
+                                        lng={factory.coordinates?.lng}
+                                        label={factory.name}
+                                        className={styles.subtitle}
+                                        style={{ textDecoration: 'underline', textDecorationColor: '#666', cursor: 'pointer', display: 'block' }}
+                                    >
+                                        {factory.location}
+                                    </MapLink>
+                                ) : (
+                                    <p className={styles.subtitle}>{factory.location}</p>
+                                )}
 
                                 {/* Capacity */}
                                 <span className={styles.capacity}>Capacity: {factory.capacity}</span>

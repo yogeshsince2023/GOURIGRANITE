@@ -5,6 +5,7 @@ import { MapPin, Calendar, Activity, CheckCircle, ArrowLeft, Mail, Phone } from 
 import Image from 'next/image';
 import styles from './factoryProfile.module.css';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import MapLink from '@/components/ui/MapLink';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -74,8 +75,20 @@ export default async function FactoryProfilePage({ params }: Props) {
                         
                         <div className={styles.metaInfo}>
                             <p className={styles.metaItem}>
-                                <MapPin size={18} className={styles.icon} /> 
-                                <span>{factory.location}</span>
+                                <MapPin size={18} className={styles.icon} />
+                                {factory.mapUrl ? (
+                                    <MapLink
+                                        googleMapsUrl={factory.mapUrl}
+                                        lat={factory.coordinates?.lat}
+                                        lng={factory.coordinates?.lng}
+                                        label={factory.name}
+                                        style={{ color: 'var(--accent)', textDecoration: 'underline', textDecorationColor: '#666' }}
+                                    >
+                                        {factory.location}
+                                    </MapLink>
+                                ) : (
+                                    <span>{factory.location}</span>
+                                )}
                             </p>
                             <div className={styles.metaGrid}>
                                 <div className={styles.metaCard}>

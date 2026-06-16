@@ -172,7 +172,7 @@ const structuredData = {
           "name": "Where does Gouri Exports export from?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Gouri Exports operates 3 manufacturing facilities - two in Kishangarh, Rajasthan and one in Karimnagar, Telangana, India. We export premium natural stone (marble, granite, onyx, travertine) to 50+ countries worldwide."
+            "text": "Gouri Exports operates 3 manufacturing facilities - two in Kishangarh, Rajasthan and one in Karimnagar, Telangana, India. We export premium natural stone (marble, granite, onyx, travertine) to 40+ countries worldwide."
           }
         },
         {
@@ -196,6 +196,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

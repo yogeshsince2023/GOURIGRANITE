@@ -52,7 +52,7 @@ export default function LeadGenerationPage() {
                             <Truck size={28} className={styles.trustIcon} />
                             <div>
                                 <h4>Secure Global Logistics</h4>
-                                <p>Delivered securely in fumigated seaworthy wooden crates to over 50+ countries.</p>
+                                <p>Delivered securely in fumigated seaworthy wooden crates to over 40+ countries.</p>
                             </div>
                         </div>
 

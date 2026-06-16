@@ -18,6 +18,7 @@ export interface Factory {
     name: string;
     location: string;
     coordinates: { lat: number; lng: number };
+    mapUrl?: string;
     capacity: string;
     image: string;
     altText?: string;

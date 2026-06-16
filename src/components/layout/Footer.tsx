@@ -2,6 +2,8 @@ import styles from './Footer.module.css';
 import { Phone, Mail, Globe, Facebook, Instagram, Navigation } from 'lucide-react';
 import Link from 'next/link';
 
+import MapLink from '@/components/ui/MapLink';
+
 const locations = [
     {
         name: 'Gouri Exports (Registered Head Office)',
@@ -13,18 +15,27 @@ const locations = [
         name: 'Gouri Marble Udhyog',
         address: 'Kishangarh, Kali Dungri - 305801',
         url: '/factories/kishangarh-marble-udhyog',
+        mapUrl: 'https://maps.app.goo.gl/ggibYwvYEDWYS5Yk8?g_st=aw',
+        lat: 26.5741,
+        lng: 74.8601,
         isExternal: false
     },
     {
         name: 'Gouri Granites',
         address: 'Kishangarh, Ralawta - 305801',
         url: '/factories/kishangarh-granites',
+        mapUrl: 'https://maps.app.goo.gl/HWKuyNAYBQkWXsd8A?g_st=aw',
+        lat: 26.5850,
+        lng: 74.8720,
         isExternal: false
     },
     {
         name: 'Gouri Granito',
         address: 'Baopet, Karimnagar - 505401',
         url: '/factories/karimnagar-granito',
+        mapUrl: 'https://maps.app.goo.gl/UpymoQSWa3gJERVs6?g_st=aw',
+        lat: 18.4386,
+        lng: 78.4872,
         isExternal: false
     }
 ];
@@ -69,33 +80,45 @@ export default function Footer() {
                     <h3>Our Global Locations</h3>
                     <nav aria-label="Factory locations">
                         {locations.map((loc, index) => (
-                            loc.isExternal ? (
-                                <a
-                                    key={index}
-                                    href={loc.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{ display: 'block', marginBottom: '1rem', textDecoration: 'none' }}
-                                    aria-label={`View ${loc.name} on map`}
-                                >
-                                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
-                                        {loc.name} <Navigation size={12} aria-hidden="true" />
-                                    </strong>
-                                    <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
-                                </a>
-                            ) : (
-                                <Link
-                                    key={index}
-                                    href={loc.url}
-                                    style={{ display: 'block', marginBottom: '1rem', textDecoration: 'none' }}
-                                    aria-label={`View details of ${loc.name}`}
-                                >
-                                    <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
-                                        {loc.name} <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>View Profile &rarr;</span>
-                                    </strong>
-                                    <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
-                                </Link>
-                            )
+                            <div key={index} style={{ marginBottom: '1rem' }}>
+                                {loc.isExternal ? (
+                                    <a
+                                        href={loc.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ display: 'block', textDecoration: 'none', marginBottom: '0.25rem' }}
+                                        aria-label={`View ${loc.name} on map`}
+                                    >
+                                        <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
+                                            {loc.name} <Navigation size={12} aria-hidden="true" />
+                                        </strong>
+                                    </a>
+                                ) : (
+                                    <Link
+                                        href={loc.url}
+                                        style={{ display: 'block', textDecoration: 'none', marginBottom: '0.25rem' }}
+                                        aria-label={`View details of ${loc.name}`}
+                                    >
+                                        <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
+                                            {loc.name} <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>View Profile &rarr;</span>
+                                        </strong>
+                                    </Link>
+                                )}
+                                
+                                {loc.mapUrl ? (
+                                    <MapLink
+                                        googleMapsUrl={loc.mapUrl}
+                                        lat={loc.lat}
+                                        lng={loc.lng}
+                                        label={loc.name}
+                                        style={{ display: 'block', fontSize: '0.9rem', color: '#a0a0a0', textDecoration: 'underline', textDecorationColor: '#444' }}
+                                    >
+                                        {loc.address}
+                                    </MapLink>
+                                ) : (
+                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#a0a0a0' }}>{loc.address}</span>
+                                )}
+                            </div>
                         ))}
                     </nav>
                 </div>
