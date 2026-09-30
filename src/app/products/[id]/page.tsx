@@ -5,6 +5,7 @@ import { PRODUCTS, FACTORIES } from '@/lib/data';
 import { Share2, Download, Truck } from 'lucide-react';
 import styles from './productDetail.module.css';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import type { Metadata } from 'next';
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -14,6 +15,33 @@ export function generateStaticParams() {
     return PRODUCTS.map((product) => ({
         id: product.id,
     }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
+    const product = PRODUCTS.find((p) => p.id === id);
+    if (!product) return { title: 'Product Not Found' };
+
+    const factory = FACTORIES.find(f => f.id === product.factoryId);
+
+    return {
+        title: `${product.name} — Premium Indian ${product.category} | Gouri Exports`,
+        description: `${product.description} ${product.finish} finish, ${product.dimensions}. Direct from ${factory?.location || 'India'}. Factory pricing for architects, builders & distributors.`,
+        keywords: [
+            `${product.name}`,
+            `${product.name} ${product.category.toLowerCase()}`,
+            `Indian ${product.category.toLowerCase()}`,
+            `${product.category.toLowerCase()} exporter India`,
+            `${product.category.toLowerCase()} slab India`,
+            `premium ${product.category.toLowerCase()} India`,
+            `buy ${product.name} India`,
+        ],
+        openGraph: {
+            title: `${product.name} — Premium Indian ${product.category}`,
+            description: product.description,
+            images: [{ url: product.image, alt: product.altText || product.name }],
+        },
+    };
 }
 
 export default async function ProductDetail({ params }: Props) {
@@ -26,8 +54,52 @@ export default async function ProductDetail({ params }: Props) {
 
     const factory = FACTORIES.find(f => f.id === product.factoryId);
 
+    const productSchema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": product.name,
+        "description": product.description,
+        "image": product.image,
+        "category": product.category,
+        "brand": {
+            "@type": "Brand",
+            "name": "Gouri Exports"
+        },
+        "manufacturer": {
+            "@type": "Organization",
+            "name": "Gouri Exports",
+            "url": "https://gourigranite.com"
+        },
+        "material": product.category,
+        "countryOfOrigin": "IN",
+        "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "USD"
+            },
+            "seller": {
+                "@type": "Organization",
+                "name": "Gouri Exports"
+            }
+        }
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gourigranite.com" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://gourigranite.com/products" },
+            { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://gourigranite.com/products/${product.id}` }
+        ]
+    };
+
     return (
         <main className={styles.pageContainer}>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
             <div className={`container ${styles.content}`}>
                 <Link href="/products" className={styles.backLink}>
                     &larr; Back to Catalog

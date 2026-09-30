@@ -7,6 +7,7 @@ import styles from './factoryProfile.module.css';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 import MapLink from '@/components/ui/MapLink';
 import FactoryQuoteForm from './FactoryQuoteForm';
+import type { Metadata } from 'next';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -25,6 +26,29 @@ export function generateStaticParams() {
         { slug: 'kishangarh-granites' },
         { slug: 'karimnagar-granito' }
     ];
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const factoryId = slugToIdMap[slug];
+    const factory = FACTORIES.find(f => f.id === factoryId);
+    if (!factory) return { title: 'Factory Not Found' };
+
+    return {
+        title: `${factory.name} — ${factory.specialization} Manufacturing Facility | Gouri Exports`,
+        description: `${factory.name} in ${factory.location} — ${factory.capacity} monthly capacity. Direct Indian ${factory.specialization?.toLowerCase()} manufacturer. Est. ${factory.yearEstablished}. Factory-direct pricing for architects & builders.`,
+        keywords: [
+            `${factory.name}`,
+            `${factory.location} ${factory.specialization?.toLowerCase()} factory`,
+            `Indian ${factory.specialization?.toLowerCase()} manufacturer`,
+            `${factory.specialization?.toLowerCase()} factory India`,
+        ],
+        openGraph: {
+            title: `${factory.name} — Indian ${factory.specialization} Factory`,
+            description: `${factory.capacity} monthly capacity. Direct manufacturer in ${factory.location}, India.`,
+            images: [{ url: factory.image, alt: factory.altText || factory.name }],
+        },
+    };
 }
 
 export default async function FactoryProfilePage({ params }: Props) {

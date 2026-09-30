@@ -196,7 +196,7 @@ const structuredData = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Where does Gouri Exports export from?",
+          "name": "Where does Gouri Exports export Indian granite and marble from?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Gouri Exports operates 3 manufacturing facilities — two in Kishangarh, Rajasthan and one in Karimnagar, Telangana, India. We are direct manufacturers and exporters of premium Indian Granite, Marble and Quartzite to 40+ countries worldwide. We supply blocks, slabs, tiles and cut-to-size products."
@@ -204,10 +204,58 @@ const structuredData = {
         },
         {
           "@type": "Question",
+          "name": "What types of Indian natural stone does Gouri Exports offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer premium Indian Granite (Black Galaxy, Tan Brown, Absolute Black, P-White, Crystal Yellow, Rajasthan Black), Indian Marble (Statuario, Makrana White, Rainforest Green), and Quartzite varieties. Available as blocks, slabs, tiles, and custom cut-to-size products for flooring, countertops, cladding and more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best Indian granite for countertops?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Black Galaxy, Absolute Black, and Tan Brown are among the best Indian granites for countertops due to their extreme durability, high density, and mirror-polish finish. Gouri Exports manufactures and exports these varieties with factory-direct pricing from our Kishangarh and Karimnagar facilities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I buy granite or marble directly from India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can buy granite and marble directly from India through Gouri Exports. As a direct manufacturer, we eliminate middlemen and offer factory pricing. Contact us at +91 86195 21711 or email gouriexports2022@gmail.com for quotes. We handle quality control, packing, and export logistics to your port."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Indian granite and marble?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Indian granite is a harder igneous rock ideal for high-traffic areas, countertops, and exterior cladding due to its durability and scratch resistance. Indian marble is a softer metamorphic rock prized for its elegant veining and is preferred for luxury interiors, flooring, and decorative applications. Both are available from Gouri Exports in slabs, tiles, and blocks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Gouri Exports ship granite and marble internationally?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Gouri Exports ships to 40+ countries including USA, UK, UAE, Australia, and EU nations. All stone is securely packed in fumigated seaworthy wooden crates. We provide quality inspection reports before loading and manage complete export logistics from Indian quarries to your destination port."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "What certifications does Gouri Exports have?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Gouri Exports holds an Export House Certificate and is government-recognized for premium quality natural stone exports to international markets."
+            "text": "Gouri Exports holds an Export House Certificate and is government-recognized for premium quality natural stone exports. We have GSTIN: 08BYQPG1619E1ZG and IEC Code: BYQPG1619E, ensuring full compliance with Indian and international trade standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get free granite or marble samples from Gouri Exports?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Gouri Exports provides free 10x10 cm stone samples for architects and builders. Courier charges apply for international shipments. Contact us to request samples of any Indian granite, marble, or quartzite variety from our collection."
           }
         }
       ]
