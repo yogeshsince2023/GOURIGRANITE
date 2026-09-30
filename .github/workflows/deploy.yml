@@ -1,0 +1,49 @@
+name: Build & Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+# Only allow one deployment at a time, cancel in-progress if a new push arrives
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY }}
+
+      - name: Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 82.25.107.85
+          port: 21
+          username: u450659410
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./out/
+          server-dir: public_html/
+          # Dangerous-clean-slate would delete ALL files in public_html.
+          # Instead, we use the default behavior: upload new/changed files,
+          # delete files that are no longer in ./out/ (i.e. old build artifacts).
+          # This keeps unrelated files safe because the action tracks state
+          # via a .ftp-deploy-sync-state.json file on the server.
+          dangerous-clean-slate: false
