@@ -4,7 +4,7 @@ jobs:
   ftp-debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Show FTP root and public_html
+      - name: Marker test
         env:
           H: ${{ secrets.HOSTINGER_FTP_HOST }}
           P: ${{ secrets.HOSTINGER_FTP_PORT }}
@@ -14,8 +14,21 @@ jobs:
           H=$(echo "$H" | tr -d '[:space:]'); H=${H#ftp://}; H=${H%%/*}
           P=$(echo "$P" | tr -d '[:space:]'); P=${P:-21}
           U=$(echo "$U" | tr -d '[:space:]')
-          echo "host length: ${#H}  user length: ${#U}  password length: ${#W}"
-          echo "=== FTP ROOT ==="
-          curl -sS --list-only --user "$U:$W" "ftp://$H:$P/" || true
-          echo "=== /public_html/ ==="
-          curl -sS --list-only --user "$U:$W" "ftp://$H:$P/public_html/" || true
+          TS=$(date -u +%Y%m%d-%H%M%S)
+          echo "marker $TS" > m.txt
+          curl -sS --user "$U:$W" -T m.txt "ftp://$H:$P/ftp-marker-root.txt" || true
+          curl -sS --user "$U:$W" -T m.txt "ftp://$H:$P/public_html/ftp-marker-inner.txt" || true
+          sleep 5
+          {
+            echo "### Marker test $TS"
+            echo "Live site, marker from FTP root (200 = served):"
+            curl -s -o /dev/null -w "%{http_code}\n" "https://gourigroupindia.com/ftp-marker-root.txt?v=$TS" || true
+            echo "Live site, marker from /public_html/ (200 = served):"
+            curl -s -o /dev/null -w "%{http_code}\n" "https://gourigroupindia.com/ftp-marker-inner.txt?v=$TS" || true
+            echo "Live index.html headers:"
+            curl -sI "https://gourigroupindia.com/index.html?v=$TS" | grep -i -E "^http|last-modified|server|cf-cache|x-cache" || true
+            echo "FTP root, long listing:"
+            curl -sS --user "$U:$W" "ftp://$H:$P/" | grep -E " (index\.html|public_html|ftp-marker-root\.txt)$" || true
+            echo "FTP /public_html/, long listing:"
+            curl -sS --user "$U:$W" "ftp://$H:$P/public_html/" | grep -E " (index\.html|ftp-marker-inner\.txt)$" || true
+          } | tee -a "$GITHUB_STEP_SUMMARY"
