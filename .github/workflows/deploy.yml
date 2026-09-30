@@ -38,7 +38,7 @@ jobs:
           server: 82.25.107.85
           port: 21
           username: u450659410
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           local-dir: ./out/
           server-dir: public_html/
           # Dangerous-clean-slate would delete ALL files in public_html.
