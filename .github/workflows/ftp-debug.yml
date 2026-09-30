@@ -1,18 +1,21 @@
 name: FTP Debug
-
-on:
-  workflow_dispatch:
-
+on: workflow_dispatch
 jobs:
   ftp-debug:
     runs-on: ubuntu-latest
     steps:
-      - name: List FTP Root
+      - name: Show FTP root and public_html
+        env:
+          H: ${{ secrets.HOSTINGER_FTP_HOST }}
+          P: ${{ secrets.HOSTINGER_FTP_PORT }}
+          U: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          W: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
+          H=$(echo "$H" | tr -d '[:space:]'); H=${H#ftp://}; H=${H%%/*}
+          P=$(echo "$P" | tr -d '[:space:]'); P=${P:-21}
+          U=$(echo "$U" | tr -d '[:space:]')
+          echo "host length: ${#H}  user length: ${#U}  password length: ${#W}"
           echo "=== FTP ROOT ==="
-          curl --list-only --user "${{ secrets.HOSTINGER_FTP_USERNAME }}:${{ secrets.HOSTINGER_FTP_PASSWORD }}" "ftp://${{ secrets.HOSTINGER_FTP_HOST }}:${{ secrets.HOSTINGER_FTP_PORT }}/"
-
-      - name: List /public_html/
-        run: |
+          curl -sS --list-only --user "$U:$W" "ftp://$H:$P/" || true
           echo "=== /public_html/ ==="
-          curl --list-only --user "${{ secrets.HOSTINGER_FTP_USERNAME }}:${{ secrets.HOSTINGER_FTP_PASSWORD }}" "ftp://${{ secrets.HOSTINGER_FTP_HOST }}:${{ secrets.HOSTINGER_FTP_PORT }}/public_html/"
+          curl -sS --list-only --user "$U:$W" "ftp://$H:$P/public_html/" || true
