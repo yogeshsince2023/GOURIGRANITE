@@ -4,31 +4,98 @@ jobs:
   ftp-debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Marker test
+      - name: Verify gourideploy and Hostinger structure
         env:
           H: ${{ secrets.HOSTINGER_FTP_HOST }}
           P: ${{ secrets.HOSTINGER_FTP_PORT }}
           U: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           W: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          H=$(echo "$H" | tr -d '[:space:]'); H=${H#ftp://}; H=${H%%/*}
-          P=$(echo "$P" | tr -d '[:space:]'); P=${P:-21}
-          U=$(echo "$U" | tr -d '[:space:]')
-          TS=$(date -u +%Y%m%d-%H%M%S)
-          echo "marker $TS" > m.txt
-          curl -sS --user "$U:$W" -T m.txt "ftp://$H:$P/ftp-marker-root.txt" || true
-          curl -sS --user "$U:$W" -T m.txt "ftp://$H:$P/public_html/ftp-marker-inner.txt" || true
-          sleep 5
-          {
-            echo "### Marker test $TS"
-            echo "Live site, marker from FTP root (200 = served):"
-            curl -s -o /dev/null -w "%{http_code}\n" "https://gourigroupindia.com/ftp-marker-root.txt?v=$TS" || true
-            echo "Live site, marker from /public_html/ (200 = served):"
-            curl -s -o /dev/null -w "%{http_code}\n" "https://gourigroupindia.com/ftp-marker-inner.txt?v=$TS" || true
-            echo "Live index.html headers:"
-            curl -sI "https://gourigroupindia.com/index.html?v=$TS" | grep -i -E "^http|last-modified|server|cf-cache|x-cache" || true
-            echo "FTP root, long listing:"
-            curl -sS --user "$U:$W" "ftp://$H:$P/" | grep -E " (index\.html|public_html|ftp-marker-root\.txt)$" || true
-            echo "FTP /public_html/, long listing:"
-            curl -sS --user "$U:$W" "ftp://$H:$P/public_html/" | grep -E " (index\.html|ftp-marker-inner\.txt)$" || true
-          } | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 -c "
+          from ftplib import FTP
+          import os
+
+          server = os.environ.get('H', '').strip().replace('ftp://', '').split('/')[0]
+          port = int(os.environ.get('P', '21').strip() or '21')
+          password = os.environ.get('W', '')
+
+          print('=== 1. TESTING GOURIDEPLOY ACCOUNT ===')
+          usernames_to_try = [
+              'gourideploy',
+              'u450659410@gourideploy',
+              'u450659410.gourideploy',
+              'gourideploy@gourigroupindia.com'
+          ]
+          connected_user = None
+          gouri_ftp = None
+
+          for u in usernames_to_try:
+              try:
+                  print(f'Attempting login as: {u}')
+                  f = FTP()
+                  f.connect(server, port, timeout=15)
+                  f.login(u, password)
+                  print(f'SUCCESS! Logged in as: {u}')
+                  connected_user = u
+                  gouri_ftp = f
+                  break
+              except Exception as e:
+                  print(f'Failed for {u}: {e}')
+
+          if gouri_ftp:
+              pwd = gouri_ftp.pwd()
+              print(f'\n[gourideploy] Initial PWD: {pwd}')
+              listing = []
+              gouri_ftp.retrlines('LIST', listing.append)
+              print(f'[gourideploy] Listing of PWD ({pwd}):')
+              for item in listing:
+                  print(f'  {item}')
+              gouri_ftp.quit()
+          else:
+              print('\nCould not log in as gourideploy with current HOSTINGER_FTP_PASSWORD.')
+
+          print('\n=== 2. INSPECTING HOSTINGER DIRECTORY STRUCTURE VIA U450659410 ===')
+          try:
+              f_main = FTP()
+              f_main.connect(server, port, timeout=15)
+              f_main.login('u450659410', password)
+              f_main.cwd('/')
+              print('Main account PWD: /')
+              root_items = []
+              f_main.retrlines('LIST', root_items.append)
+              print('Root items:')
+              for r in root_items:
+                  if any(k in r for k in ['domains', 'public_html']):
+                      print(f'  {r}')
+
+              try:
+                  f_main.cwd('/domains')
+                  print('\nSuccessfully entered /domains. PWD: /domains')
+                  d_items = []
+                  f_main.retrlines('LIST', d_items.append)
+                  print('Entries in /domains:')
+                  for d in d_items:
+                      print(f'  {d}')
+
+                  for line in d_items:
+                      parts = line.split()
+                      if len(parts) >= 9:
+                          dname = parts[-1]
+                          try:
+                              f_main.cwd(f'/domains/{dname}/public_html')
+                              print(f'\nListing of /domains/{dname}/public_html:')
+                              site_items = []
+                              f_main.retrlines('LIST', site_items.append)
+                              for s in site_items[:20]:
+                                  print(f'  {s}')
+                              if len(site_items) > 20:
+                                  print(f'  ... and {len(site_items) - 20} more items')
+                          except Exception as e:
+                              print(f'Could not enter /domains/{dname}/public_html: {e}')
+              except Exception as e:
+                  print(f'Could not enter /domains: {e}')
+
+              f_main.quit()
+          except Exception as e:
+              print(f'Failed main account inspection: {e}')
+          " | tee -a "$GITHUB_STEP_SUMMARY"
