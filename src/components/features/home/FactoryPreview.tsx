@@ -7,8 +7,7 @@ import { useState } from 'react';
 import { Award } from 'lucide-react';
 import styles from './FactoryPreview.module.css';
 import { FACTORIES } from '@/lib/data';
-import { fadeIn } from '@/lib/animations';
-import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import { getOptimizedCloudinaryUrl, STONE_BLUR_DATA_URL } from '@/lib/cloudinary';
 import MapLink from '@/components/ui/MapLink';
 
 const getFactorySlug = (id: string) => {
@@ -44,7 +43,9 @@ export default function FactoryPreview() {
                             transition={{ duration: 0.25 }}
                         >
                             <div className={styles.media}>
-                                {!loadedFactories.has(factory.id) && <div className={styles.skeleton}></div>}
+                                <div className={`${styles.skeleton} ${loadedFactories.has(factory.id) ? styles.skeletonHidden : ''}`}>
+                                    <div className={styles.skeletonSpinner}></div>
+                                </div>
                                 <Image
                                     src={getOptimizedCloudinaryUrl(factory.image, 800)}
                                     alt={factory.altText || factory.name}
@@ -52,7 +53,7 @@ export default function FactoryPreview() {
                                     sizes="(max-width: 768px) 100vw, 33vw"
                                     className={`${styles.image} ${loadedFactories.has(factory.id) ? styles.imageLoaded : styles.imageLoading}`}
                                     placeholder="blur"
-                                    blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23b0b0b0' width='400' height='300'/%3E%3C/svg%3E"
+                                    blurDataURL={STONE_BLUR_DATA_URL}
                                     loading="lazy"
                                     onLoad={() => handleFactoryImageLoad(factory.id)}
                                 />

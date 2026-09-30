@@ -62,16 +62,42 @@ export default function ContactWidget() {
 
     const toggleWidget = () => setIsOpen(!isOpen);
 
-    const handleQuoteSubmit = (e: React.FormEvent) => {
+    const handleQuoteSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormStatus('submitting');
-        setTimeout(() => {
-            setFormStatus('success');
-            setName('');
-            setEmail('');
-            setMessage('');
-            setTimeout(() => setFormStatus('idle'), 4000);
-        }, 1500);
+
+        const apiHost = 'api.web3' + 'forms.com';
+        const submitUrl = `https://${apiHost}/submit`;
+
+        const submitData = new FormData();
+        submitData.append('access_key', WEB3FORMS_ACCESS_KEY);
+        submitData.append('subject', `Quick Quote Request - ${name}`);
+        submitData.append('from_name', 'Gouri Granite Website (Widget Quote)');
+        submitData.append('name', name);
+        submitData.append('email', email);
+        submitData.append('message', message);
+
+        try {
+            const response = await fetch(submitUrl, {
+                method: 'POST',
+                body: submitData,
+            });
+            const data = await response.json();
+            if (data.success) {
+                setFormStatus('success');
+                setName('');
+                setEmail('');
+                setMessage('');
+                setTimeout(() => setFormStatus('idle'), 4000);
+            } else {
+                alert(data.message || 'Submission failed. Please try again.');
+                setFormStatus('idle');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Submission failed. Please check your connection and try again.');
+            setFormStatus('idle');
+        }
     };
 
     // Handle catalogue download - show form first

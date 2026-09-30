@@ -147,7 +147,7 @@ export default function Footer() {
             </div>
 
             <div className={styles.bottom}>
-                <p>&copy; 2000 Gouri Exports. All rights reserved.</p>
+                <p>&copy; 2000&ndash;{new Date().getFullYear()} Gouri Exports. All rights reserved.</p>
             </div>
         </footer>
     );

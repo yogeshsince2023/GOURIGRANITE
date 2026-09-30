@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { PRODUCTS, FACTORIES } from '@/lib/data';
 import { Share2, Download, Truck } from 'lucide-react';
 import styles from './productDetail.module.css';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -35,7 +37,14 @@ export default async function ProductDetail({ params }: Props) {
                     {/* Image Section */}
                     <div className={styles.imageSection}>
                         <div className={styles.mainImage}>
-                            <img src={product.image} alt={product.name} />
+                            <Image
+                                src={getOptimizedCloudinaryUrl(product.image, 1000)}
+                                alt={product.altText || product.name}
+                                width={1000}
+                                height={750}
+                                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                                priority
+                            />
                         </div>
                         <div className={styles.thumbnails}>
                             <div className={styles.thumbnail}></div>

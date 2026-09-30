@@ -6,11 +6,8 @@ import Image from 'next/image';
 import { ArrowRight, Maximize2, X } from 'lucide-react';
 import styles from './CategoryGrid.module.css';
 import { GALLERY_IMAGES } from '@/lib/data';
-import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
+import { getOptimizedCloudinaryUrl, STONE_BLUR_DATA_URL } from '@/lib/cloudinary';
 
-// Pick a curated subset of 12 images for the homepage showcase
-// We'll pick specific indices that represent diverse stone types
-const HOMEPAGE_IMAGE_INDICES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 // Shuffle helper
 function shuffleArray<T>(array: T[]): T[] {
@@ -94,10 +91,10 @@ export default function CategoryGrid() {
                                     style={{ animationDelay: `${index * 0.08}s` }}
                                 >
                                     <div className={styles.imageWrapper}>
-                                        {/* Skeleton */}
-                                        {!loadedImages.has(index) && (
-                                            <div className={styles.skeleton}></div>
-                                        )}
+                                        {/* Luxury Skeleton Loader */}
+                                        <div className={`${styles.skeleton} ${loadedImages.has(index) ? styles.skeletonHidden : ''}`}>
+                                            <div className={styles.skeletonSpinner}></div>
+                                        </div>
                                         <Image
                                             src={getOptimizedCloudinaryUrl(imageUrl, 600)}
                                             alt={`Premium natural stone - ${index + 1}`}
@@ -105,8 +102,9 @@ export default function CategoryGrid() {
                                             sizes="(max-width: 768px) 100vw, 30vw"
                                             className={`${styles.stoneImage} ${loadedImages.has(index) ? styles.imageLoaded : styles.imageLoading}`}
                                             placeholder="blur"
-                                            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23d4c5a9' width='400' height='400'/%3E%3C/svg%3E"
-                                            loading="lazy"
+                                            blurDataURL={STONE_BLUR_DATA_URL}
+                                            priority={index < 4}
+                                            loading={index < 4 ? "eager" : "lazy"}
                                             onLoad={() => handleImageLoad(index)}
                                         />
 

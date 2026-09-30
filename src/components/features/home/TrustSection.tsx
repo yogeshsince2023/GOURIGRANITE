@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import styles from './TrustSection.module.css';
 import { Building2, Globe2, Award, CheckCircle } from 'lucide-react';
-import { fadeIn, staggerContainer, textVariant } from '@/lib/animations';
+import { fadeIn, staggerContainer } from '@/lib/animations';
 
 export default function TrustSection() {
     return (

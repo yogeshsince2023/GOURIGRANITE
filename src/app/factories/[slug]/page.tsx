@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from './factoryProfile.module.css';
 import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 import MapLink from '@/components/ui/MapLink';
+import FactoryQuoteForm from './FactoryQuoteForm';
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -16,12 +17,6 @@ const slugToIdMap: Record<string, string> = {
     'kishangarh-marble-udhyog': 'f1',
     'kishangarh-granites': 'f2',
     'karimnagar-granito': 'f3'
-};
-
-const idToSlugMap: Record<string, string> = {
-    'f1': 'kishangarh-marble-udhyog',
-    'f2': 'kishangarh-granites',
-    'f3': 'karimnagar-granito'
 };
 
 export function generateStaticParams() {
@@ -202,32 +197,7 @@ export default async function FactoryProfilePage({ params }: Props) {
                             </div>
                         </div>
                         <div className={styles.contactRight}>
-                            <form className={styles.profileForm}>
-                                <div className={styles.formGroup}>
-                                    <label htmlFor="pname">Full Name</label>
-                                    <input required id="pname" type="text" placeholder="Your Name" />
-                                </div>
-                                <div className={styles.formGroup}>
-                                    <label htmlFor="pemail">Email Address</label>
-                                    <input required id="pemail" type="email" placeholder="email@company.com" />
-                                </div>
-                                <div className={styles.formGroup}>
-                                    <label htmlFor="pphone">Phone / WhatsApp</label>
-                                    <input required id="pphone" type="tel" placeholder="+1 555 123 4567" />
-                                </div>
-                                <div className={styles.formGroup}>
-                                    <label htmlFor="pmessage">Quantity & Requirement Details</label>
-                                    <textarea 
-                                        required 
-                                        id="pmessage" 
-                                        rows={4} 
-                                        placeholder={`I am interested in products from ${factory.name}. Please provide specifications & sample details...`}
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                                    Request Factory Quote
-                                </button>
-                            </form>
+                            <FactoryQuoteForm factoryName={factory.name} />
                         </div>
                     </div>
                 </div>

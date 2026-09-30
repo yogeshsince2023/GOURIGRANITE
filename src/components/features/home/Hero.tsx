@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { Globe, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
-import { fadeIn } from '@/lib/animations';
 import { getOptimizedCloudinaryUrl, getOptimizedCloudinaryVideoUrl } from '@/lib/cloudinary';
 
 export default function Hero() {
@@ -43,7 +42,7 @@ export default function Hero() {
                 className={styles.content}
             >
                 <h1 className={styles.title}>
-                    Premium Marble & Granite Exporters from India – Gouri Exports
+                    Premium Indian Granite, Marble & Quartzite Exporters — Gouri Exports
                 </h1>
 
                 {/* Trust Bullets */}
@@ -57,7 +56,7 @@ export default function Hero() {
                 </div>
 
                 <p className={styles.subtitle}>
-                    We offer premium marble, granite, and natural stone from our Rajasthan and Telangana facilities. As a leading granite exporter Rajasthan and marble exporter India, we are trusted by architects and builders worldwide.
+                    Gouri Exports offers premium Indian natural stones, including Granite, Marble and Quartzite, carefully selected and processed for quality, beauty and durability. We provide blocks, slabs, tiles and cut-to-size solutions for residential, commercial and luxury architectural projects worldwide.
                 </p>
 
                 <div className={styles.actions}>
@@ -78,9 +77,9 @@ export default function Hero() {
                 </div>
 
                 <div className={styles.ctaSubtitle}>
-                    <span>Premium marble & granite for architects and builders</span>
+                    <span>From Indian quarries to global projects</span>
                     <span className={styles.divider}>|</span>
-                    <span>Trusted by 40+ countries</span>
+                    <span>Quality is our First Priority</span>
                 </div>
 
                 {/* Certification Badges */}

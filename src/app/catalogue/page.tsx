@@ -326,7 +326,7 @@ export default function CataloguePage() {
                   className={styles.modalHeader}
                   style={{ marginBottom: "1rem" }}
                 >
-                  <h2>Youre all set!</h2>
+                  <h2>You&apos;re all set!</h2>
                   <p>Thank you for your interest in Gouri Exports.</p>
                 </div>
 

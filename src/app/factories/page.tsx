@@ -2,7 +2,9 @@ import { FACTORIES } from '@/lib/data';
 import WorldMap from '@/components/features/factories/WorldMap';
 import { MapPin } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './factories.module.css';
+import { getOptimizedCloudinaryUrl } from '@/lib/cloudinary';
 
 const getFactorySlug = (id: string) => {
     switch (id) {
@@ -29,7 +31,15 @@ export default function FactoriesPage() {
                     <div className={styles.factoriesGrid}>
                         {FACTORIES.map(factory => (
                             <div key={factory.id} className={styles.factoryCard}>
-                                <img src={factory.image} alt={factory.name} />
+                                <div style={{ position: 'relative', width: '100%', aspectRatio: '16/10' }}>
+                                    <Image
+                                        src={getOptimizedCloudinaryUrl(factory.image, 600)}
+                                        alt={factory.altText || factory.name}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        style={{ objectFit: 'cover', borderRadius: '8px 8px 0 0' }}
+                                    />
+                                </div>
                                 <div className={styles.factoryInfo}>
                                     <h3>{factory.name}</h3>
                                     <p className={styles.locationText}>

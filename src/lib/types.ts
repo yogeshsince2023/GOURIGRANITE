@@ -42,3 +42,11 @@ export interface ClientLocation {
     coordinates: { lat: number; lng: number };
     projectName?: string;
 }
+
+export interface StoneItem {
+    id: string;
+    url: string;
+    category: 'Granite' | 'Marble & Quartz';
+    title: string;
+}
+

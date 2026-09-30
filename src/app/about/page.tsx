@@ -1,30 +1,39 @@
-import { OWNERS } from '@/lib/data';
 import { Award, ShieldCheck, Leaf, CheckCircle, Factory, Gem, Package, Eye } from 'lucide-react';
 import styles from './about.module.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About Gouri Exports | Premium Indian Granite, Marble & Quartzite Manufacturer',
+    description: 'Gouri Exports — India\'s leading manufacturer and exporter of premium Granite, Marble and Quartzite. Own manufacturing facilities, direct quarry sourcing, exporting to 40+ countries worldwide.',
+    keywords: ['about Gouri Exports', 'Indian granite manufacturer', 'marble exporter India', 'quartzite supplier India', 'natural stone company India', 'Kishangarh marble factory', 'Indian quarry stone'],
+};
 
 export default function AboutPage() {
     return (
         <main className={styles.pageContainer}>
             {/* Hero Section */}
             <div className={styles.hero}>
-                <h1>About Us</h1>
+                <h1>About Gouri Exports</h1>
                 <p>
-                    Pioneering the natural stone industry with integrity and innovation since 1998.
+                    Premium Indian Natural Stone — Granite | Marble | Quartzite
                 </p>
             </div>
 
             <div className="container">
                 {/* Welcome Section */}
                 <div className={styles.welcomeSection}>
-                    <h2>Welcome to Gouri Marble Udhyog</h2>
+                    <h2>Gouri Group — From Indian Quarries to Global Projects</h2>
                     <p>
-                        Welcome to Gouri Marble Udhyog, where legacy meets precision. Located in the heart of India's stone capital, we are a premier manufacturer and supplier of high-quality Granite and Marble.
+                        At Gouri Exports, we bring the finest natural stone from India to projects around the world. With our own manufacturing facilities and direct sourcing from Indian quarries, we specialize in premium <strong>Granite</strong>, <strong>Marble</strong> and <strong>Quartzite</strong>, selected for their natural beauty, durability, consistency and exceptional finish.
                     </p>
                     <p>
-                        Unlike traders who simply buy and sell, we are <strong>Direct Manufacturers</strong>. This means we oversee every step of the process—from sourcing the finest raw blocks from the mines to the precision cutting and polishing in our factory. This hands-on approach allows us to guarantee two things that matter most to our clients: <strong>uncompromised quality</strong> and <strong>unbeatable factory pricing</strong>.
+                        From elegant Indian marble and powerful, durable granite to luxurious and distinctive quartzite, our collection offers a wide range of colours, patterns, textures and finishes for residential, commercial and architectural applications.
                     </p>
                     <p>
-                        Whether you are a builder looking for reliable bulk supply for a commercial project, or a homeowner seeking that one perfect slab for your kitchen, Gouri Marble Udhyog delivers with integrity. We believe that stone is not just a building material; it is an investment that stands the test of time.
+                        We supply blocks, slabs, tiles and cut-to-size products, with customized solutions to meet the requirements of architects, designers, builders, developers, importers and stone distributors.
+                    </p>
+                    <p>
+                        Unlike traders who simply buy and sell, we are <strong>Direct Manufacturers</strong>. This means we oversee every step of the process — from sourcing the finest raw blocks from the mines to the precision cutting and polishing in our factory. This hands-on approach allows us to guarantee two things that matter most to our clients: <strong>uncompromised quality</strong> and <strong>unbeatable factory pricing</strong>.
                     </p>
                 </div>
 
@@ -32,7 +41,13 @@ export default function AboutPage() {
                 <div className={styles.missionSection}>
                     <h2>Our Mission</h2>
                     <p>
-                        At Gouri Marble Udhyog, our mission is to build lasting foundations through the timeless strength of granite. As direct manufacturers, we are dedicated to delivering uncompromised quality and precision in every slab. We strive to bridge the gap between nature's raw beauty and modern architecture, ensuring that every client—from homeowners to large-scale developers—receives the finest stone with transparency, integrity, and trust.
+                        Our focus is simple: quality, consistency, reliable service and long-term relationships. Every stone is carefully selected and processed to meet international standards, while our experienced team manages quality control, finishing, packing and export logistics from India to global markets.
+                    </p>
+                    <p>
+                        Whether you are looking for a signature marble for a luxury interior, durable granite for a high-traffic project, or premium quartzite for a statement surface, Gouri Exports delivers Indian natural stone with confidence and care.
+                    </p>
+                    <p style={{ marginTop: '1.5rem', fontStyle: 'italic', color: 'var(--accent)', fontWeight: 500 }}>
+                        From Indian quarries to global projects — Natural Stone, Crafted for Excellence.
                     </p>
                 </div>
 
@@ -53,7 +68,7 @@ export default function AboutPage() {
                         <div className={styles.valueCard}>
                             <Award size={48} color="var(--accent)" style={{ marginBottom: '1rem' }} />
                             <h3>Commitment</h3>
-                            <p>We value our relationships ("Vyavahar") as much as our business.</p>
+                            <p>We value our relationships as much as our business. Quality is our First Priority.</p>
                         </div>
                     </div>
                 </div>
@@ -100,7 +115,7 @@ export default function AboutPage() {
                         {/* Category A: Granite */}
                         <div className={styles.graniteCard}>
                             <span className={`${styles.categoryBadge} ${styles.categoryBadgeGold}`}>
-                                Category A
+                                Granite
                             </span>
                             <h3>The Granite Range</h3>
                             <p style={{ color: 'var(--accent)', fontWeight: 500, marginBottom: '1rem' }}>Strong, durable, and perfect for heavy-use areas.</p>
@@ -108,19 +123,31 @@ export default function AboutPage() {
                                 Discover our extensive range of North and South Indian Granites. Known for their high density and mirror-polish, our granite slabs are ideal for kitchen countertops, flooring, and exterior cladding.
                             </p>
                             <p style={{ color: '#999', fontSize: '0.9rem' }}>
-                                <strong style={{ color: 'var(--accent)' }}>Available in:</strong> Rajasthan Black, Crystal Yellow, P-White, Tan Brown, and more.
+                                <strong style={{ color: 'var(--accent)' }}>Available in:</strong> Rajasthan Black, Crystal Yellow, P-White, Tan Brown, Black Galaxy, and more.
                             </p>
                         </div>
 
                         {/* Category B: Marble */}
                         <div className={styles.marbleCard}>
                             <span className={`${styles.categoryBadge} ${styles.categoryBadgeDark}`}>
-                                Category B
+                                Marble
                             </span>
                             <h3>The Marble Range</h3>
                             <p style={{ color: 'var(--accent)', fontWeight: 500, marginBottom: '1rem' }}>Elegant, classic, and timeless.</p>
                             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                                 From the pristine whites of Makrana to the rich textures of colored marble, our collection brings luxury to your interiors. Processed with precision to highlight the natural veins and patterns that make every slab unique.
+                            </p>
+                        </div>
+
+                        {/* Category C: Quartzite */}
+                        <div className={styles.graniteCard}>
+                            <span className={`${styles.categoryBadge} ${styles.categoryBadgeGold}`}>
+                                Quartzite
+                            </span>
+                            <h3>The Quartzite Range</h3>
+                            <p style={{ color: 'var(--accent)', fontWeight: 500, marginBottom: '1rem' }}>Luxurious, distinctive, and statement-making.</p>
+                            <p style={{ color: '#bbb', lineHeight: 1.7 }}>
+                                Premium quartzite for statement surfaces — naturally harder than marble with stunning visual depth. Perfect for high-end countertops, feature walls, and luxury architectural elements.
                             </p>
                         </div>
                     </div>
@@ -144,22 +171,8 @@ export default function AboutPage() {
                         <p>Eco-friendly extraction practices.</p>
                     </div>
                 </div>
-
-                {/* Owners */}
-                {/* <div className={styles.leadershipSection}>
-                    <h2>Leadership</h2>
-                    <div className={styles.leadersGrid}>
-                        {OWNERS.map(owner => (
-                            <div key={owner.id} className={styles.leaderCard}>
-                                <img src={owner.image} alt={owner.name} />
-                                <h3>{owner.name}</h3>
-                                <p className={styles.role}>{owner.role}</p>
-                                <p className={styles.bio}>{owner.bio}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
             </div>
         </main>
     );
 }
+

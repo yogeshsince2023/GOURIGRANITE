@@ -23,41 +23,67 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL('https://gourigranite.com'),
   title: {
-    default: "Gouri Exports | Premium Marble & Granite Exporters",
-    template: "%s | Gouri Exports"
+    default: "Gouri Exports | Premium Indian Granite, Marble & Quartzite Exporters from India",
+    template: "%s | Gouri Exports — Indian Natural Stone"
   },
-  description: "Leading premium marble granite exporters in India, trusted by architects and builders globally.",
+  description: "Gouri Exports — India's leading manufacturer and exporter of premium Granite, Marble and Quartzite. Direct from own quarries in Rajasthan & Telangana. Blocks, slabs, tiles & cut-to-size for architects, builders & distributors worldwide. Quality is our First Priority.",
   keywords: [
+    "Indian granite exporter",
+    "Indian marble exporter",
+    "granite exporter India",
     "marble exporter India",
-    "granite exporter Rajasthan",
-    "natural stone manufacturer",
+    "quartzite exporter India",
+    "Indian natural stone",
+    "Indian granite supplier",
+    "Indian marble supplier",
+    "granite manufacturer India",
+    "marble manufacturer India",
     "Kishangarh marble",
-    "Indian granite",
-    "stone supplier",
-    "premium marble slabs",
-    "granite countertops",
-    "natural stone cladding",
-    "export stone building materials",
-    "Premium natural stone exporter"
+    "Kishangarh granite",
+    "Rajasthan granite",
+    "Rajasthan marble",
+    "Indian granite slabs",
+    "Indian marble slabs",
+    "Indian quartzite slabs",
+    "natural stone exporter India",
+    "premium granite India",
+    "premium marble India",
+    "granite countertops India",
+    "marble flooring India",
+    "granite tiles India",
+    "Black Galaxy granite",
+    "Tan Brown granite",
+    "Indian white marble",
+    "stone supplier India",
+    "granite blocks India",
+    "marble blocks India",
+    "Indian stone company",
+    "granite export from India",
+    "marble export from India",
+    "buy granite from India",
+    "buy marble from India",
+    "Indian quartzite supplier",
+    "Gouri Exports",
+    "Gouri Granite"
   ],
   authors: [{ name: "Gouri Exports" }],
   creator: "Gouri Exports",
   publisher: "Gouri Exports",
   category: "Business",
-  classification: "Stone Export",
+  classification: "Indian Natural Stone Export",
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     siteName: 'Gouri Exports',
     url: 'https://gourigranite.com',
-    title: 'Gouri Exports | Premium Marble & Granite Exporters',
-    description: 'Leading premium marble granite exporters in India, trusted by architects and builders globally.',
+    title: 'Gouri Exports | Premium Indian Granite, Marble & Quartzite Exporters',
+    description: 'India\'s leading manufacturer and exporter of premium Granite, Marble and Quartzite. Direct from own quarries — blocks, slabs, tiles for architects & builders worldwide.',
     images: [
       {
         url: 'https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png',
         width: 1200,
         height: 630,
-        alt: 'Gouri Exports - Premium Stone Exporter',
+        alt: 'Gouri Exports - Premium Indian Granite, Marble & Quartzite Exporter',
         type: 'image/png',
       }
     ]
@@ -65,8 +91,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@gourigranite',
-    title: 'Gouri Exports | Premium Marble & Granite Exporters',
-    description: 'Leading premium marble granite exporters in India, trusted by architects and builders globally.',
+    title: 'Gouri Exports | Premium Indian Granite, Marble & Quartzite Exporters',
+    description: 'India\'s leading manufacturer and exporter of premium Granite, Marble and Quartzite. Direct quarry sourcing, 40+ countries.',
     creator: '@gourigranite',
   },
   robots: {
@@ -82,6 +108,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
+    canonical: 'https://gourigranite.com',
     languages: {
       en: 'https://gourigranite.com',
       hi: 'https://gourigranite.com/hi',
@@ -105,7 +132,7 @@ const structuredData = {
       "@id": "https://gourigranite.com/#organization",
       "name": "Gouri Exports",
       "alternateName": "Gouri Exports",
-      "description": "Premium manufacturer and exporter of natural stone (marble, granite, onyx) from India",
+      "description": "Premium Indian manufacturer and exporter of natural stone — Granite, Marble, Quartzite — from own quarries in Rajasthan and Telangana, India",
       "url": "https://gourigranite.com",
       "logo": {
         "@type": "ImageObject",
@@ -143,7 +170,7 @@ const structuredData = {
         "https://www.instagram.com/gourigranites.in"
       ],
       "foundingDate": "2000",
-      "knowsAbout": ["Marble", "Granite", "Natural Stone", "Tile Export"],
+      "knowsAbout": ["Indian Granite", "Indian Marble", "Quartzite", "Natural Stone", "Granite Slabs", "Marble Slabs", "Stone Export", "Granite Tiles", "Cut-to-Size Stone"],
       "certifications": ["Export House Certificate", "Government Recognized"],
       "priceRange": "$$$"
     },
@@ -152,7 +179,7 @@ const structuredData = {
       "@id": "https://gourigranite.com/#localbusiness",
       "name": "Gouri Exports",
       "image": "https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png",
-      "description": "Premium natural stone exporter - marble, granite, onyx",
+      "description": "Premium Indian natural stone exporter — Granite, Marble, Quartzite from own quarries",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Kishangarh",
@@ -172,7 +199,7 @@ const structuredData = {
           "name": "Where does Gouri Exports export from?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Gouri Exports operates 3 manufacturing facilities - two in Kishangarh, Rajasthan and one in Karimnagar, Telangana, India. We export premium natural stone (marble, granite, onyx, travertine) to 40+ countries worldwide."
+            "text": "Gouri Exports operates 3 manufacturing facilities — two in Kishangarh, Rajasthan and one in Karimnagar, Telangana, India. We are direct manufacturers and exporters of premium Indian Granite, Marble and Quartzite to 40+ countries worldwide. We supply blocks, slabs, tiles and cut-to-size products."
           }
         },
         {

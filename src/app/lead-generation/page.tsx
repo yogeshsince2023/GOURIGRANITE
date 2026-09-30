@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ShieldCheck, Truck, Gem, Award, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import styles from './leadGeneration.module.css';
+import { WEB3FORMS_ACCESS_KEY } from '../../lib/web3forms';
 
 export default function LeadGenerationPage() {
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -15,12 +16,42 @@ export default function LeadGenerationPage() {
     const [phone, setPhone] = useState('');
     const [notes, setNotes] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('submitting');
-        setTimeout(() => {
-            setStatus('success');
-        }, 1500);
+
+        const apiHost = 'api.web3' + 'forms.com';
+        const submitUrl = `https://${apiHost}/submit`;
+
+        const submitData = new FormData();
+        submitData.append('access_key', WEB3FORMS_ACCESS_KEY);
+        submitData.append('subject', `Lead Gen Estimate Request - ${name}`);
+        submitData.append('from_name', 'Gouri Granite Website (Lead Gen)');
+        submitData.append('name', name);
+        submitData.append('email', email);
+        submitData.append('phone', phone);
+        submitData.append('project_type', projectType);
+        submitData.append('material', material);
+        submitData.append('quantity', qty);
+        submitData.append('notes', notes);
+
+        try {
+            const response = await fetch(submitUrl, {
+                method: 'POST',
+                body: submitData,
+            });
+            const data = await response.json();
+            if (data.success) {
+                setStatus('success');
+            } else {
+                alert(data.message || 'Submission failed. Please try again.');
+                setStatus('idle');
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Submission failed. Please check your connection and try again.');
+            setStatus('idle');
+        }
     };
 
     return (
