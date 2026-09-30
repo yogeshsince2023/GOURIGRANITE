@@ -32,6 +32,7 @@ jobs:
         env:
           NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY }}
 
+      # Deploy to gourigroupindia.com document root via gourideploy account
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
