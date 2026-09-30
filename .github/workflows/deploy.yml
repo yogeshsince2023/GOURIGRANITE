@@ -1,66 +1,66 @@
-name: FTP Directory Inspection
+name: Build & Deploy to Hostinger
 
 on:
   push:
     branches:
       - main
 
+# Only allow one deployment at a time, cancel in-progress if a new push arrives
 concurrency:
   group: deploy-production
   cancel-in-progress: true
 
 jobs:
-  inspect-ftp:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Run Read-Only FTP Inspection
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY }}
+
+      - name: Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: 82.25.107.85
+          port: 21
+          username: u450659410
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftp
+          local-dir: ./out/
+          server-dir: /public_html/
+          dangerous-clean-slate: false
+
+      - name: Verify Hostinger public_html Timestamps
         env:
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
           python3 -c "
           from ftplib import FTP
-          import os, sys
-
-          print('=== CONNECTING TO FTP ===')
-          server = '82.25.107.85'
-          port = 21
-          username = 'u450659410'
-          password = os.environ.get('HOSTINGER_FTP_PASSWORD')
-
-          if not password:
-              print('ERROR: HOSTINGER_FTP_PASSWORD not available')
-              sys.exit(1)
+          import os
 
           ftp = FTP()
-          ftp.connect(server, port, timeout=30)
-          ftp.login(username, password)
-
-          print('=== INITIAL PWD ===')
-          initial_pwd = ftp.pwd()
-          print(f'PWD: {initial_pwd}')
-
-          print(f'=== DIRECTORY LISTING OF INITIAL PWD ({initial_pwd}) ===')
-          initial_listing = []
-          ftp.retrlines('LIST', initial_listing.append)
-          for item in initial_listing:
-              print(f'  {item}')
-
-          for path in ['/', 'public_html', '/public_html', 'domains']:
-              try:
-                  print(f'\n=== TESTING PATH: {path} ===')
-                  ftp.cwd(path)
-                  cur = ftp.pwd()
-                  print(f'Successfully changed directory to {path}. Current PWD: {cur}')
-                  listing = []
-                  ftp.retrlines('LIST', listing.append)
-                  print(f'Found {len(listing)} entries in {path}:')
-                  for item in listing[:25]:
-                      print(f'  {item}')
-                  if len(listing) > 25:
-                      print(f'  ... and {len(listing) - 25} more items')
-              except Exception as e:
-                  print(f'Path \"{path}\" could not be accessed: {e}')
-
+          ftp.connect('82.25.107.85', 21, timeout=30)
+          ftp.login('u450659410', os.environ['HOSTINGER_FTP_PASSWORD'])
+          ftp.cwd('/public_html')
+          print('=== VERIFYING /public_html FILE TIMESTAMPS AFTER DEPLOYMENT ===')
+          listing = []
+          ftp.retrlines('LIST', listing.append)
+          for item in listing:
+              if any(k in item for k in ['index.html', '404.html', '_next', '.ftp-deploy-sync-state.json']):
+                  print(item)
           ftp.quit()
-          print('\n=== FTP INSPECTION FINISHED SUCCESSFULLY ===')
           "
