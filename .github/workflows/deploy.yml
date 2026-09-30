@@ -35,32 +35,11 @@ jobs:
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: 82.25.107.85
-          port: 21
-          username: u450659410
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          port: ${{ secrets.HOSTINGER_FTP_PORT }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           protocol: ftp
           local-dir: ./out/
           server-dir: /public_html/
           dangerous-clean-slate: false
-
-      - name: Verify Hostinger public_html Timestamps
-        env:
-          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-        run: |
-          python3 -c "
-          from ftplib import FTP
-          import os
-
-          ftp = FTP()
-          ftp.connect('82.25.107.85', 21, timeout=30)
-          ftp.login('u450659410', os.environ['HOSTINGER_FTP_PASSWORD'])
-          ftp.cwd('/public_html')
-          print('=== VERIFYING /public_html FILE TIMESTAMPS AFTER DEPLOYMENT ===')
-          listing = []
-          ftp.retrlines('LIST', listing.append)
-          for item in listing:
-              if any(k in item for k in ['index.html', '404.html', '_next', '.ftp-deploy-sync-state.json']):
-                  print(item)
-          ftp.quit()
-          "
