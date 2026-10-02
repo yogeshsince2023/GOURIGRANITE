@@ -72,9 +72,9 @@ export default function Metrics() {
                             transition: { duration: 0.3 }
                         }}
                     >
-                        <h4 className={styles.value}>
+                        <div className={styles.value}>
                             <CountUp end={item.num} suffix={item.suffix} inView={inView} />
-                        </h4>
+                        </div>
                         <p className={styles.label}>{item.label}</p>
                         
                         {/* Hover Tooltip */}
@@ -87,7 +87,7 @@ export default function Metrics() {
 
             {/* Case Study Gallery Link */}
             <div className={styles.linkWrapper}>
-                <Link href="/products" className={styles.caseStudyLink} aria-label="Explore Our Global Projects and Case Studies">
+                <Link href="/products" className={styles.caseStudyLink}>
                     Explore Our Global Projects & Case Studies &rarr;
                 </Link>
             </div>

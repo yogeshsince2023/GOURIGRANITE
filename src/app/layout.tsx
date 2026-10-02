@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gourigranite.com'),
+  metadataBase: new URL('https://gourigroupindia.com'),
   title: {
     default: "Gouri Exports | Premium Indian Granite, Marble & Quartzite Exporters from India",
     template: "%s | Gouri Exports — Indian Natural Stone"
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     siteName: 'Gouri Exports',
-    url: 'https://gourigranite.com',
+    url: 'https://gourigroupindia.com',
     title: 'Gouri Exports | Premium Indian Granite, Marble & Quartzite Exporters',
     description: 'India\'s leading manufacturer and exporter of premium Granite, Marble and Quartzite. Direct from own quarries — blocks, slabs, tiles for architects & builders worldwide.',
     images: [
@@ -108,10 +108,10 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://gourigranite.com',
+    canonical: './',
     languages: {
-      en: 'https://gourigranite.com',
-      hi: 'https://gourigranite.com/hi',
+      en: 'https://gourigroupindia.com',
+      hi: 'https://gourigroupindia.com/hi',
     },
   },
 };
@@ -129,11 +129,11 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://gourigranite.com/#organization",
+      "@id": "https://gourigroupindia.com/#organization",
       "name": "Gouri Exports",
       "alternateName": "Gouri Exports",
       "description": "Premium Indian manufacturer and exporter of natural stone — Granite, Marble, Quartzite — from own quarries in Rajasthan and Telangana, India",
-      "url": "https://gourigranite.com",
+      "url": "https://gourigroupindia.com",
       "logo": {
         "@type": "ImageObject",
         "url": "https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png",
@@ -176,7 +176,7 @@ const structuredData = {
     },
     {
       "@type": "LocalBusiness",
-      "@id": "https://gourigranite.com/#localbusiness",
+      "@id": "https://gourigroupindia.com/#localbusiness",
       "name": "Gouri Exports",
       "image": "https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790200/Company_logo_e8ehxq.png",
       "description": "Premium Indian natural stone exporter — Granite, Marble, Quartzite from own quarries",
@@ -188,7 +188,7 @@ const structuredData = {
         "addressCountry": "IN"
       },
       "telephone": "+91-8619521711",
-      "url": "https://gourigranite.com",
+      "url": "https://gourigroupindia.com",
       "areaServed": ["US", "GB", "EU", "UAE", "AU"]
     },
     {
@@ -272,15 +272,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-        <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
       </head>
       <body className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
         <ThemeProvider>

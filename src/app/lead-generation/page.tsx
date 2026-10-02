@@ -74,7 +74,7 @@ export default function LeadGenerationPage() {
                         <div className={styles.trustCard}>
                             <ShieldCheck size={28} className={styles.trustIcon} />
                             <div>
-                                <h4>Direct Quarry Exporters</h4>
+                                <h2>Direct Quarry Exporters</h2>
                                 <p>Sourcing and processing raw blocks ourselves to guarantee 100% factory rates.</p>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ export default function LeadGenerationPage() {
                         <div className={styles.trustCard}>
                             <Truck size={28} className={styles.trustIcon} />
                             <div>
-                                <h4>Secure Global Logistics</h4>
+                                <h2>Secure Global Logistics</h2>
                                 <p>Delivered securely in fumigated seaworthy wooden crates to over 40+ countries.</p>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ export default function LeadGenerationPage() {
                         <div className={styles.trustCard}>
                             <Gem size={28} className={styles.trustIcon} />
                             <div>
-                                <h4>Free Sample Inspection</h4>
+                                <h2>Free Sample Inspection</h2>
                                 <p>We provide free 10x10 cm stone samples for architects and builders (courier rates apply).</p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ export default function LeadGenerationPage() {
                         <div className={styles.trustCard}>
                             <Award size={28} className={styles.trustIcon} />
                             <div>
-                                <h4>Government Recognized</h4>
+                                <h2>Government Recognized</h2>
                                 <p>Certified Export House with government recognized credentials and strict quality control.</p>
                             </div>
                         </div>

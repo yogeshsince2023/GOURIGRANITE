@@ -41,10 +41,10 @@ export default function Header() {
                 </div>
 
                 <div className={styles.extremeRight}> {/* Extreme right actions */}
-                    <Link href="/catalogue" className={`btn btn-outline ${styles.desktopOnly}`} aria-label="View Our Premium Marble and Granite Catalog">
+                    <Link href="/catalogue" className={`btn btn-outline ${styles.desktopOnly}`}>
                         Catalogue
                     </Link>
-                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`} aria-label="Request a Quote for Premium Marble and Granite">
+                    <Link href="/contact" className={`btn btn-primary ${styles.desktopOnly}`}>
                         Request Quote
                     </Link>
                 </div>
@@ -93,7 +93,6 @@ export default function Header() {
                                     className="btn btn-primary" 
                                     style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }} 
                                     onClick={() => setMobileMenuOpen(false)}
-                                    aria-label="Request a Quote for Premium Marble and Granite"
                                 >
                                     Request Quote
                                 </Link>

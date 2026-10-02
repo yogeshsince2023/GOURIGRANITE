@@ -26,6 +26,7 @@
     /* This creates a fading line effect instead of a sharp full-width border */
 }
 
+.column h2,
 .column h3 {
     font-family: var(--font-playfair);
     font-size: 1.5rem;

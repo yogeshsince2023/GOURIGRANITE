@@ -132,7 +132,7 @@ export default function Testimonials() {
 
                 {/* Contextual CTA */}
                 <div className={styles.ctaWrapper}>
-                    <Link href="/lead-generation" className="btn btn-primary" aria-label="Get a custom quote today">
+                    <Link href="/lead-generation" className="btn btn-primary">
                         Get Your Free Stone Quote Today
                     </Link>
                 </div>

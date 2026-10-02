@@ -128,7 +128,7 @@ export default async function FactoryProfilePage({ params }: Props) {
                         </div>
 
                         <div className={styles.detailBlock}>
-                            <h3>Factory Specialization</h3>
+                            <h2>Factory Specialization</h2>
                             <p className={styles.desc}>
                                 Specialized in high-volume processing and finishing of premium <strong>{factory.specialization}</strong>. Direct from our quarries with full quality control from block cutting to mirror-polishing.
                             </p>
@@ -137,7 +137,7 @@ export default async function FactoryProfilePage({ params }: Props) {
                         {/* Certifications */}
                         {factory.certifications && factory.certifications.length > 0 && (
                             <div className={styles.detailBlock}>
-                                <h3>Recognized Standards</h3>
+                                <h2>Recognized Standards</h2>
                                 <div className={styles.certList}>
                                     {factory.certifications.map((cert, i) => (
                                         <div key={i} className={styles.certItem}>
@@ -181,7 +181,7 @@ export default async function FactoryProfilePage({ params }: Props) {
                     </p>
                     <div className={styles.productsGrid}>
                         {associatedProducts.slice(0, 4).map(product => (
-                            <Link key={product.id} href={`/products/${product.id}`} className={styles.productCard}>
+                            <Link key={product.id} href={`/products/${product.id}`} prefetch={false} className={styles.productCard}>
                                 <div className={styles.productImgWrapper}>
                                     <Image
                                         src={getOptimizedCloudinaryUrl(product.image, 400)}
@@ -191,7 +191,7 @@ export default async function FactoryProfilePage({ params }: Props) {
                                         className={styles.productImg}
                                     />
                                 </div>
-                                <h4>{product.name}</h4>
+                                <h3>{product.name}</h3>
                                 <div className={styles.productDetails}>
                                     <span>{product.category}</span>
                                     <span>{product.finish}</span>

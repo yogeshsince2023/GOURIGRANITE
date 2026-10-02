@@ -68,7 +68,7 @@ export default async function ProductDetail({ params }: Props) {
         "manufacturer": {
             "@type": "Organization",
             "name": "Gouri Exports",
-            "url": "https://gourigranite.com"
+            "url": "https://gourigroupindia.com"
         },
         "material": product.category,
         "countryOfOrigin": "IN",
@@ -90,9 +90,9 @@ export default async function ProductDetail({ params }: Props) {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gourigranite.com" },
-            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://gourigranite.com/products" },
-            { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://gourigranite.com/products/${product.id}` }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gourigroupindia.com" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://gourigroupindia.com/products" },
+            { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://gourigroupindia.com/products/${product.id}` }
         ]
     };
 
@@ -134,7 +134,7 @@ export default async function ProductDetail({ params }: Props) {
                         </p>
 
                         <div className={styles.specsSection}>
-                            <h3>Technical Specifications</h3>
+                            <h2>Technical Specifications</h2>
                             <div className={styles.specsGrid}>
                                 <div>
                                     <span className={styles.specLabel}>Finish</span>
@@ -166,7 +166,7 @@ export default async function ProductDetail({ params }: Props) {
 
                         {/* Direct Lead Gen Banner */}
                         <div className={styles.leadGenBanner}>
-                            <h4>Wholesale Project Supply?</h4>
+                            <h2>Wholesale Project Supply?</h2>
                             <p>We process container-load orders directly from quarries with inspection reports.</p>
                             <Link href={`/lead-generation?product=${encodeURIComponent(product.name)}`} className={styles.leadGenLink}>
                                 Request Factory Volume Rates &rarr;

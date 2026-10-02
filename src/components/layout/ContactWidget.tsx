@@ -234,7 +234,7 @@ export default function ContactWidget() {
                         <div className={styles.headerInfo}>
                             <div className={styles.avatar}>G</div>
                             <div>
-                                <h4>Gouri Stone Assistant</h4>
+                                <strong>Gouri Stone Assistant</strong>
                                 <span className={styles.status}><span className={styles.statusDot}></span> Online Expert</span>
                             </div>
                         </div>
@@ -309,7 +309,7 @@ export default function ContactWidget() {
                                 ) : catalogFormSuccess ? (
                                     <div className={styles.catalogFormSuccess}>
                                         <div className={styles.successCheckIcon}>✓</div>
-                                        <h4>Thank You!</h4>
+                                        <strong>Thank You!</strong>
                                         <p>Your catalogue download will start automatically. If not, click below:</p>
                                         <button 
                                             onClick={triggerDownload}
@@ -326,9 +326,9 @@ export default function ContactWidget() {
                                     </div>
                                 ) : (
                                     <div className={styles.catalogFormWrapper}>
-                                        <h4 className={styles.catalogFormTitle}>
+                                        <div className={styles.catalogFormTitle}>
                                             <FileText size={20} /> Access the Catalogue
-                                        </h4>
+                                        </div>
                                         <p className={styles.catalogFormDesc}>
                                             Please share your details to download the complete product catalogue.
                                         </p>
@@ -406,7 +406,7 @@ export default function ContactWidget() {
                             <div className={styles.quoteTab}>
                                 {formStatus === 'success' ? (
                                     <div className={styles.successMessage}>
-                                        <h4>Quote Request Received!</h4>
+                                        <strong>Quote Request Received!</strong>
                                         <p>Thank you. A premium stone export manager will contact you with factory pricing and samples info within 12 hours.</p>
                                     </div>
                                 ) : (
@@ -464,7 +464,7 @@ export default function ContactWidget() {
                                     {messages.map((m, i) => (
                                         <div key={i} className={`${styles.chatBubble} ${m.sender === 'user' ? styles.userBubble : styles.botBubble}`}>
                                             <p>{m.text}</p>
-                                            <span className={styles.chatTime}>
+                                            <span className={styles.chatTime} suppressHydrationWarning>
                                                 {m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </span>
                                         </div>

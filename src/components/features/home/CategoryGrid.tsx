@@ -9,26 +9,29 @@ import { GALLERY_IMAGES } from '@/lib/data';
 import { getOptimizedCloudinaryUrl, STONE_BLUR_DATA_URL } from '@/lib/cloudinary';
 
 
-// Shuffle helper
-function shuffleArray<T>(array: T[]): T[] {
+// Deterministic seeded shuffle (Mulberry32) for zero layout shift and identical SSR/client rendering
+function seededShuffle<T>(array: T[], seed: number = 2026): T[] {
     const shuffled = [...array];
+    let s = seed;
+    const random = () => {
+        let t = (s += 0x6D2B79F5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
     for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
 }
 
+const INITIAL_HOMEPAGE_IMAGES = seededShuffle(GALLERY_IMAGES, 2026).slice(0, 12);
+
 export default function CategoryGrid() {
-    const [homepageImages, setHomepageImages] = useState<string[]>([]);
+    const [homepageImages] = useState<string[]>(INITIAL_HOMEPAGE_IMAGES);
     const [lightboxImage, setLightboxImage] = useState<string | null>(null);
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
-
-    useEffect(() => {
-        // Shuffle all gallery images and pick 12 for the homepage
-        const shuffled = shuffleArray(GALLERY_IMAGES);
-        setHomepageImages(shuffled.slice(0, 12));
-    }, []);
 
     useEffect(() => {
         if (lightboxImage) {
@@ -75,7 +78,7 @@ export default function CategoryGrid() {
 
                         {/* View All Gallery Button */}
                         <div style={{ marginTop: '2.5rem' }}>
-                            <Link href="/products" className={styles.cta} aria-label="View full gallery of stones">
+                            <Link href="/products" className={styles.cta}>
                                 Explore Full Gallery <ArrowRight size={18} />
                             </Link>
                         </div>
@@ -128,7 +131,7 @@ export default function CategoryGrid() {
                         {/* View More CTA below the grid */}
                         <div className={styles.gridFooter}>
                             <Link href="/products" className={styles.viewMoreBtn}>
-                                View All {GALLERY_IMAGES.length}+ Stones in Gallery
+                                View All Stones in Gallery
                                 <ArrowRight size={18} />
                             </Link>
                         </div>

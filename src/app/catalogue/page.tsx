@@ -146,7 +146,7 @@ export default function CataloguePage() {
           <div className={styles.featureIcon}>
             <Layers size={24} />
           </div>
-          <h3 className={styles.featureTitle}>100+ Premium Varieties</h3>
+          <h2 className={styles.featureTitle}>100+ Premium Varieties</h2>
           <p className={styles.featureText}>
             Explore our extensive collection of North and South Indian granites,
             curated for exceptional quality and color consistency.
@@ -157,7 +157,7 @@ export default function CataloguePage() {
           <div className={styles.featureIcon}>
             <ImageIcon size={24} />
           </div>
-          <h3 className={styles.featureTitle}>High-Res Gallery</h3>
+          <h2 className={styles.featureTitle}>High-Res Gallery</h2>
           <p className={styles.featureText}>
             Detailed high-resolution textures and application shots to help you
             visualize the perfect stone for your project.
@@ -168,7 +168,7 @@ export default function CataloguePage() {
           <div className={styles.featureIcon}>
             <Ruler size={24} />
           </div>
-          <h3 className={styles.featureTitle}>Technical Specifications</h3>
+          <h2 className={styles.featureTitle}>Technical Specifications</h2>
           <p className={styles.featureText}>
             Complete physical and chemical properties, sizing options, and
             recommended applications for every stone.

@@ -48,6 +48,7 @@ export default function FactoriesPage() {
                                     <p className={styles.capacityText}><strong>Capacity:</strong> {factory.capacity}</p>
                                     <Link 
                                         href={`/factories/${getFactorySlug(factory.id)}`}
+                                        prefetch={false}
                                         className="btn btn-primary"
                                         style={{ marginTop: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}
                                     >

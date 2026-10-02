@@ -80,28 +80,28 @@ export default function AboutPage() {
                         <div className={styles.reasonCard}>
                             <Factory size={32} color="var(--accent)" style={{ flexShrink: 0, marginTop: '0.25rem' }} />
                             <div>
-                                <h4>Direct Factory Rates</h4>
+                                <h3>Direct Factory Rates</h3>
                                 <p>Cut out the middlemen. Get the best market price directly from the manufacturer.</p>
                             </div>
                         </div>
                         <div className={styles.reasonCard}>
                             <Package size={32} color="var(--accent)" style={{ flexShrink: 0, marginTop: '0.25rem' }} />
                             <div>
-                                <h4>Bulk Capacity</h4>
+                                <h3>Bulk Capacity</h3>
                                 <p>We have the infrastructure to fulfill large-scale orders for hospitals, hotels, and townships on time.</p>
                             </div>
                         </div>
                         <div className={styles.reasonCard}>
                             <CheckCircle size={32} color="var(--accent)" style={{ flexShrink: 0, marginTop: '0.25rem' }} />
                             <div>
-                                <h4>Quality Control</h4>
+                                <h3>Quality Control</h3>
                                 <p>Every slab undergoes a rigorous check for cracks, flatness, and polish quality before dispatch.</p>
                             </div>
                         </div>
                         <div className={styles.reasonCard}>
                             <Gem size={32} color="var(--accent)" style={{ flexShrink: 0, marginTop: '0.25rem' }} />
                             <div>
-                                <h4>Wide Inventory</h4>
+                                <h3>Wide Inventory</h3>
                                 <p>A massive stockyard ensuring you have plenty of options to choose from without waiting.</p>
                             </div>
                         </div>

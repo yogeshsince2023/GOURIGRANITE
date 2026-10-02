@@ -45,7 +45,7 @@ export default function Footer() {
         <footer className={styles.footer} role="contentinfo" aria-label="Site footer">
             <div className={styles.grid}>
                 <div className={styles.column}>
-                    <h3>Gouri Exports</h3>
+                    <h2>Gouri Exports</h2>
                     <p>
                         Premium manufacturing and export of natural stone.
                         Serving architects and builders worldwide from our facilities in India.
@@ -77,7 +77,7 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.column}>
-                    <h3>Our Global Locations</h3>
+                    <h2>Our Global Locations</h2>
                     <nav aria-label="Factory locations">
                         {locations.map((loc, index) => (
                             <div key={index} style={{ marginBottom: '1rem' }}>
@@ -96,8 +96,8 @@ export default function Footer() {
                                 ) : (
                                     <Link
                                         href={loc.url}
+                                        prefetch={false}
                                         style={{ display: 'block', textDecoration: 'none', marginBottom: '0.25rem' }}
-                                        aria-label={`View details of ${loc.name}`}
                                     >
                                         <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#fff' }}>
                                             {loc.name} <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>View Profile &rarr;</span>
@@ -124,7 +124,7 @@ export default function Footer() {
                 </div>
 
                 <div className={styles.column}>
-                    <h3>Contact Gouri Exports</h3>
+                    <h2>Contact Gouri Exports</h2>
                     <address style={{ fontStyle: 'normal' }}>
                         <p>
                             <a href="tel:+918619521711" style={{ color: '#a0a0a0' }} aria-label="Call us at +91 86195 21711">

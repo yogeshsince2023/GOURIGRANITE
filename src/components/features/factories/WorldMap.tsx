@@ -78,8 +78,11 @@ export default function WorldMap() {
             <div className={styles.mapContainer}>
                 {/* World Map Image */}
                 <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1280px-World_map_blank_without_borders.svg.png"
+                    src="/images/world-map.png"
                     alt="World Map"
+                    width={1280}
+                    height={640}
+                    loading="lazy"
                     className={styles.mapImage}
                 />
 
@@ -148,22 +151,22 @@ export default function WorldMap() {
             <div className={styles.regions}>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Sun size={32} strokeWidth={1.5} /></div>
-                    <h4>Gulf & Middle East</h4>
+                    <h3>Gulf & Middle East</h3>
                     <p>UAE, Qatar, Oman, Saudi Arabia, Kuwait, Bahrain, Jordan, Lebanon, Syria, Iraq, Iran, Turkey, Yemen</p>
                 </div>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Globe2 size={32} strokeWidth={1.5} /></div>
-                    <h4>Africa</h4>
+                    <h3>Africa</h3>
                     <p>Egypt, Libya, Sudan, Algeria, Tunisia, Morocco, Tanzania, Kenya, Ethiopia, Nigeria, South Africa</p>
                 </div>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Landmark size={32} strokeWidth={1.5} /></div>
-                    <h4>Asia & Europe</h4>
+                    <h3>Asia & Europe</h3>
                     <p>India, Bangladesh, Nepal, Sri Lanka, Azerbaijan, Malaysia, UK, Germany, Italy, Greece, Spain</p>
                 </div>
                 <div className={styles.region}>
                     <div className={styles.regionIcon}><Map size={32} strokeWidth={1.5} /></div>
-                    <h4>Americas & Oceania</h4>
+                    <h3>Americas & Oceania</h3>
                     <p>USA, Canada, Brazil, Mexico, Australia</p>
                 </div>
             </div>

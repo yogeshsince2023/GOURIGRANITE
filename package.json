@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/fix-next-export.js",
     "lint": "eslint",
     "sync-photos": "node scripts/sync-cloudinary.js"
   },

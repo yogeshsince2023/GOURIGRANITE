@@ -4,20 +4,18 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './ProductGallery.module.css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Keyboard, Zoom } from 'swiper/modules';
+import dynamic from 'next/dynamic';
 import { ALL_STONES, CATEGORIES, StoneCategory, StoneItem } from '@/lib/data';
 import { STONE_BLUR_DATA_URL } from '@/lib/cloudinary';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/zoom';
+const ProductLightbox = dynamic(
+    () => import('./ProductLightbox'),
+    { ssr: false }
+);
 
 // Build lightweight, responsive Cloudinary URL (f_auto, q_auto for 70%+ bandwidth savings on mobile)
-function getOptimizedGalleryUrl(url: string, width: number = 650): string {
+function getOptimizedGalleryUrl(url: string, width: number = 450): string {
     if (!url || !url.includes('res.cloudinary.com')) return url;
 
     const uploadMarker = '/upload/';
@@ -31,15 +29,25 @@ function getOptimizedGalleryUrl(url: string, width: number = 650): string {
     return `${preUpload}f_auto,q_auto,w_${width}/${postUpload}`;
 }
 
-// Fisher-Yates shuffle
-function shuffleStones<T>(array: T[]): T[] {
+// Deterministic pseudo-random shuffle (Mulberry32) so SSR build and client hydration match 100% identically
+function seededShuffle<T>(array: T[], seed: number = 2026): T[] {
     const shuffled = [...array];
+    let s = seed;
+    const random = () => {
+        let t = (s += 0x6D2B79F5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
     for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
 }
+
+// Pre-shuffled deterministically so SSR and client HTML are 100% identical
+const SHUFFLED_ALL_STONES = seededShuffle(ALL_STONES, 2026);
 
 const INITIAL_LOAD_COUNT = 12;
 const LOAD_MORE_COUNT = 12;
@@ -50,27 +58,21 @@ export default function ProductGallery() {
     const [initialSlide, setInitialSlide] = useState(0);
     const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
     const [visibleCount, setVisibleCount] = useState(INITIAL_LOAD_COUNT);
-    const [shuffledAllStones, setShuffledAllStones] = useState<StoneItem[]>([]);
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-    // Shuffle stones randomly for the 'All' tab on mount
-    useEffect(() => {
-        setShuffledAllStones(shuffleStones(ALL_STONES));
-    }, []);
-
     // Filter stones by active category:
-    // - 'All': beautifully shuffled mix of all stones
+    // - 'All': beautifully pre-shuffled mix of all stones
     // - 'Granite': ordered Granite stones
     // - 'Marble & Quartz': ordered Marble & Quartz stones
     const filteredStones = useMemo(() => {
         if (activeCategory === 'All') {
-            return shuffledAllStones.length > 0 ? shuffledAllStones : ALL_STONES;
+            return SHUFFLED_ALL_STONES;
         }
         if (activeCategory === 'Granite') {
             return ALL_STONES.filter(stone => stone.category === 'Granite');
         }
         return ALL_STONES.filter(stone => stone.category === 'Marble & Quartz');
-    }, [activeCategory, shuffledAllStones]);
+    }, [activeCategory]);
 
     // Handle body scroll locking for lightbox
     useEffect(() => {
@@ -144,12 +146,8 @@ export default function ProductGallery() {
 
                 {/* Category Navigation Tabs */}
                 <div className={styles.categoryNav} role="tablist" aria-label="Stone Categories">
-                    {CATEGORIES.map((cat) => {
-                        const count = cat === 'All'
-                            ? ALL_STONES.length
-                            : ALL_STONES.filter(s => s.category === cat).length;
-                        return (
-                            <button
+                    {CATEGORIES.map((cat) => (
+                        <button
                                 key={cat}
                                 role="tab"
                                 aria-selected={activeCategory === cat}
@@ -157,10 +155,8 @@ export default function ProductGallery() {
                                 onClick={() => handleCategoryChange(cat)}
                             >
                                 <span>{cat}</span>
-                                <span className={styles.categoryBadge}>{count}</span>
                             </button>
-                        );
-                    })}
+                        ))}
                 </div>
             </div>
 
@@ -187,7 +183,7 @@ export default function ProductGallery() {
 
                         {/* High Quality Optimized Image */}
                         <Image
-                            src={getOptimizedGalleryUrl(stone.url, 650)}
+                            src={getOptimizedGalleryUrl(stone.url, 450)}
                             alt={`${stone.title} - ${stone.category}`}
                             fill
                             className={`${styles.galleryImage} ${loadedImages.has(index) ? styles.imageLoaded : styles.imageLoading}`}
@@ -221,43 +217,13 @@ export default function ProductGallery() {
                 </Link>
             </div>
 
-            {/* Lightbox */}
+            {/* Lazy Loaded Lightbox Modal */}
             {lightboxOpen && (
-                <div className={styles.lightboxOverlay}>
-                    <button className={styles.lightboxClose} onClick={closeLightbox}>
-                        &times;
-                    </button>
-                    <Swiper
-                        modules={[Navigation, Pagination, Zoom, Keyboard]}
-                        initialSlide={initialSlide}
-                        spaceBetween={0}
-                        slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        zoom={{ maxRatio: 3 }}
-                        keyboard={{ enabled: true }}
-                        loop={true}
-                        className={styles.lightboxSwiper}
-                    >
-                        {filteredStones.map((stone, index) => (
-                            <SwiperSlide key={`lightbox-${stone.id}-${index}`} className={styles.lightboxSlide}>
-                                <div className="swiper-zoom-container">
-                                    <Image
-                                        src={getOptimizedGalleryUrl(stone.url, 1400)}
-                                        alt={`${stone.title} - ${stone.category}`}
-                                        width={1600}
-                                        height={1200}
-                                        className={styles.lightboxImage}
-                                        priority={false}
-                                        loading="lazy"
-                                        placeholder="blur"
-                                        blurDataURL={STONE_BLUR_DATA_URL}
-                                    />
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
+                <ProductLightbox
+                    stones={filteredStones}
+                    initialSlide={initialSlide}
+                    onClose={closeLightbox}
+                />
             )}
         </div>
     );

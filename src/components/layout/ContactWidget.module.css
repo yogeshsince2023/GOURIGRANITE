@@ -101,7 +101,8 @@
     font-size: 1.1rem;
 }
 
-.headerInfo h4 {
+.headerInfo h4,
+.headerInfo strong {
     margin: 0;
     font-size: 0.95rem;
     font-weight: 600;
@@ -340,7 +341,8 @@
     padding: 2rem 1rem;
 }
 
-.successMessage h4 {
+.successMessage h4,
+.successMessage strong {
     color: var(--accent);
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
@@ -358,6 +360,7 @@
     flex-direction: column;
     height: 100%;
     max-height: 410px;
+    gap: 0.5rem;
 }
 
 .chatHistory {
@@ -366,30 +369,49 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    padding-bottom: 1rem;
-    max-height: 220px;
+    padding-bottom: 0.75rem;
+    max-height: 200px;
     padding-right: 4px;
+    scroll-behavior: smooth;
 }
 
 .chatHistory::-webkit-scrollbar {
     width: 4px;
 }
 
+.chatHistory::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
 .chatBubble {
     max-width: 85%;
-    padding: 0.6rem 0.85rem;
+    padding: 0.65rem 0.9rem;
     border-radius: 14px;
-    font-size: 0.85rem;
-    line-height: 1.4;
+    font-size: 0.84rem;
+    line-height: 1.45;
     position: relative;
     word-break: break-word;
+    animation: fadeInBubble 0.25s ease-out;
+}
+
+@keyframes fadeInBubble {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .botBubble {
     align-self: flex-start;
-    background: var(--surface-3);
+    background: var(--surface-2);
     color: var(--text-primary);
     border-bottom-left-radius: 4px;
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+:global(.dark) .botBubble {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .userBubble {
@@ -402,21 +424,21 @@
 
 .chatTime {
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     color: var(--text-secondary);
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
     text-align: right;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .userBubble .chatTime {
-    color: #333;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 /* Quick Questions chips */
 .quickQuestions {
     border-top: 1px solid var(--border-color);
-    padding: 0.6rem 0;
+    padding: 0.5rem 0;
     background: var(--card-bg);
 }
 
@@ -425,23 +447,19 @@
 }
 
 .quickQuestionsLabel {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     color: var(--text-secondary);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .questionsRow {
     display: flex;
-    gap: 0.4rem;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-}
-
-.questionsRow::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding-bottom: 2px;
 }
 
 .quickQBtn {
@@ -449,9 +467,9 @@
     border: 1px solid var(--border-color);
     background: var(--surface-2);
     color: var(--text-secondary);
-    padding: 0.35rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 16px;
+    font-size: 0.72rem;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
@@ -461,14 +479,16 @@
 .quickQBtn:hover {
     border-color: var(--accent);
     color: var(--accent);
+    background: rgba(212, 175, 55, 0.08);
 }
 
 /* Chat Input Bar */
 .chatInputWrapper {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
     border-top: 1px solid var(--border-color);
-    padding-top: 0.75rem;
+    padding-top: 0.6rem;
     background: var(--card-bg);
 }
 
@@ -478,23 +498,24 @@
 
 .chatInputWrapper input {
     flex-grow: 1;
-    padding: 0.5rem 0.75rem;
+    padding: 0.55rem 0.85rem;
     border-radius: 20px;
-    border: 1px solid var(--border-color);
+    border: 1.5px solid var(--border-color);
     background: var(--surface-2);
     color: var(--text-primary);
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .chatInputWrapper input:focus {
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
 .sendBtn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     border: none;
     background: var(--accent);
@@ -503,11 +524,13 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
 }
 
 .sendBtn:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 /* Catalogue Form in Widget */
@@ -584,7 +607,8 @@
     padding: 1.5rem 1rem;
 }
 
-.catalogFormSuccess h4 {
+.catalogFormSuccess h4,
+.catalogFormSuccess strong {
     color: var(--accent);
     font-size: 1.1rem;
     margin: 0;

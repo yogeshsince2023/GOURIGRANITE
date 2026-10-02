@@ -135,6 +135,7 @@
     margin-bottom: 2rem;
 }
 
+.detailBlock h2,
 .detailBlock h3 {
     font-size: 1.1rem;
     text-transform: uppercase;

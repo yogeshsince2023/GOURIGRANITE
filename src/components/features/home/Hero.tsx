@@ -63,14 +63,12 @@ export default function Hero() {
                     <Link
                         href="/contact"
                         className={`btn ${styles.primaryCta}`}
-                        aria-label="Request a free quote for premium marble and granite"
                     >
                         Get Your Free Stone Quote Today
                     </Link>
                     <Link
                         href="/products"
                         className={`btn ${styles.secondaryCta}`}
-                        aria-label="Explore our premium marble and granite collections catalog"
                     >
                         Explore Our Fine Stone Collection
                     </Link>
@@ -92,19 +90,19 @@ export default function Hero() {
 
                 {/* Hero Quick Navigation Block */}
                 <nav className={styles.quickNav} aria-label="Hero Quick Links">
-                    <Link href="/products" className={styles.quickNavLink} aria-label="View premium marble and granite catalog">
+                    <Link href="/products" className={styles.quickNavLink}>
                         Premium Marble Catalog
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/factories" className={styles.quickNavLink} aria-label="Explore our global granite export factories">
+                    <Link href="/factories" className={styles.quickNavLink}>
                         Granite Export Factories
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/about" className={styles.quickNavLink} aria-label="Learn about Gouri Exports natural stone manufacturer info">
+                    <Link href="/about" className={styles.quickNavLink}>
                         Why Gouri Exports
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/contact" className={styles.quickNavLink} aria-label="Request a marble and granite export quote">
+                    <Link href="/contact" className={styles.quickNavLink}>
                         Request a Quote
                     </Link>
                 </nav>

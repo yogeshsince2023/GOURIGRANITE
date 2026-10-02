@@ -63,6 +63,7 @@ export default function FactoryPreview() {
                                 <h3 className={styles.title}>
                                     <Link
                                         href={`/factories/${getFactorySlug(factory.id)}`}
+                                        prefetch={false}
                                         className={styles.link}
                                     >
                                         {factory.name}
@@ -100,6 +101,7 @@ export default function FactoryPreview() {
                                 <div style={{ marginTop: '1.5rem' }}>
                                     <Link
                                         href={`/factories/${getFactorySlug(factory.id)}`}
+                                        prefetch={false}
                                         className="btn btn-outline"
                                         style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
                                     >

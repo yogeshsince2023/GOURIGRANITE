@@ -82,7 +82,7 @@
     margin-bottom: 2rem;
 }
 
-.specsSection h3 {
+.specsSection h2 {
     font-size: 1rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
@@ -172,7 +172,7 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.leadGenBanner h4 {
+.leadGenBanner h2 {
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-primary);
