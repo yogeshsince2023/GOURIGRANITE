@@ -1,15 +1,10 @@
-'use client';
-
-import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { Globe, CheckCircle } from 'lucide-react';
 import styles from './Hero.module.css';
-import { getOptimizedCloudinaryUrl, getOptimizedCloudinaryVideoUrl } from '@/lib/cloudinary';
+
+const POSTER_URL = "https://res.cloudinary.com/dvlapdn5x/image/upload/f_auto,q_75,w_800/v1770790198/factory1_uzv7wd.jpg";
 
 export default function Hero() {
-    const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 1000], [0, 400]);
-
     const trustItems = [
         { icon: CheckCircle, text: 'Direct from 3 Indian quarries' },
         { icon: Globe, text: 'Shipped to 40+ countries' },
@@ -17,32 +12,45 @@ export default function Hero() {
 
     return (
         <section className={styles.hero}>
-            <motion.div
-                className={styles.backgroundWrapper}
-                style={{ y }}
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 2, ease: 'easeOut' }}
-            >
+            <div className={styles.backgroundWrapper}>
                 <video
                     className={styles.backgroundVideo}
                     autoPlay
                     loop
                     muted
                     playsInline
-                    preload="metadata"
-                    poster={getOptimizedCloudinaryUrl("https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790198/factory1_uzv7wd.jpg", 1920)}
+                    preload="auto"
+                    poster={POSTER_URL}
+                    {...{ fetchPriority: 'high' }}
                     style={{ backgroundColor: '#2b261b' }}
                 >
-                    <source src={getOptimizedCloudinaryVideoUrl("https://res.cloudinary.com/dvlapdn5x/video/upload/v1770790212/Background_ozszff.mp4")} type="video/mp4" />
-                </video>
-            </motion.div>
+                    {/* Mobile (< 768px): Lightweight 480p WebM (600KB) */}
+                    <source
+                        src="https://res.cloudinary.com/dvlapdn5x/video/upload/f_webm,q_auto,vc_vp9,w_480/v1770790212/Background_ozszff.mp4"
+                        type="video/webm"
+                        media="(max-width: 768px)"
+                    />
+                    <source
+                        src="https://res.cloudinary.com/dvlapdn5x/video/upload/f_auto,q_auto,vc_auto,w_480/v1770790212/Background_ozszff.mp4"
+                        type="video/mp4"
+                        media="(max-width: 768px)"
+                    />
 
-            <div
-                className={styles.content}
-            >
+                    {/* Desktop / Tablet: Optimized 720p WebM (~1MB) & MP4 fallback */}
+                    <source
+                        src="https://res.cloudinary.com/dvlapdn5x/video/upload/f_webm,q_auto,vc_vp9,w_720/v1770790212/Background_ozszff.mp4"
+                        type="video/webm"
+                    />
+                    <source
+                        src="https://res.cloudinary.com/dvlapdn5x/video/upload/f_auto,q_auto,vc_auto,w_720/v1770790212/Background_ozszff.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+
+            <div className={styles.content}>
                 <h1 className={styles.title}>
-                    Premium Indian Granite, Marble & Quartzite Exporters — Gouri Exports
+                    Premium Indian Granite, Marble &amp; Quartzite Exporters — Gouri Exports
                 </h1>
 
                 {/* Trust Bullets */}

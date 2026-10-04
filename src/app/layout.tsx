@@ -274,11 +274,18 @@ export default function RootLayout({
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link
+          rel="preload"
+          as="image"
+          href="https://res.cloudinary.com/dvlapdn5x/image/upload/f_auto,q_75,w_800/v1770790198/factory1_uzv7wd.jpg"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-
       </head>
       <body className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
         <ThemeProvider>
