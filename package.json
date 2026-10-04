@@ -26,5 +26,11 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
     "typescript": "^5"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not dead",
+    "> 0.5%"
+  ]
 }

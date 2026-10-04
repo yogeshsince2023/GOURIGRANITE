@@ -38,3 +38,12 @@ function walk(dir) {
 const outDir = path.join(__dirname, '..', 'out');
 walk(outDir);
 console.log('✓ Next.js static export RSC paths mapped successfully.');
+
+// Ensure .htaccess from public is copied to out/.htaccess
+const htaccessSrc = path.join(__dirname, '..', 'public', '.htaccess');
+const htaccessDest = path.join(outDir, '.htaccess');
+if (fs.existsSync(htaccessSrc)) {
+    fs.copyFileSync(htaccessSrc, htaccessDest);
+    console.log('✓ .htaccess copied to out/.htaccess successfully.');
+}
+
