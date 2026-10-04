@@ -5,8 +5,7 @@
     background-color: color-mix(in srgb, var(--card-bg) 85%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    /* SOFTENED: Replaced sharp border with soft shadow */
-    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.08);
     border-bottom: none;
     transition: all 0.3s ease;
 }
@@ -17,7 +16,9 @@
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1.5rem;
+    position: relative;
+    gap: 1rem;
 }
 
 .left,
@@ -37,24 +38,21 @@
     flex: 1;
 }
 
+/* In desktop flow: extremeRight is natural flex item, NEVER positioned absolutely over right */
 .extremeRight {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    justify-content: flex-end;
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-shrink: 0;
 }
 
 .logoCenter {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 0;
+    flex-shrink: 0;
     transition: transform 0.3s ease;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
 }
 
 .logoCenter:hover {
@@ -62,7 +60,7 @@
 }
 
 .logoImage {
-    height: 100px;
+    height: 90px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.12));
@@ -75,10 +73,11 @@
     align-items: center;
     white-space: nowrap;
     padding: 0.5rem 0;
+    margin: 0;
 }
 
 .link {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -87,6 +86,7 @@
     letter-spacing: 0.02em;
     line-height: 1;
     border-radius: 6px;
+    text-decoration: none;
 }
 
 .link:hover {
@@ -94,25 +94,9 @@
     background-color: var(--overlay-light);
 }
 
-.navLink {
-  position: relative;
-  display: inline-block;
-  padding: 12px 20px;
-  margin: 0 15px;
-  text-decoration: none;
-  color: var(--text-primary);
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.navLink:hover {
-  color: var(--accent);
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
+.desktopOnly {
+    font-size: 0.9rem;
+    padding: 0.55rem 1rem;
 }
 
 .mobileMenuButton {
@@ -124,11 +108,7 @@
     color: var(--text-primary);
 }
 
-.desktopOnly {
-    font-size: 0.9rem;
-    padding: 0.55rem 1rem;
-}
-
+/* Mobile & Tablet Dropdown Menu */
 .mobileMenu {
     position: absolute;
     top: 100%;
@@ -136,111 +116,20 @@
     right: 0;
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.25rem 1.5rem;
+    padding: 1rem 1rem 1.5rem;
     background-color: var(--card-bg);
-    /* SOFTENED: Replaced border top with shadow */
-    border-top: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
-    /* Additional inner shadow at top for separation if needed, but the main header shadow covers it */
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    overflow: hidden; 
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+    border-top: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+    z-index: 1001;
 }
 
 :global(.dark) .mobileMenu {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.mobileLink {
-    padding: 0.95rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    /* SOFTENED: Replaced border-bottom with lighter border/shadow or gradient */
-    border-bottom: 1px solid transparent;
-    background: linear-gradient(to right, var(--border-color) 40%, rgba(255,255,255,0) 0%) bottom/100% 1px no-repeat;
-    /* Actually a simple very light border is often cleaner than shadow for list items, but let's try a very subtle border */
-    border-bottom: 1px solid var(--overlay-light); 
-    transition: color 0.2s;
-}
-
-.mobileLink:hover {
-    color: var(--accent);
-    background-color: var(--surface-2); /* Visual feedback instead of just line */
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .links {
-        gap: 0.75rem;
-    }
-
-    .logoImage {
-        height: 85px;
-    }
-
-    .link {
-        font-size: 1rem;
-        padding: 0.5rem 0.6rem;
-    }
-    
-    .extremeRight {
-        gap: 0.5rem;
-    }
-    
-    .desktopOnly {
-        font-size: 0.85rem;
-        padding: 0.5rem 0.75rem;
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .nav {
-        padding: 0.5rem 1rem;
-        justify-content: center;
-    }
-
-    .logoImage {
-        height: 70px;
-    }
-
-    .links {
-        display: none;
-    }
-    
-    .left,
-    .right {
-        display: none;
-    }
-
-    .extremeRight {
-        display: none;
-    }
-
-    .mobileMenuButton {
-        display: flex;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .logoCenter {
-        padding: 0.5rem;
-    }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-    .logoImage {
-        height: 60px;
-    }
-    
-    .mobileLink {
-        font-size: 1rem;
-        padding: 0.85rem 0;
-    }
+    background-color: rgba(22, 22, 24, 0.98);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .mobileLinksList {
@@ -249,5 +138,141 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
+}
+
+.mobileItem {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.mobileLink {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 52px;
+    padding: 0.85rem 1.15rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobileLink:hover,
+.mobileLink:active {
+    background: var(--surface-2);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+.mobileArrow {
+    color: var(--text-secondary);
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.mobileLink:hover .mobileArrow,
+.mobileLink:active .mobileArrow {
+    color: var(--accent);
+    transform: translateX(3px);
+}
+
+.mobileCtaItem {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.mobileCtaBtn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Tablet & Mobile Breakpoint (Switches to clean mobile menu below 1024px) */
+@media (max-width: 1024px) {
+    .nav {
+        padding: 0.5rem 1rem;
+        justify-content: space-between;
+    }
+
+    .logoCenter {
+        margin: 0 auto;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .logoImage {
+        height: 65px;
+    }
+
+    .links,
+    .left,
+    .right,
+    .extremeRight {
+        display: none !important;
+    }
+
+    .mobileMenuButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: var(--surface-2);
+        color: var(--text-primary);
+        cursor: pointer;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 1px solid var(--border-color);
+        z-index: 1002;
+        transition: background 0.2s, border-color 0.2s;
+    }
+
+    .mobileMenuButton:hover,
+    .mobileMenuButton:active {
+        background: var(--surface-3);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+}
+
+/* Small Mobile Phones */
+@media (max-width: 480px) {
+    .logoImage {
+        height: 54px;
+    }
+
+    .mobileMenu {
+        padding: 0.85rem 0.75rem 1.25rem;
+    }
+
+    .mobileLink {
+        font-size: 1rem;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+    }
+
+    .mobileCtaBtn {
+        min-height: 46px;
+        font-size: 1rem;
+    }
 }

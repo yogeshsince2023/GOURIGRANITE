@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Header.module.css';
 
@@ -53,11 +53,11 @@ export default function Header() {
                 <button
                     className={styles.mobileMenuButton}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="Menu"
+                    aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                     aria-expanded={mobileMenuOpen}
                     aria-controls="mobile-navigation"
                 >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
                 </button>
             </nav>
 
@@ -69,30 +69,69 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
                     >
                         <ul className={styles.mobileLinksList}>
-                            <li>
-                                <Link href="/products" prefetch={false} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Products</Link>
+                            <li className={styles.mobileItem}>
+                                <Link 
+                                    href="/products" 
+                                    prefetch={false} 
+                                    className={styles.mobileLink} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span>Products</span>
+                                    <ChevronRight size={18} className={styles.mobileArrow} aria-hidden="true" />
+                                </Link>
                             </li>
-                            <li>
-                                <Link href="/factories" prefetch={false} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Global Factories</Link>
+                            <li className={styles.mobileItem}>
+                                <Link 
+                                    href="/factories" 
+                                    prefetch={false} 
+                                    className={styles.mobileLink} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span>Global Factories</span>
+                                    <ChevronRight size={18} className={styles.mobileArrow} aria-hidden="true" />
+                                </Link>
                             </li>
-                            <li>
-                                <Link href="/about" prefetch={false} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+                            <li className={styles.mobileItem}>
+                                <Link 
+                                    href="/about" 
+                                    prefetch={false} 
+                                    className={styles.mobileLink} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span>About Us</span>
+                                    <ChevronRight size={18} className={styles.mobileArrow} aria-hidden="true" />
+                                </Link>
                             </li>
-                            <li>
-                                <Link href="/contact" prefetch={false} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+                            <li className={styles.mobileItem}>
+                                <Link 
+                                    href="/contact" 
+                                    prefetch={false} 
+                                    className={styles.mobileLink} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span>Contact</span>
+                                    <ChevronRight size={18} className={styles.mobileArrow} aria-hidden="true" />
+                                </Link>
                             </li>
-                            <li>
-                                <Link href="/catalogue" prefetch={false} className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Catalogue</Link>
+                            <li className={styles.mobileItem}>
+                                <Link 
+                                    href="/catalogue" 
+                                    prefetch={false} 
+                                    className={styles.mobileLink} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span>Catalogue</span>
+                                    <ChevronRight size={18} className={styles.mobileArrow} aria-hidden="true" />
+                                </Link>
                             </li>
-                            <li style={{ padding: '1rem 0' }}>
+                            <li className={styles.mobileCtaItem}>
                                 <Link 
                                     href="/contact" 
                                     prefetch={false}
-                                    className="btn btn-primary" 
-                                    style={{ width: '100%', textAlign: 'center', justifyContent: 'center' }} 
+                                    className={`btn btn-primary ${styles.mobileCtaBtn}`} 
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     Request Quote
