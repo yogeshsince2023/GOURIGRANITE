@@ -87,7 +87,7 @@ export default function Metrics() {
 
             {/* Case Study Gallery Link */}
             <div className={styles.linkWrapper}>
-                <Link href="/products" className={styles.caseStudyLink}>
+                <Link href="/products" prefetch={false} className={styles.caseStudyLink}>
                     Explore Our Global Projects & Case Studies &rarr;
                 </Link>
             </div>

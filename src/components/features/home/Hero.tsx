@@ -30,7 +30,7 @@ export default function Hero() {
                     loop
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     poster={getOptimizedCloudinaryUrl("https://res.cloudinary.com/dvlapdn5x/image/upload/v1770790198/factory1_uzv7wd.jpg", 1920)}
                     style={{ backgroundColor: '#2b261b' }}
                 >
@@ -62,12 +62,14 @@ export default function Hero() {
                 <div className={styles.actions}>
                     <Link
                         href="/contact"
+                        prefetch={false}
                         className={`btn ${styles.primaryCta}`}
                     >
                         Get Your Free Stone Quote Today
                     </Link>
                     <Link
                         href="/products"
+                        prefetch={false}
                         className={`btn ${styles.secondaryCta}`}
                     >
                         Explore Our Fine Stone Collection
@@ -90,19 +92,19 @@ export default function Hero() {
 
                 {/* Hero Quick Navigation Block */}
                 <nav className={styles.quickNav} aria-label="Hero Quick Links">
-                    <Link href="/products" className={styles.quickNavLink}>
+                    <Link href="/products" prefetch={false} className={styles.quickNavLink}>
                         Premium Marble Catalog
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/factories" className={styles.quickNavLink}>
+                    <Link href="/factories" prefetch={false} className={styles.quickNavLink}>
                         Granite Export Factories
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/about" className={styles.quickNavLink}>
+                    <Link href="/about" prefetch={false} className={styles.quickNavLink}>
                         Why Gouri Exports
                     </Link>
                     <span className={styles.quickNavDot}>&bull;</span>
-                    <Link href="/contact" className={styles.quickNavLink}>
+                    <Link href="/contact" prefetch={false} className={styles.quickNavLink}>
                         Request a Quote
                     </Link>
                 </nav>

@@ -106,8 +106,7 @@ export default function CategoryGrid() {
                                             className={`${styles.stoneImage} ${loadedImages.has(index) ? styles.imageLoaded : styles.imageLoading}`}
                                             placeholder="blur"
                                             blurDataURL={STONE_BLUR_DATA_URL}
-                                            priority={index < 4}
-                                            loading={index < 4 ? "eager" : "lazy"}
+                                            loading="lazy"
                                             onLoad={() => handleImageLoad(index)}
                                         />
 
